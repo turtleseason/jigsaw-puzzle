@@ -12,7 +12,7 @@
 
 	const BUMP = 'b';
 	const RECESS = 'r';
-
+	const FLAT = 'f';
 
 	// Returns an array containing values from 0 (inclusive) to i (exclusive).
 	function range(i) {
@@ -24,21 +24,33 @@
 		return Math.floor(Math.random() * (max - .00001));
 	}
 
-
 	class Piece extends React.Component {
 		render() {
-			const positionX = -this.props.width * this.props.col;
-			const positionY = -this.props.height * this.props.row;
+			const bumps = [];
+			const recesses = [];
+			for (const side of [LEFT, TOP, RIGHT, BOTTOM]) {
+				if (this.props.edges[side] === BUMP) {
+					bumps.push(side);
+				} else if (this.props.edges[side] === RECESS) {
+					recesses.push(side);
+				}
+			}
+
+			// (mask-composite only works in Firefox; webkit may have a prefixed version?)
+			let maskString = bumps.map(s => `url(#${BUMP}${s}), `).join('');
+			maskString += 'url(#main) subtract'; // subtract = "subtract all layers below from this layer," not vice-versa
+			maskString += recesses.map(s => `, url(#${RECESS}${s})`).join('');
+
 			return e('div', {
 				className: 'puzzle_piece',
-				mykeylol: this.props.keystr,
+				idtemp: this.props.keystr,
 				style: {
 					backgroundPosition: `${this.props.bgLeft}px ${this.props.bgTop}px`,
 					width: this.props.width,
 					height: this.props.height,
 					left: this.props.left,
 					top: this.props.top,
-					mask: this.props.maskString
+					mask: maskString
 				}
 			});
 		}
@@ -95,6 +107,7 @@
 
 			const masks = [];
 
+			// Default mask (rectangular middle area)
 			masks.push(e('mask', {id: 'main', key: 'main'}, [
 				e('rect', {
 					fill: '#000000',
@@ -123,6 +136,22 @@
 			return e('svg', {height: 0, width: 0, key: -1}, masks);
 		}
 
+		getRandomEdgeType() {
+			const types = [BUMP, RECESS];
+			return types[randomInt(types.length)];
+		}
+		
+		getOppositeEdge(edge) {
+			switch(edge) {
+				case BUMP:
+					return RECESS;
+				case RECESS:
+					return BUMP;
+				default:
+					throw Error(`getOppositeEdge: ${edge} does not have an opposite edge type`);
+			}
+		}
+
 		createPieces() {
 			const borderSize = this.props.borderSize;
 
@@ -133,37 +162,42 @@
 			const pieceHeight = boxHeight + 2 * borderSize;
 
 			const availableKeys = range(this.props.cols * this.props.rows);
+			const keys = Array(this.props.cols).fill(Array(this.props.rows));
 			const pieces = [];
 			for (let i = 0; i < this.props.cols; i++) {
 				for (let j = 0; j < this.props.rows; j++) {
 					const keyIndex = randomInt(availableKeys.length);
 					const key = availableKeys.splice(keyIndex, 1)[0];
-
-					const left = (boxWidth + 2) * i - this.props.borderSize;  // (temp)
-					const top = (boxHeight + 2) * j - this.props.borderSize;  // (temp)
-
+					
+					const leftPos = (boxWidth + 2) * i - this.props.borderSize;  // (temp)
+					const topPos = (boxHeight + 2) * j - this.props.borderSize;  // (temp)
+					
 					const bgLeft = -boxWidth * i + this.props.borderSize;
 					const bgTop = -boxHeight * j + this.props.borderSize;
-
-					// p.left = flat if i == 0 else pickRandom;
-					// p.top = flat if j == 0 else pickRandom;
-					// p.right = flat if i == numColumns - 1 else pickRandom;
-					// p.bottom = flat if j == numRows - 1 else pickRandom;
 					
-					// p.leftPiece = null if i == 0 else pieces[i - 1, j];
-					// p.topPiece = null if j == 0 else pieces[i, j - i];
-					// p.rightPiece = p.bottomPiece = null;
+					const neighbors = {};
+					neighbors[LEFT] = (i > 0) ? keys[i - 1][j] : undefined;
+					neighbors[TOP] = (j > 0) ? keys[i][j - 1] : undefined;
+					
+					const edges = {};
+					edges[LEFT] = (i === 0) ? FLAT : this.getOppositeEdge(neighbors[LEFT].edges[RIGHT]);
+					edges[TOP] = (j === 0) ? FLAT : this.getOppositeEdge(neighbors[TOP].edges[BOTTOM]);
+					edges[RIGHT] = (i === this.props.cols - 1) ? FLAT : this.getRandomEdgeType();
+					edges[BOTTOM] = (j === this.props.rows - 1) ? FLAT : this.getRandomEdgeType();
 
-					const maskString = `url(#bLeft), url(#bTop), url(#main) subtract, url(#rRight), url(#rBottom)`;
-					pieces.push(e(Piece, {
+					keys[i][j] = {key: key, edges: edges};
+
+					const piece = (e(Piece, {
 						key: key,
 						keystr: key + '',
 						col: i, row: j,
 						width: pieceWidth, height: pieceHeight,
-						left: left, top: top,
+						left: leftPos, top: topPos,
 						bgLeft: bgLeft, bgTop: bgTop,
-						maskString: maskString
+						edges: edges,
+						neighbors: neighbors
 					}));
+					pieces.splice(randomInt(pieces.length), 0, piece);  // use push to keep in order for debugging
 				}
 			}
 			return pieces;
