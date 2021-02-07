@@ -178,6 +178,7 @@
 				pieces: pieces,
 				groups: groups,
 				edgeDrawer: edgeDrawer,
+				gameComplete: false,
 				draggedPiece: null,
 				nextzIndex: 1
 			}
@@ -305,26 +306,29 @@
 		}
 
 		handleMouseUp(e, key) {
-			if (this.state.draggedPiece === key) {
-				const groups = {...this.state.groups};  // deep copy?
-				const pieces = this.state.pieces.map(x => PieceModel.clone(x));
-				
-				for (const k of this.state.groups[pieces[key].group]) {
-					const p = pieces[k];
-					for (const side of [LEFT, TOP, RIGHT, BOTTOM]) {
-						const neighbor = pieces[p.neighbors[side]];
-						if (neighbor && neighbor.group !== p.group && this.isTouching(p, side, neighbor)) {
-							this.mergeGroups(pieces, groups, p.group, neighbor.group);
-							
-							console.log("grouped " + k + " & " + neighbor.key)						
-							let str = ''; for (const i in groups) { str += "[" + groups[i] + "] "; }
-							console.log(str);
-						}
+			if (this.state.draggedPiece !== key) {
+				return;
+			}
+
+			const groups = {...this.state.groups};  // deep copy?
+			const pieces = this.state.pieces.map(x => PieceModel.clone(x));
+
+			for (const k of this.state.groups[pieces[key].group]) {
+				const p = pieces[k];
+				for (const side of [LEFT, TOP, RIGHT, BOTTOM]) {
+					const neighbor = pieces[p.neighbors[side]];
+					if (neighbor && neighbor.group !== p.group && this.isTouching(p, side, neighbor)) {
+						this.mergeGroups(pieces, groups, p.group, neighbor.group);
+						
+						console.log("grouped " + k + " & " + neighbor.key)						
+						let str = ''; for (const i in groups) { str += "[" + groups[i] + "] "; }
+						console.log(str);
 					}
 				}
-
-				this.setState({groups: groups, pieces: pieces, draggedPiece: null});
 			}
+
+			const gameComplete = Object.keys(groups).length === 1;
+			this.setState({groups: groups, pieces: pieces, draggedPiece: null, gameComplete: gameComplete});
 		}
 
 		renderPiece(model, isDragged) {
@@ -358,11 +362,15 @@
 		}
 
 		render() {
-			const renderedPieces = this.state.pieces.map(
-				model => this.renderPiece(model, model.key === this.state.draggedPiece));
-			return e('div', 
-				{onMouseMove: (e) => this.handleMouseMove(e)},
-				[this.state.masks].concat(renderedPieces));
+			if (this.state.gameComplete) {
+				return e('div', {className: 'puzzle_complete'});
+			} else {
+				const renderedPieces = this.state.pieces.map(
+					model => this.renderPiece(model, model.key === this.state.draggedPiece));
+				return e('div', 
+					{onMouseMove: (e) => this.handleMouseMove(e)},
+					[this.state.masks].concat(renderedPieces));
+			}
 		}
 	}
 	
