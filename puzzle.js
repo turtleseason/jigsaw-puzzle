@@ -118,8 +118,10 @@
 	}
 
 	class PieceModel {
+		// By default, a piece is inserted into the group with the same id as its key
 		constructor(key, col, row, left, top, zIndex, edges, neighbors) {
 			this.key = key;
+			this.group = key;
 			this.col = col;
 			this.row = row;
 			this.left = left;
@@ -165,11 +167,16 @@
 		constructor(props) {
 			super(props);
 
-			const pieces = this.createPieces();
 			const edgeDrawer = new EdgePathDrawer(this.pieceWidth, this.pieceHeight, this.props.borderSize);
+			const pieces = this.createPieces();
+			let groups = {};
+			for (let i = 0; i < pieces.length; i++) {
+				groups[i] = [i];
+			}
 
 			this.state = {
 				pieces: pieces,
+				groups: groups,
 				edgeDrawer: edgeDrawer,
 				draggedPiece: null,
 				nextzIndex: 1
@@ -211,8 +218,14 @@
 					const topPos = (this.boxHeight + 2) * j - this.props.borderSize;  // (temp)
 
 					const neighbors = {};
-					neighbors[LEFT] = (i > 0) ? keysByGridPos[i - 1][j] : undefined;
-					neighbors[TOP] = (j > 0) ? keysByGridPos[i][j - 1] : undefined;
+					if (i > 0) {
+						neighbors[LEFT] = keysByGridPos[i - 1][j];
+						pieces[neighbors[LEFT]].neighbors[RIGHT] = key;
+					}
+					if (j > 0) {
+						neighbors[TOP] = keysByGridPos[i][j - 1];
+						pieces[neighbors[TOP]].neighbors[BOTTOM] = key;
+					}
 					
 					const edges = {};
 					edges[LEFT] = (i === 0) ? this.createEdge(FLAT) : pieces[neighbors[LEFT]].edges[RIGHT].opposite();
@@ -247,15 +260,70 @@
 			if (this.state.draggedPiece !== null) {
 				const key = this.state.draggedPiece;
 				const pieces = this.state.pieces.map(x => PieceModel.clone(x));
-				pieces[key].left = e.clientX - this.state.offsetX;
-				pieces[key].top = e.clientY - this.state.offsetY;
+				
+				const p = pieces[key];
+				p.left = e.clientX - this.state.offsetX;
+				p.top = e.clientY - this.state.offsetY;
+
+				for (const k of this.state.groups[p.group]) {
+					this.snapToPosition(pieces[k], p);
+				}
 				this.setState({pieces: pieces});
 			}
 		}
 
+		snapToPosition(piece, snapTo) {
+			piece.left = snapTo.left + this.boxWidth * (piece.col - snapTo.col);
+			piece.top = snapTo.top + this.boxHeight * (piece.row - snapTo.row);
+		}
+
+		isTouching(piece, side, other) {
+			const snapRange = 3;
+			if (side === RIGHT) {
+				return Math.abs(piece.top - other.top) <= snapRange
+					&& Math.abs((other.left - piece.left) - this.boxWidth) <= snapRange;
+			} else if (side === LEFT) {
+				return Math.abs(piece.top - other.top) <= snapRange
+					&& Math.abs((piece.left - other.left) - this.boxWidth) <= snapRange;
+			} else if (side === TOP) {
+				return Math.abs(piece.left - other.left) <= snapRange
+					&& Math.abs((piece.top - other.top) - this.boxHeight) <= snapRange;
+			} else if (side === BOTTOM) {
+				return Math.abs(piece.left - other.left) <= snapRange
+					&& Math.abs((other.top - piece.top) - this.boxHeight) <= snapRange;
+			}
+		}
+
+		mergeGroups(pieces, groups, g1, g2) {
+			groups[g1] = groups[g1].concat(groups[g2]);
+			const refPiece = pieces[groups[g1][0]];
+			for (const k of groups[g2]) {
+				pieces[k].group = g1;
+				this.snapToPosition(pieces[k], refPiece);
+			}
+			delete groups[g2];
+		}
+
 		handleMouseUp(e, key) {
 			if (this.state.draggedPiece === key) {
-				this.setState({draggedPiece: null});
+				const groups = {...this.state.groups};  // deep copy?
+				const pieces = this.state.pieces.map(x => PieceModel.clone(x));
+				
+				for (const k of this.state.groups[pieces[key].group]) {
+					const p = pieces[k];
+					for (const side of [LEFT, TOP, RIGHT, BOTTOM]) {
+						const neighbor = pieces[p.neighbors[side]];
+						if (neighbor && neighbor.group !== p.group && this.isTouching(p, side, neighbor)) {
+							this.mergeGroups(pieces, groups, p.group, neighbor.group);
+							
+							console.log("grouped " + k + " & " + neighbor.key)						
+							let str = ''; for (const i in groups) { str += "[" + groups[i] + "] "; }
+							console.log(str);
+						}
+					}
+				}
+
+				this.setState({groups: groups, pieces: pieces, draggedPiece: null});
 			}
 		}
 
