@@ -41,24 +41,127 @@
 		}
 	}
 
-	class Piece extends React.Component {
-		getMaskString() {
-			const bumps = [];
-			const recesses = [];
-			for (const side of [LEFT, TOP, RIGHT, BOTTOM]) {
-				if (this.props.edges[side] === BUMP) {
-					bumps.push(side);
-				} else if (this.props.edges[side] === RECESS) {
-					recesses.push(side);
-				}
-			}
+	class EdgePathDrawer {
+		constructor(pieceWidth, pieceHeight, borderSize) {
+			this.pW = pieceWidth;
+			this.pH = pieceHeight;
+			this.b = borderSize;
+		}
 
-			// (mask-composite only works in Firefox; webkit may have a prefixed version?)
-			// -> switch to clipping mask so that mask affects click area
-			let maskString = bumps.map(s => `url(#${BUMP}${s}), `).join('');
-			maskString += 'url(#main) subtract'; // subtract = "subtract all layers below from this layer," not vice-versa
-			maskString += recesses.map(s => `, url(#${RECESS}${s})`).join('');
-			return maskString;
+		getPathString(side, edgeStyleInfo) {
+			const [pW, pH, b] = [this.pW, this.pH, this.b];
+			let w, o, c1, c2;
+			if (edgeStyleInfo) {
+				[w, o, c1, c2] = [edgeStyleInfo.w, edgeStyleInfo.o, edgeStyleInfo.c1, edgeStyleInfo.c2];
+			}
+			
+			const leftStart = `M ${b} ${pH - b} V ${(pH + w) / 2} `;
+			
+			const leftBump = `C ${b - o} ${pH / 2 + c1} ${0} ${pH / 2 + c2} ${0} ${pH / 2} `
+			+ `C ${0} ${pH / 2 - c2} ${b - o} ${pH / 2 - c1} ${b} ${(pH - w) / 2} `;
+			
+			const leftRecess = `C ${b + o} ${pH / 2 + c1} ${b * 2} ${pH / 2 + c2} ${b * 2} ${pH / 2} `
+			+ `C ${b * 2} ${pH / 2 - c2} ${b + o} ${pH / 2 - c1} ${b} ${(pH - w) / 2} `;
+			
+			const leftEnd = `V ${b} `;
+			
+			const topStart = `H ${(pW - w) / 2} `;
+			
+			const topBump = `C ${pW / 2 - c1} ${b - o} ${pW / 2 - c2} ${0} ${pW / 2} ${0} `
+						  + `C ${pW / 2 + c2} ${0} ${pW / 2 + c1} ${b - o} ${(pW + w) / 2} ${b} `;
+			
+			const topRecess = `C ${pW / 2 - c1} ${b + o}  ${pW / 2 - c2} ${b * 2} ${pW / 2} ${b * 2} `
+							+ `C ${pW / 2 + c2} ${b * 2} ${pW / 2 + c1} ${b + o} ${(pW + w) / 2} ${b} `;
+			
+			const topEnd = `H ${pW - b} `;
+			
+			const rightStart = `V ${(pH - w) / 2} `;
+			
+			const rightBump = `C ${pW - b + o} ${pH / 2 - c1} ${pW} ${pH / 2 - c2} ${pW} ${pH / 2} `
+			+ `C ${pW} ${pH / 2 + c2} ${pW - b + o} ${pH / 2 + c1} ${pW - b} ${(pH + w) / 2} `;
+			
+			const rightRecess = `C ${pW - b - o} ${pH / 2 - c1} ${pW - b * 2} ${pH / 2 - c2} ${pW - b * 2} ${pH / 2} `
+			+ `C ${pW - b * 2} ${pH / 2 + c2} ${pW - b - o} ${pH / 2 + c1} ${pW - b} ${(pH + w) / 2} `;
+			
+			const rightEnd = `V ${pH - b} `;
+			
+			const bottomStart = `H ${(pW + w) / 2} `;
+			
+			const bottomBump = `C ${pW / 2 + c1} ${pH - b + o} ${pW / 2 + c2} ${pH} ${pW / 2} ${pH} `
+						  	 + `C ${pW / 2 - c2} ${pH} ${pW / 2 - c1} ${pH - b + o} ${(pW - w) / 2} ${pH - b} `;
+			
+			const bottomRecess = `C ${pW / 2 + c1} ${pH - b - o}  ${pW / 2 + c2} ${pH - b * 2} ${pW / 2} ${pH - b * 2} `
+							   + `C ${pW / 2 - c2} ${pH - b * 2} ${pW / 2 - c1} ${pH - b - o} ${(pW - w) / 2} ${pH - b} `;
+			
+			const bottomEnd = `Z`;
+			
+			const type = edgeStyleInfo ? edgeStyleInfo.type : FLAT;
+			switch(side) {
+				case LEFT:
+					return leftStart
+					+ (type === BUMP ? leftBump : '')
+					+ (type === RECESS ? leftRecess : '') 
+					+ leftEnd;
+				case TOP:
+					return topStart
+					+ (type === BUMP ? topBump : '')
+					+ (type === RECESS ? topRecess : '') 
+					+ topEnd;
+				case RIGHT:
+					return rightStart
+					+ (type === BUMP ? rightBump : '')
+					+ (type === RECESS ? rightRecess : '')
+					+ rightEnd;
+				case BOTTOM:
+					return bottomStart
+					+ (type === BUMP ? bottomBump : '')
+					+ (type === RECESS ? bottomRecess : '') 
+					+ bottomEnd;
+				default:
+					return undefined;
+			}
+		}
+	}
+
+	class EdgeStyleInfo {
+		constructor(type, neckWidth, offset, control1, control2) {
+			this.type = type;
+			this.w = neckWidth;
+			this.o = offset;
+			this.c1 = control1;
+			this.c2 = control2;
+		}
+
+		opposite() {
+			const other = {...this};
+			other.type = getOppositeEdge(this.type);
+			return other;
+		}
+	}
+
+	class PieceModel {
+		constructor(key, col, row, left, top, zIndex, edges, neighbors) {
+			this.key = key;
+			this.col = col;
+			this.row = row;
+			this.left = left;
+			this.zIndex = zIndex;
+			this.top = top;
+			this.edges = edges;
+			this.neighbors = neighbors;
+		}
+
+		static clone(obj) {
+			const copy = {...obj};
+			copy.edges = {...obj.edges};
+			copy.neighbors = {...obj.neighbors};
+			return copy;
+		}
+	}
+	
+	class Piece extends React.Component {
+		getClipPathString() {
+			return 'path(\'' + this.props.clipPathString + '\')';
 		}
 
 		render() {
@@ -74,42 +177,22 @@
 					left: this.props.left,
 					top: this.props.top,
 					zIndex: this.props.zIndex,
-					mask: this.getMaskString()
+					clipPath: this.getClipPathString()
 				}
 			});
 		}
 	}
-
+	
 	class Puzzle extends React.Component {
-		PieceModel = class {
-			constructor(key, col, row, left, top, zIndex, edges, neighbors) {
-				this.key = key;
-				this.col = col;
-				this.row = row;
-				this.left = left;
-				this.zIndex = zIndex;
-				this.top = top;
-				this.edges = edges;
-				this.neighbors = neighbors;
-			}
-
-			static clone(obj) {
-				const copy = {...obj};
-				copy.edges = {...obj.edges};
-				copy.neighbors = {...obj.neighbors};
-				return copy;
-			}
-		}
-
 		constructor(props) {
 			super(props);
-			
-			const masks = this.createMasks();
+
 			const pieces = this.createPieces();
+			const edgeDrawer = new EdgePathDrawer(this.pieceWidth, this.pieceHeight, this.props.borderSize);
 
 			this.state = {
-				masks: masks,
 				pieces: pieces,
+				edgeDrawer: edgeDrawer,
 				draggedPiece: null,
 				nextzIndex: 1
 			}
@@ -131,55 +214,8 @@
 			return 2 * this.props.borderSize + this.boxHeight;
 		}
 
-		createSideMask(side, type, borderSize, offset) {
-			const name = type + side;
-			const radius = borderSize - offset;
-			const centerToEdge = (type === BUMP) ? borderSize - offset : borderSize + offset;
-			
-			let x, y;
-			if (side === LEFT || side === RIGHT) {
-				x = (side === LEFT) ? centerToEdge : this.pieceWidth - centerToEdge;
-				y = this.pieceHeight / 2;
-			} else {
-				x = this.pieceWidth / 2;
-				y = (side === TOP) ? centerToEdge : this.pieceHeight - centerToEdge;
-			}
-			
-			return e('mask', {id: name, key: name}, [
-				e('circle', {fill: '#FFFFFF', cx: x, cy: y, r: radius, key: 0})
-			]);
-		}
-
-		createMasks() {
-			const masks = [];
-
-			// Default mask (rectangular middle area)
-			masks.push(e('mask', {id: 'main', key: 'main'}, [
-				e('rect', {
-					fill: '#000000',
-					x: 0,
-					y: 0,
-					width: this.pieceWidth,
-					height: this.pieceHeight,
-					key: 0
-				}),
-				e('rect', {
-					fill: '#FFFFFF',
-					x: this.props.borderSize,
-					y: this.props.borderSize,
-					width: this.boxWidth,
-					height: this.boxHeight,
-					key: 1
-				})
-			]));
-
-			for (let side of [LEFT, TOP, RIGHT, BOTTOM]) {
-				for (let type of [BUMP, RECESS]) {
-					masks.push(this.createSideMask(side, type, this.props.borderSize, this.props.offset));
-				}
-			}
-
-			return e('svg', {height: 0, width: 0, key: -1}, masks);
+		createEdge(type) {
+			return new EdgeStyleInfo(type, this.props.borderSize, this.props.borderSize / 3, this.props.borderSize, this.props.borderSize / 2);
 		}
 
 		createPieces() {
@@ -201,12 +237,12 @@
 					neighbors[TOP] = (j > 0) ? keysByGridPos[i][j - 1] : undefined;
 					
 					const edges = {};
-					edges[LEFT] = (i === 0) ? FLAT : getOppositeEdge(pieces[neighbors[LEFT]].edges[RIGHT]);
-					edges[TOP] = (j === 0) ? FLAT : getOppositeEdge(pieces[neighbors[TOP]].edges[BOTTOM]);
-					edges[RIGHT] = (i === this.props.cols - 1) ? FLAT : getRandomEdgeType();
-					edges[BOTTOM] = (j === this.props.rows - 1) ? FLAT : getRandomEdgeType();
+					edges[LEFT] = (i === 0) ? this.createEdge(FLAT) : pieces[neighbors[LEFT]].edges[RIGHT].opposite();
+					edges[TOP] = (j === 0) ? this.createEdge(FLAT) : pieces[neighbors[TOP]].edges[BOTTOM].opposite();
+					edges[RIGHT] = (i === this.props.cols - 1) ? this.createEdge(FLAT) : this.createEdge(getRandomEdgeType());
+					edges[BOTTOM] = (j === this.props.rows - 1) ? this.createEdge(FLAT) : this.createEdge(getRandomEdgeType());
 					
-					pieces[key] = new this.PieceModel(key, i, j, leftPos, topPos, 0, edges, neighbors);
+					pieces[key] = new PieceModel(key, i, j, leftPos, topPos, 0, edges, neighbors);
 				}
 			}
 			return pieces;
@@ -216,9 +252,8 @@
 			if (e.button !== 0 || this.state.draggedPiece !== null) {
 				return;
 			}
-			console.log('Picked up ' + key);
 
-			const pieces = this.state.pieces.map(x => this.PieceModel.clone(x));  // use lodash for deep copy?
+			const pieces = this.state.pieces.map(x => PieceModel.clone(x));  // use lodash for deep copy?
 			pieces[key].zIndex = this.state.nextzIndex;
 			
 			this.setState({
@@ -233,7 +268,7 @@
 		handleMouseMove(e) {
 			if (this.state.draggedPiece !== null) {
 				const key = this.state.draggedPiece;
-				const pieces = this.state.pieces.map(x => this.PieceModel.clone(x));
+				const pieces = this.state.pieces.map(x => PieceModel.clone(x));
 				pieces[key].left = e.clientX - this.state.offsetX;
 				pieces[key].top = e.clientY - this.state.offsetY;
 				this.setState({pieces: pieces});
@@ -243,13 +278,18 @@
 		handleMouseUp(e, key) {
 			if (this.state.draggedPiece === key) {
 				this.setState({draggedPiece: null});
-				console.log('Released ' + key);
 			}
 		}
 
 		renderPiece(model, isDragged) {
 			const bgLeft = - (this.boxWidth * model.col) + this.props.borderSize;
 			const bgTop = -(this.boxHeight * model.row) + this.props.borderSize;
+
+			let clipPathString = '';
+			for (const side of [LEFT, TOP, RIGHT, BOTTOM]) {
+				const edge = model.edges[side];
+				clipPathString += this.state.edgeDrawer.getPathString(side, model.edges[side]);
+			}
 
 			return e(Piece, {
 				key: model.key,
@@ -266,7 +306,8 @@
 				edges: model.edges,
 				neighbors: model.neighbors,
 				onMouseDown: (e) => this.handleMouseDown(e, model.key),
-				onMouseUp: (e) => this.handleMouseUp(e, model.key)
+				onMouseUp: (e) => this.handleMouseUp(e, model.key),
+				clipPathString: clipPathString
 			});
 		}
 
