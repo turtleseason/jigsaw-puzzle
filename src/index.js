@@ -1,8 +1,10 @@
-// To add JSX support:
-// https://reactjs.org/docs/add-react-to-a-website.html#optional-try-react-with-jsx
-
 'use strict';
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 (function() {
+
 	const e = React.createElement;
 	
 	const LEFT = 'Left';
