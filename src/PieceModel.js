@@ -14,6 +14,7 @@ class PieceModel {
 
 	static clone(obj) {
 		const copy = {...obj};
+		// replace pos with a new object if it needs to be updated
 		copy.edges = {...obj.edges};
 		copy.neighbors = {...obj.neighbors};
 		return copy;

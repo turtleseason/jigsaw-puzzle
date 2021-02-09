@@ -6,7 +6,7 @@ import PieceModel from './PieceModel.js';
 
 import { getRandomEdgeType, getOppositeEdge } from './Edges.js';
 import { BUMP, RECESS, FLAT } from './Edges.js';
-import { LEFT, TOP, RIGHT, BOTTOM } from './Sides.js';
+import { LEFT, TOP, RIGHT, BOTTOM, Sides } from './Sides.js';
 import { range, randomInt } from './util.js';
 
 
@@ -114,7 +114,7 @@ class Puzzle extends React.Component {
 	}
 	
 	isTouching(piece, side, other) {
-		const snapRange = 5;
+		const snapRange = 7;
 		if (side === RIGHT) {
 			return Math.abs(piece.pos.top - other.pos.top) <= snapRange
 				&& Math.abs((other.pos.left - piece.pos.left) - this.innerWidth) <= snapRange;
@@ -135,6 +135,7 @@ class Puzzle extends React.Component {
 		const refPiece = pieces[groups[g1][0]];
 		for (const k of groups[g2]) {
 			pieces[k].group = g1;
+			pieces[k].zIndex = refPiece.zIndex;
 			this.alignPiece(pieces[k], refPiece);
 		}
 		delete groups[g2];
@@ -145,8 +146,10 @@ class Puzzle extends React.Component {
 			return;
 		}
 
-		const pieces = this.state.pieces.map(x => PieceModel.clone(x));  // use lodash for deep copy?
-		pieces[key].zIndex = this.state.nextzIndex;
+		const pieces = this.state.pieces.map(x => PieceModel.clone(x));
+		for (const k of this.state.groups[pieces[key].group]) {
+			pieces[k].zIndex = this.state.nextzIndex;
+		}
 		
 		this.setState({
 			pieces: pieces,
@@ -184,7 +187,7 @@ class Puzzle extends React.Component {
 
 		for (const k of this.state.groups[pieces[key].group]) {
 			const p = pieces[k];
-			for (const side of [LEFT, TOP, RIGHT, BOTTOM]) {
+			for (const side of Sides) {
 				const neighbor = pieces[p.neighbors[side]];
 				if (neighbor && neighbor.group !== p.group && this.isTouching(p, side, neighbor)) {
 					this.mergeGroups(pieces, groups, p.group, neighbor.group);
@@ -197,22 +200,12 @@ class Puzzle extends React.Component {
 	}
 
 	renderPiece(model, isDragged) {
-		let clipPathString = '';
-		for (const side of [LEFT, TOP, RIGHT, BOTTOM]) {
-			clipPathString += this.state.edgeDrawer.getPathString(side, model.edges[side]);
-		}
-
 		return e(Piece, {
 			key: model.key,
-			keystr: model.key + '',
+			model: model,
 			width: this.pieceWidth,
 			height: this.pieceHeight,
-			pos: model.pos,
-			bgPos: model.bgPos,
-			zIndex: model.zIndex || 'auto',
-			edges: model.edges,
-			neighbors: model.neighbors,
-			clipPathString: clipPathString,
+			edgeDrawer: this.state.edgeDrawer,
 			onMouseDown: (e) => this.handleMouseDown(e, model.key),
 			onMouseUp: (e) => this.handleMouseUp(e, model.key)
 		});
