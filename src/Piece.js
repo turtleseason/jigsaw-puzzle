@@ -14,7 +14,7 @@ class Piece extends React.Component {
 	render() {
 		const model = this.props.model;
 
-		const className = 'puzzle_piece' + (this.props.blockPointerEvents ? ' block_pointer_events' : '');
+		const className = 'puzzle-piece' + (this.props.blockPointerEvents ? ' block-pointer-events' : '');
 		const backgroundPositionString = `${model.bgPos.left}px ${model.bgPos.top}px`; 
 		const clipPathString = this.getClipPathString(this.props.edgeDrawer);
 

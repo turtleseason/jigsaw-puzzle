@@ -4,51 +4,53 @@
 		<meta charset="utf-8">
 		<title>Puzzle piece</title>
 		<style type="text/css">
-			* {
-				user-select: none;
-			}
-
 			body {
 				background: #74A5D0;
 			}
 
-			#puzzle_container {
+			.puzzle-container {
 				position: relative;
-				/* top: 50px; */
-				/* min-width: 1221px; */
-				/* min-height: 823px; */
+				height: 900px;
+				width: 1600px;
 				margin: 0 auto;
+				user-select: none;
 			}
 
-			.puzzle_background {
-				height: 90vh;
-				width: 80vw;
+			.puzzle-background {
 				background: #def0e6;
-				margin: 5vh auto;
+				width: 100%;
+				height: 100%;
 			}
 
-			.puzzle_piece, .puzzle_complete {
-				background-color: #FFFFFF;
+			.puzzle-area {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+
+			.puzzle-complete {
+				background-position: center;
+			}
+
+			.puzzle-piece, .puzzle-complete {
+				background-color: transparent;
 				background-image: url('lunar_festival.png');
 				background-repeat: no-repeat;
 			}
 
-			.puzzle_piece {
+			.puzzle-piece {
 				position: absolute;
 			}
 
-			.puzzle_piece.block_pointer_events {
+			.puzzle-piece.block-pointer-events {
 				pointer-events: none;
-			}
-
-			.puzzle_complete {
-				width: 100%;
-				height: 100%;
 			}
 		</style>
 	</head>
 
 	<body>
-		<div id="puzzle_container"> </div>
+		<div id="react-root"> </div>
 	</body>
 </html>

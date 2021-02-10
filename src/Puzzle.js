@@ -81,6 +81,7 @@ class Puzzle extends React.Component {
 				const key = availableKeys.splice(keyIndex, 1)[0];
 				keysByGridPos[col][row] = key;
 				
+				// const pos = this.getGridPosition(col, row, 1);
 				const pos = this.getRandomPosition();
 				const bgPos = this.getBackgroundPosition(col, row);
 
@@ -153,8 +154,8 @@ class Puzzle extends React.Component {
 			pieces: pieces,
 			draggedPiece: key,
 			nextzIndex: this.state.nextzIndex + 1,
-			offsetX: e.clientX - this.state.pieces[key].pos.left,
-			offsetY: e.clientY - this.state.pieces[key].pos.top
+			offsetX: e.clientX - (this.state.pieces[key].pos.left * this.props.scaleFactor),
+			offsetY: e.clientY - (this.state.pieces[key].pos.top * this.props.scaleFactor)
 		});
 	}
 
@@ -167,7 +168,9 @@ class Puzzle extends React.Component {
 		const pieces = this.state.pieces.map(x => PieceModel.clone(x));
 		
 		const p = pieces[key];
-		p.pos = {left: e.clientX - this.state.offsetX, top: e.clientY - this.state.offsetY};
+		const left = (e.clientX - this.state.offsetX) / this.props.scaleFactor;
+		const top = (e.clientY - this.state.offsetY) / this.props.scaleFactor;
+		p.pos = {left: left, top: top };
 
 		for (const k of this.state.groups[p.group]) {
 			this.alignPiece(pieces[k], p);
@@ -213,24 +216,23 @@ class Puzzle extends React.Component {
 	}
 
 	render() {
+		let board;
 		if (this.state.gameComplete) {
-			return (<div className='puzzle_complete'></div>);
+			board = (<div className='puzzle-area puzzle-complete'></div>);
 		} else {
-			const children = this.state.pieces.map(
-				model => this.renderPiece(model));
-			return (
-				<div>
-					<div
-						className='puzzle_background' 
-						onMouseMove={(e) => this.handleMouseMove(e)}
-						onMouseUp={() => this.handleMouseUp()}>
-					</div>
-					<div>
-						{ children }
-					</div>
-				</div>
-			);
+			const children = this.state.pieces.map(model => this.renderPiece(model));
+			board = (
+				<div className='puzzle-area' onMouseMove={(e) => this.handleMouseMove(e)} onMouseUp={() => this.handleMouseUp()}>
+					{ children }
+				</div>);
 		}
+		
+		return (
+			<div className='puzzle-container' style={{transform: `scale(${this.props.scaleFactor})`}}>
+				<div className='puzzle-background'></div>
+				{board}
+			</div>
+		);
 	}
 }
 
