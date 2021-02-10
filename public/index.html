@@ -4,16 +4,27 @@
 		<meta charset="utf-8">
 		<title>Puzzle piece</title>
 		<style type="text/css">
+			* {
+				user-select: none;
+			}
+
 			body {
 				background: #74A5D0;
 			}
 
 			#puzzle_container {
 				position: relative;
-				top: 50px;
-				width: 1221px;
-				height: 823px;
+				/* top: 50px; */
+				/* min-width: 1221px; */
+				/* min-height: 823px; */
 				margin: 0 auto;
+			}
+
+			.puzzle_background {
+				height: 90vh;
+				width: 80vw;
+				background: #def0e6;
+				margin: 5vh auto;
 			}
 
 			.puzzle_piece, .puzzle_complete {
@@ -24,6 +35,10 @@
 
 			.puzzle_piece {
 				position: absolute;
+			}
+
+			.puzzle_piece.block_pointer_events {
+				pointer-events: none;
 			}
 
 			.puzzle_complete {

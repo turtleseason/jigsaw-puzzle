@@ -10,8 +10,6 @@ import { LEFT, TOP, RIGHT, BOTTOM, Sides } from './Sides.js';
 import { range, randomInt } from './util.js';
 
 
-const e = React.createElement;
-
 class Puzzle extends React.Component {
 	constructor(props) {
 		super(props);
@@ -177,11 +175,12 @@ class Puzzle extends React.Component {
 		this.setState({pieces: pieces});
 	}
 
-	handleMouseUp(e, key) {
-		if (this.state.draggedPiece !== key) {
+	handleMouseUp() {
+		if (this.state.draggedPiece === null) {
 			return;
 		}
 
+		const key = this.state.draggedPiece;
 		const groups = {...this.state.groups};
 		const pieces = this.state.pieces.map(x => PieceModel.clone(x));
 
@@ -199,25 +198,38 @@ class Puzzle extends React.Component {
 		this.setState({groups: groups, pieces: pieces, draggedPiece: null, gameComplete: gameComplete});
 	}
 
-	renderPiece(model, isDragged) {
-		return e(Piece, {
-			key: model.key,
-			model: model,
-			width: this.pieceWidth,
-			height: this.pieceHeight,
-			edgeDrawer: this.state.edgeDrawer,
-			onMouseDown: (e) => this.handleMouseDown(e, model.key),
-			onMouseUp: (e) => this.handleMouseUp(e, model.key)
-		});
+	renderPiece(model) {
+		return (
+			<Piece key={model.key}
+				model={model}
+				width={this.pieceWidth}
+				height={this.pieceHeight}
+				isDragged={model.key === this.state.draggedPiece}
+				blockPointerEvents={this.state.draggedPiece !== null}
+				edgeDrawer={this.state.edgeDrawer}
+				onMouseDown={(e) => this.handleMouseDown(e, model.key)}
+				onMouseUp={(e) => this.handleMouseUp(e, model.key)}/>
+		);
 	}
 
 	render() {
 		if (this.state.gameComplete) {
-			return e('div', {className: 'puzzle_complete'});
+			return (<div className='puzzle_complete'></div>);
 		} else {
 			const children = this.state.pieces.map(
-				model => this.renderPiece(model, model.key === this.state.draggedPiece));
-			return e('div', {onMouseMove: (e) => this.handleMouseMove(e)}, children);
+				model => this.renderPiece(model));
+			return (
+				<div>
+					<div
+						className='puzzle_background' 
+						onMouseMove={(e) => this.handleMouseMove(e)}
+						onMouseUp={() => this.handleMouseUp()}>
+					</div>
+					<div>
+						{ children }
+					</div>
+				</div>
+			);
 		}
 	}
 }
