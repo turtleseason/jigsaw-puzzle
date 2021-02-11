@@ -74,8 +74,8 @@ class Puzzle extends React.Component {
 	}
 	
 	getRandomPosition() {
-		const left = Math.random() * this.props.imgWidth; 
-		const top = Math.random() * this.props.imgHeight;
+		const left = Math.random() * (.2 * this.props.imgWidth);
+		const top = Math.random() * (this.props.imgHeight - this.pieceHeight);
 		return {left: left, top: top};
 	}
 	
