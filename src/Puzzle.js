@@ -10,6 +10,9 @@ import { LEFT, TOP, RIGHT, BOTTOM, Sides } from './Sides.js';
 import { range, randomInt } from './util.js';
 
 
+const MAX_WIDTH_SCALE = .7;  // The maximum percentage of the window width that the puzzle image should take up. 
+const MAX_HEIGHT_SCALE = .9;  // The maximum percentage of the window height that the puzzle image should take up. 
+
 class Puzzle extends React.Component {
 	constructor(props) {
 		super(props);
@@ -29,6 +32,23 @@ class Puzzle extends React.Component {
 			draggedPiece: null,
 			nextzIndex: 1
 		}
+	}
+
+	componentDidMount() {
+		this.setScaleFactor();
+
+		this.resizeListener = this.setScaleFactor.bind(this);
+		window.addEventListener('resize', this.resizeListener);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('resize', this.resizeListener);
+	}
+
+	setScaleFactor() {
+		const widthScale = MAX_WIDTH_SCALE * document.documentElement.clientWidth / this.props.imgWidth;
+		const heightScale = MAX_HEIGHT_SCALE * document.documentElement.clientHeight / this.props.imgHeight;
+		this.setState({scaleFactor: Math.min(widthScale, heightScale)});
 	}
 
 	get innerWidth() {
@@ -81,7 +101,7 @@ class Puzzle extends React.Component {
 				const key = availableKeys.splice(keyIndex, 1)[0];
 				keysByGridPos[col][row] = key;
 				
-				// const pos = this.getGridPosition(col, row, 1);
+				// const pos = this.getGridPosition(col, row, 0);
 				const pos = this.getRandomPosition();
 				const bgPos = this.getBackgroundPosition(col, row);
 
@@ -154,8 +174,8 @@ class Puzzle extends React.Component {
 			pieces: pieces,
 			draggedPiece: key,
 			nextzIndex: this.state.nextzIndex + 1,
-			offsetX: e.clientX - (this.state.pieces[key].pos.left * this.props.scaleFactor),
-			offsetY: e.clientY - (this.state.pieces[key].pos.top * this.props.scaleFactor)
+			offsetX: e.clientX - (this.state.pieces[key].pos.left * this.state.scaleFactor),
+			offsetY: e.clientY - (this.state.pieces[key].pos.top * this.state.scaleFactor)
 		});
 	}
 
@@ -168,8 +188,8 @@ class Puzzle extends React.Component {
 		const pieces = this.state.pieces.map(x => PieceModel.clone(x));
 		
 		const p = pieces[key];
-		const left = (e.clientX - this.state.offsetX) / this.props.scaleFactor;
-		const top = (e.clientY - this.state.offsetY) / this.props.scaleFactor;
+		const left = (e.clientX - this.state.offsetX) / this.state.scaleFactor;
+		const top = (e.clientY - this.state.offsetY) / this.state.scaleFactor;
 		p.pos = {left: left, top: top };
 
 		for (const k of this.state.groups[p.group]) {
@@ -216,19 +236,25 @@ class Puzzle extends React.Component {
 	}
 
 	render() {
+		const boardStyle = {transform: `scale(${this.state.scaleFactor})`, width: (100 / this.state.scaleFactor) + '%', height: (100 / this.state.scaleFactor) + '%'};
+
 		let board;
 		if (this.state.gameComplete) {
-			board = (<div className='puzzle-area puzzle-complete'></div>);
+			board = (<div className='puzzle-area puzzle-complete' style={boardStyle}></div>);
 		} else {
 			const children = this.state.pieces.map(model => this.renderPiece(model));
 			board = (
-				<div className='puzzle-area' onMouseMove={(e) => this.handleMouseMove(e)} onMouseUp={() => this.handleMouseUp()}>
+				<div 
+					className='puzzle-area'
+					onMouseMove={(e) => this.handleMouseMove(e)}
+					onMouseUp={() => this.handleMouseUp()}
+					style={boardStyle}>
 					{ children }
 				</div>);
 		}
 		
 		return (
-			<div className='puzzle-container' style={{transform: `scale(${this.props.scaleFactor})`}}>
+			<div className='puzzle-container'>
 				<div className='puzzle-background'></div>
 				{board}
 			</div>

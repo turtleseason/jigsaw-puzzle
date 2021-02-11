@@ -5,7 +5,7 @@ import Puzzle from './Puzzle';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Puzzle imgWidth={1221} imgHeight={823} borderSize={30} offset={10} rows={7} cols={10} scaleFactor={1} />
+    <Puzzle imgWidth={1221} imgHeight={823} borderSize={30} offset={10} rows={7} cols={10} />
   </React.StrictMode>,
   document.getElementById('react-root')
 );
