@@ -1,5 +1,5 @@
-class PieceModel {
-	// By default, a piece is inserted into the group with the same id as its key
+export default class PieceModel {
+	// By default, a new piece is inserted into the group with the same id as its key
 	constructor(key, col, row, pos, bgPos, zIndex, edges, neighbors) {
 		this.key = key;
 		this.group = key;
@@ -11,14 +11,4 @@ class PieceModel {
 		this.edges = edges;
 		this.neighbors = neighbors;
 	}
-
-	static clone(obj) {
-		const copy = {...obj};
-		// replace pos with a new object if it needs to be updated
-		copy.edges = {...obj.edges};
-		copy.neighbors = {...obj.neighbors};
-		return copy;
-	}
 }
-
-export default PieceModel;

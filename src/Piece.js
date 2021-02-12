@@ -2,7 +2,16 @@ import React from 'react';
 import { Sides } from './Sides.js';
 
 
-class Piece extends React.Component {
+export default class Piece extends React.PureComponent {
+	constructor(props) {
+		super(props);
+
+		const bgPos = this.props.model.bgPos;
+		// These will never change over the lifetime of the object, so just calculate them once
+		this.backgroundPositionString = `${bgPos.left}px ${bgPos.top}px`;
+		this.clipPathString = this.getClipPathString(this.props.edgeDrawer);
+	}
+	
 	getClipPathString(edgeDrawer) {
 		let clipPathString = 'path(\'';
 		for (const side of Sides) {
@@ -13,19 +22,15 @@ class Piece extends React.Component {
 
 	render() {
 		const model = this.props.model;
-
 		const className = 'puzzle-piece' + (this.props.blockPointerEvents ? ' block-pointer-events' : '');
-		const backgroundPositionString = `${model.bgPos.left}px ${model.bgPos.top}px`; 
-		const clipPathString = this.getClipPathString(this.props.edgeDrawer);
-
 		return (
 			<div
 				className={className}
 				tempid={model.key}
 				onMouseDown={(e) => this.props.onMouseDown(e)}
 				style={{
-					backgroundPosition: backgroundPositionString,
-					clipPath: clipPathString,
+					backgroundPosition: this.backgroundPositionString,
+					clipPath: this.clipPathString,
 					width: this.props.width,
 					height: this.props.height,
 					left: model.pos.left,
@@ -36,5 +41,3 @@ class Piece extends React.Component {
 		);
 	}
 }
-
-export default Piece;

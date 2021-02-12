@@ -3,7 +3,7 @@ import { getOppositeEdge } from './Edges.js';
 
 // Contains the properties needed to draw a specific puzzle piece edge:
 // its overall type (bump, recess, flat) and any constants needed to define its shape.
-class EdgeStyleInfo {
+export default class EdgeStyleInfo {
 	constructor(type, neckWidth, offset, control1, control2) {
 		this.type = type;
 		this.w = neckWidth;
@@ -21,5 +21,3 @@ class EdgeStyleInfo {
 		return other;
 	}
 }
-
-export default EdgeStyleInfo;

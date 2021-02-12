@@ -2,7 +2,7 @@ import { BUMP, RECESS, FLAT } from './Edges.js';
 import { LEFT, TOP, RIGHT, BOTTOM } from './Sides.js';
 
 
-class EdgePathDrawer {
+export default class EdgePathDrawer {
 	constructor(pieceWidth, pieceHeight, borderSize) {
 		this.START = 'START';
 		this.templates = this.makeTemplates(pieceWidth, pieceHeight, borderSize)
@@ -61,5 +61,3 @@ class EdgePathDrawer {
 		return start + mid + end;
 	}
 }
-
-export default EdgePathDrawer;

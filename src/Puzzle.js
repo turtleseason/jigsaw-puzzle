@@ -7,13 +7,13 @@ import PieceModel from './PieceModel.js';
 import { getRandomEdgeType, getOppositeEdge } from './Edges.js';
 import { BUMP, RECESS, FLAT } from './Edges.js';
 import { LEFT, TOP, RIGHT, BOTTOM, Sides } from './Sides.js';
-import { range, randomInt } from './util.js';
+import { range, randomInt, objectMap } from './util.js';
 
 
 const MAX_WIDTH_SCALE = .7;  // The maximum percentage of the window width that the puzzle image should take up. 
 const MAX_HEIGHT_SCALE = .9;  // The maximum percentage of the window height that the puzzle image should take up. 
 
-class Puzzle extends React.Component {
+export default class Puzzle extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -23,20 +23,18 @@ class Puzzle extends React.Component {
 		this.pieceWidth = 2 * this.borderSize + this.innerWidth;
 		this.pieceHeight = 2 * this.borderSize + this.innerHeight;
 
-		const edgeDrawer = new EdgePathDrawer(this.pieceWidth, this.pieceHeight, this.borderSize);
+		this.mouseDownHandlers = range(this.props.rows * this.props.cols).map(i => this.handleMouseDown.bind(this, i));
+		this.edgeDrawer = new EdgePathDrawer(this.pieceWidth, this.pieceHeight, this.borderSize);
+		this.nextzIndex = 1;
+
 		const pieces = this.createPieces();
-		const groups = {};
-		for (let i = 0; i < pieces.length; i++) {
-			groups[i] = [i];
-		}
+		const groups = objectMap(range(pieces.length), (i) => [i]);
 
 		this.state = {
 			pieces: pieces,
 			groups: groups,
-			edgeDrawer: edgeDrawer,
 			gameComplete: false,
 			draggedPiece: null,
-			nextzIndex: 1
 		}
 	}
 
@@ -143,27 +141,30 @@ class Puzzle extends React.Component {
 		groups[g1] = groups[g1].concat(groups[g2]);
 		const refPiece = pieces[groups[g1][0]];
 		for (const k of groups[g2]) {
-			pieces[k].group = g1;
-			pieces[k].zIndex = refPiece.zIndex;
-			this.alignPiece(pieces[k], refPiece);
+			const p = {...pieces[k]};
+			p.group = g1;
+			p.zIndex = refPiece.zIndex;
+			this.alignPiece(p, refPiece);
+			pieces[k] = p;
 		}
 		delete groups[g2];
 	}
 
-	handleMouseDown(e, key) {
+	handleMouseDown(key, e) {
 		if (e.button !== 0 || this.state.draggedPiece !== null) {
 			return;
 		}
 
-		const pieces = this.state.pieces.map(x => PieceModel.clone(x));
+		const pieces = this.state.pieces.slice();
 		for (const k of this.state.groups[pieces[key].group]) {
-			pieces[k].zIndex = this.state.nextzIndex;
+			pieces[k] = {...pieces[k]};
+			pieces[k].zIndex = this.nextzIndex;
 		}
-		
+		this.nextzIndex++;
+
 		this.setState({
 			pieces: pieces,
 			draggedPiece: key,
-			nextzIndex: this.state.nextzIndex + 1,
 			offsetX: e.clientX - (this.state.pieces[key].pos.left * this.state.scaleFactor),
 			offsetY: e.clientY - (this.state.pieces[key].pos.top * this.state.scaleFactor)
 		});
@@ -175,14 +176,17 @@ class Puzzle extends React.Component {
 		}
 
 		const key = this.state.draggedPiece;
-		const pieces = this.state.pieces.map(x => PieceModel.clone(x));
+		const pieces = this.state.pieces.slice();
 		
-		const p = pieces[key];
+		const p = {...pieces[key]};
+		pieces[key] = p;
+		
 		const left = (e.clientX - this.state.offsetX) / this.state.scaleFactor;
 		const top = (e.clientY - this.state.offsetY) / this.state.scaleFactor;
 		p.pos = {left: left, top: top };
 
 		for (const k of this.state.groups[p.group]) {
+			pieces[k] = {...pieces[k]};
 			this.alignPiece(pieces[k], p);
 		}
 		this.setState({pieces: pieces});
@@ -195,7 +199,7 @@ class Puzzle extends React.Component {
 
 		const key = this.state.draggedPiece;
 		const groups = {...this.state.groups};
-		const pieces = this.state.pieces.map(x => PieceModel.clone(x));
+		const pieces = this.state.pieces.slice();
 
 		for (const k of this.state.groups[pieces[key].group]) {
 			const p = pieces[k];
@@ -217,11 +221,10 @@ class Puzzle extends React.Component {
 				model={model}
 				width={this.pieceWidth}
 				height={this.pieceHeight}
-				isDragged={model.key === this.state.draggedPiece}
+				// isDragged={model.group === this.state.pieces[this.state.draggedPiece].group}
 				blockPointerEvents={this.state.draggedPiece !== null}
-				edgeDrawer={this.state.edgeDrawer}
-				onMouseDown={(e) => this.handleMouseDown(e, model.key)}
-				onMouseUp={(e) => this.handleMouseUp(e, model.key)}/>
+				edgeDrawer={this.edgeDrawer}
+				onMouseDown={this.mouseDownHandlers[model.key]}/>
 		);
 	}
 
@@ -251,5 +254,3 @@ class Puzzle extends React.Component {
 		);
 	}
 }
-
-export default Puzzle;
