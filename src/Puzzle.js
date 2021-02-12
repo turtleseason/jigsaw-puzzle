@@ -17,7 +17,13 @@ class Puzzle extends React.Component {
 	constructor(props) {
 		super(props);
 
-		const edgeDrawer = new EdgePathDrawer(this.pieceWidth, this.pieceHeight, this.props.borderSize);
+		this.innerWidth =  this.props.imgWidth / this.props.cols;	
+		this.innerHeight = this.props.imgHeight / this.props.rows;
+		this.borderSize = Math.min(this.innerHeight, this.innerWidth) / 4;
+		this.pieceWidth = 2 * this.borderSize + this.innerWidth;
+		this.pieceHeight = 2 * this.borderSize + this.innerHeight;
+
+		const edgeDrawer = new EdgePathDrawer(this.pieceWidth, this.pieceHeight, this.borderSize);
 		const pieces = this.createPieces();
 		const groups = {};
 		for (let i = 0; i < pieces.length; i++) {
@@ -51,25 +57,9 @@ class Puzzle extends React.Component {
 		this.setState({scaleFactor: Math.min(widthScale, heightScale)});
 	}
 
-	get innerWidth() {
-		return this.props.imgWidth / this.props.cols;	
-	}
-
-	get innerHeight() {
-		return this.props.imgHeight / this.props.rows;
-	}
-
-	get pieceWidth() {
-		return 2 * this.props.borderSize + this.innerWidth;
-	}
-
-	get pieceHeight() {
-		return 2 * this.props.borderSize + this.innerHeight;
-	}
-
 	getGridPosition(col, row, spacing) {
-		const left = (this.innerWidth + spacing) * col - this.props.borderSize;
-		const top = (this.innerHeight + spacing) * row - this.props.borderSize;
+		const left = (this.innerWidth + spacing) * col - this.borderSize;
+		const top = (this.innerHeight + spacing) * row - this.borderSize;
 		return {left: left, top: top};
 	}
 	
@@ -80,13 +70,13 @@ class Puzzle extends React.Component {
 	}
 	
 	getBackgroundPosition(col, row) {
-		const left = - (this.innerWidth * col) + this.props.borderSize;
-		const top = -(this.innerHeight * row) + this.props.borderSize;
+		const left = - (this.innerWidth * col) + this.borderSize;
+		const top = -(this.innerHeight * row) + this.borderSize;
 		return {left: left, top: top};
 	}
 	
 	createEdge(type) {
-		return new EdgeStyleInfo(type, this.props.borderSize, this.props.borderSize / 3, this.props.borderSize, this.props.borderSize / 2);
+		return new EdgeStyleInfo(type, this.borderSize, this.borderSize / 3, this.borderSize, this.borderSize / 2);
 	}
 
 	createPieces() {
