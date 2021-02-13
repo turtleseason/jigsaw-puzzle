@@ -74,7 +74,12 @@ export default class Puzzle extends React.Component {
 	}
 	
 	createEdge(type) {
-		return new EdgeStyleInfo(type, this.borderSize, this.borderSize / 3, this.borderSize, this.borderSize / 2);
+		const neckWidth = this.borderSize * (.8 + Math.random() * .45);
+		const offset = this.borderSize * (.4 + Math.random() * .1);
+		const c1 = (neckWidth > this.borderSize) ? neckWidth * (.75 + Math.random() * .25)
+					: this.borderSize * (.85 + Math.random() * .35);
+		const c2 = neckWidth * (.5 + Math.random() * .15);
+		return new EdgeStyleInfo(type, neckWidth, offset, c1, c2);
 	}
 
 	createPieces() {
@@ -89,7 +94,7 @@ export default class Puzzle extends React.Component {
 				const key = availableKeys.splice(keyIndex, 1)[0];
 				keysByGridPos[col][row] = key;
 				
-				// const pos = this.getGridPosition(col, row, 0);
+				// const pos = this.getGridPosition(col, row, 5);
 				const pos = this.getRandomPosition();
 				const bgPos = this.getBackgroundPosition(col, row);
 

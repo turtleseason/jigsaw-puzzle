@@ -8,7 +8,7 @@ let puzzleKey = 1;
 function renderPuzzle(width, height, rows, columns) {
     ReactDOM.render(
         <React.StrictMode>
-            <Puzzle key={++puzzleKey} imgWidth={width} imgHeight={height} offset={10} rows={rows} cols={columns} />
+            <Puzzle key={++puzzleKey} imgWidth={width} imgHeight={height} rows={rows} cols={columns} />
         </React.StrictMode>,
         document.getElementById('react-root')
     );
