@@ -18,14 +18,19 @@ function renderPuzzle(width, height, rows, columns) {
 }
     
 function newPuzzle() {
-    const rows = document.getElementById('row-input').value;
-    const columns = document.getElementById('col-input').value;
-    const imageUrl = document.getElementById('puzzle-image-select').value;
+    const rowInput = document.getElementById('row-input');
+    const colInput = document.getElementById('col-input');
+    if (!rowInput.checkValidity() || !colInput.checkValidity()) {
+        return;
+    }
+    const rows = parseInt(rowInput.value, 10);
+    const cols = parseInt(colInput.value, 10);
 
+    const imageUrl = document.getElementById('puzzle-image-select').value;
     document.documentElement.style.setProperty('--puzzle-img', `url(${imageUrl})`);
 
     const sizeTester = new Image();
-    sizeTester.onload = () => renderPuzzle(sizeTester.width, sizeTester.height, parseInt(rows, 10), parseInt(columns, 10));
+    sizeTester.onload = () => renderPuzzle(sizeTester.width, sizeTester.height, rows, cols);
     sizeTester.src = imageUrl;
 };
 
