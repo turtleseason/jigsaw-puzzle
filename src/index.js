@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Puzzle from './Puzzle';
 
+import 'bootstrap/dist/css/bootstrap.css';
+import './index.css';
+
 
 let puzzleKey = 1;
 

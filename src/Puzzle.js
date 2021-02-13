@@ -9,6 +9,8 @@ import { BUMP, RECESS, FLAT } from './Edges.js';
 import { LEFT, TOP, RIGHT, BOTTOM, Sides } from './Sides.js';
 import { range, randomInt, objectMap } from './util.js';
 
+import './Puzzle.css';
+
 
 const MAX_WIDTH_SCALE = .7;  // The maximum percentage of the window width that the puzzle image should take up. 
 const MAX_HEIGHT_SCALE = .9;  // The maximum percentage of the window height that the puzzle image should take up. 
