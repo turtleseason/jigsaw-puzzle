@@ -1,4 +1,4 @@
-import { ImageInfo, ImageSource } from './PuzzleImage';
+import { ImageInfo, ImageSource } from './ImageInfo';
 
 
 const providedImages = [
