@@ -12,3 +12,21 @@ body {
 input[type="number"] {
     width: 3.5em;
 }
+
+
+/* Bootstrap overrides */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-weight: 400;
+}
+
+h1, .h1 {
+    font-size: 2rem;
+}
+
+h2, .h2 {
+    font-size: 1.25rem;
+}
+
+small, .small {
+    font-size: 70%;
+}
