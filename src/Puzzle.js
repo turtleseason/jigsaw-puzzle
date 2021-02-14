@@ -254,7 +254,7 @@ export default class Puzzle extends React.Component {
 		}
 		
 		return (
-			<div className='puzzle-container'>
+			<div className='puzzle-container mt-3 pb-3'>
 				<div className='puzzle-background'></div>
 				{board}
 			</div>
