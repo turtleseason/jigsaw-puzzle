@@ -1,8 +1,8 @@
-import React from 'react';
-import { Sides } from './Sides.js';
+import { PureComponent } from 'react';
+import { Sides } from './Sides';
 
 
-export default class Piece extends React.PureComponent {
+export default class Piece extends PureComponent {
 	constructor(props) {
 		super(props);
 

@@ -1,4 +1,4 @@
-import { getOppositeEdge } from './Edges.js';
+import { getOppositeEdge } from './Edges';
 
 
 // Contains the properties needed to draw a specific puzzle piece edge:

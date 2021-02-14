@@ -1,5 +1,5 @@
-import { BUMP, RECESS, FLAT } from './Edges.js';
-import { LEFT, TOP, RIGHT, BOTTOM } from './Sides.js';
+import { BUMP, RECESS, FLAT } from './Edges';
+import { LEFT, TOP, RIGHT, BOTTOM } from './Sides';
 
 
 export default class EdgePathDrawer {

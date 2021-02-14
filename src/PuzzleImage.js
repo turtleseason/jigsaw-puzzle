@@ -1,18 +1,20 @@
-export default class PuzzleImage {
-    constructor(name, url, author, source, defaultRows, defaultCols) {
+export class ImageInfo {
+    constructor(name, url, defaultRows, defaultCols, author, source) {
         this.name = name;
         this.url = url;
-        this.author = author;
-        this.source = source;
         this.defaultRows = defaultRows;
         this.defaultCols = defaultCols;
+        this.author = author;
+        this.source = source;
     }
 }
 
-class PuzzleImageSource {
-    constructor(sourceName, sourceUrl, description) {
+export class ImageSource {
+    constructor(sourceName, nameIsTitle=false, isPhoto=false, sourceUrl='', description='') {
         this.sourceName = sourceName;
+        this.nameIsTitle = nameIsTitle;
         this.sourceUrl = sourceUrl;
+        this.isPhoto = isPhoto;
         this.description = description;
     }
 }

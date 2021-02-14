@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Puzzle from './Puzzle';
+import PuzzleTitle from './PuzzleTitle';
 import PuzzleControls from './PuzzleControls';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
@@ -8,10 +9,11 @@ import './index.css';
 
 let puzzleKey = 1;
 
-function renderPuzzle(width, height, rows, columns) {
+function renderPuzzle(width, height, rows, columns, image) {
     ReactDOM.render(
         <React.StrictMode>
             <PuzzleControls newPuzzle={renderPuzzle} />
+            <PuzzleTitle puzzleImage={image} />
             <Puzzle key={++puzzleKey} imgWidth={width} imgHeight={height} rows={rows} cols={columns} />
         </React.StrictMode>,
         document.getElementById('react-root')

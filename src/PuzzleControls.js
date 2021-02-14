@@ -1,21 +1,21 @@
-import React from 'react';
-import PuzzleImage from './PuzzleImage';
+import { Component } from 'react';
+import { ImageInfo, ImageSource } from './PuzzleImage';
 
 
 const presetImages = [
-    new PuzzleImage('Roses', 'images/van-gogh-roses-nga.jpg', 'Vincent van Gogh', 'National Gallery of Art', 8, 10),
-    new PuzzleImage('Moonlit field', 'images/luca-huter-vFrhuBvI-hI-unsplash.jpg', 'Luca Huter', 'unsplash', 7, 10),
-    new PuzzleImage('Wish', 'images/casey-horner-80UR4DM2Rz0-unsplash.jpg', 'Casey Horner', 'unsplash', 7, 10),
-    new PuzzleImage('Coral', 'images/david-clode-eOSqRq2Qm1c-unsplash.jpg', 'David Clode', 'unsplash', 7, 10),
-    new PuzzleImage('Jellyfish', 'images/travel-sourced-FsmcD6uKcHk-unsplash.jpg', 'Travel Sourced', 'unsplash', 7, 10),
-    new PuzzleImage('Succulents', 'images/scott-webb-lYzgtps0UtQ-unsplash.jpg', 'Scott Webb', 'unsplash', 11, 7),
-    new PuzzleImage('freebirb', 'lunar_festival.png', 'Kan Gao', 'twitter', 7, 10),
+    new ImageInfo('Roses', 'images/van-gogh-roses-nga.jpg', 8, 10, 'Vincent van Gogh', new ImageSource('National Gallery of Art', true, false)),
+    new ImageInfo('Moonlit field', 'images/luca-huter-vFrhuBvI-hI-unsplash.jpg', 7, 10, 'Luca Huter', new ImageSource('unsplash', false, true)),
+    new ImageInfo('Wish', 'images/casey-horner-80UR4DM2Rz0-unsplash.jpg', 7, 10, 'Casey Horner', new ImageSource('unsplash', true, true)),
+    new ImageInfo('Coral', 'images/david-clode-eOSqRq2Qm1c-unsplash.jpg', 7, 10, 'David Clode', new ImageSource('unsplash', false, true)),
+    new ImageInfo('Jellyfish', 'images/travel-sourced-FsmcD6uKcHk-unsplash.jpg', 7, 10, 'Travel Sourced', new ImageSource('unsplash', false, true)),
+    new ImageInfo('Succulents', 'images/scott-webb-lYzgtps0UtQ-unsplash.jpg', 11, 7, 'Scott Webb', new ImageSource('unsplash', false, true)),
+    new ImageInfo('freebirb', 'lunar_festival.png', 7, 10, 'Kan Gao'),
 ];
 
 const minPuzzleDimension = 2;
 const maxPuzzleDimension = 25;
 
-export default class PuzzleControls extends React.Component {
+export default class PuzzleControls extends Component {
     constructor(props) {
         super(props);
 
@@ -60,7 +60,7 @@ export default class PuzzleControls extends React.Component {
         document.documentElement.style.setProperty('--puzzle-img', `url(${imageUrl})`);
         
         const sizeTester = new Image();
-        sizeTester.onload = () => this.props.newPuzzle(sizeTester.width, sizeTester.height, this.state.rows, this.state.cols);
+        sizeTester.onload = () => this.props.newPuzzle(sizeTester.width, sizeTester.height, this.state.rows, this.state.cols, this.state.selectedImage);
         sizeTester.src = imageUrl;
     };
 
