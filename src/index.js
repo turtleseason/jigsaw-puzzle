@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Puzzle from './Puzzle';
 import PuzzleTitle from './PuzzleTitle';
 import PuzzleControls from './PuzzleControls';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 

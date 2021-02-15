@@ -68,7 +68,7 @@ export default class PuzzleControls extends Component {
         const options = [];
         for (let i = 0; i < presetImages.length; i++) {
             const img = presetImages[i];
-            options.push(<option key={i} value={img.url} data-index={i}>{img.name}</option>);
+            options.push(<option key={i} value={img.url} data-index={i}>{img.shortName}</option>);
         }
         return options;
     }

@@ -1,11 +1,12 @@
 export class ImageInfo {
-    constructor(name, url, defaultRows, defaultCols, author, source) {
+    constructor(name, url, defaultRows, defaultCols, author, source, shortName) {
         this.name = name;
         this.url = url;
         this.defaultRows = defaultRows;
         this.defaultCols = defaultCols;
         this.author = author;
         this.source = source;
+        this.shortName = shortName ?? name;
     }
 }
 
