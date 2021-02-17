@@ -29,11 +29,15 @@
     transform-origin: 0 0;
 }
 
-.puzzle-complete {
+.puzzle-area.no-scroll {
+    touch-action: none;
+}
+
+.puzzle-area.puzzle-complete {
     background-position: center;
 }
 
-.puzzle-piece, .puzzle-complete {
+.puzzle-piece, .puzzle-area.puzzle-complete {
     background-color: transparent;
     background-image: var(--puzzle-img);
     background-repeat: no-repeat;

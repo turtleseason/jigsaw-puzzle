@@ -1,8 +1,16 @@
-html, body, #react-root {
+html, body, .scroll-div, #react-root {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+html, body {
+	overflow: hidden;
+}
+
+.scroll-div {
+	overflow: auto;
 }
 
 input[type="number"] {

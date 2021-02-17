@@ -25,7 +25,7 @@ export default class Puzzle extends Component {
 		this.pieceWidth = 2 * this.borderSize + this.innerWidth;
 		this.pieceHeight = 2 * this.borderSize + this.innerHeight;
 
-		this.mouseDownHandlers = range(this.props.rows * this.props.cols).map(i => this.handleMouseDown.bind(this, i));
+		this.pointerDownHandlers = range(this.props.rows * this.props.cols).map(i => this.handlePointerDown.bind(this, i));
 		this.edgeDrawer = new EdgePathDrawer(this.pieceWidth, this.pieceHeight, this.borderSize);
 		this.nextzIndex = 1;
 
@@ -128,7 +128,7 @@ export default class Puzzle extends Component {
 	}
 	
 	isTouching(piece, side, other) {
-		const snapRange = 7;
+		const snapRange = 7 / this.state.scaleFactor;
 		if (side === RIGHT) {
 			return Math.abs(piece.pos.top - other.pos.top) <= snapRange
 				&& Math.abs((other.pos.left - piece.pos.left) - this.innerWidth) <= snapRange;
@@ -157,11 +157,10 @@ export default class Puzzle extends Component {
 		delete groups[g2];
 	}
 
-	handleMouseDown(key, e) {
+	handlePointerDown(key, e) {
 		if (this.state.draggedPiece !== null || !e.isPrimary || (e.pointerType === 'mouse' && e.button !== 0)) {
 			return;
 		}
-		e.preventDefault();
 
 		const pieces = this.state.pieces.slice();
 		for (const k of this.state.groups[pieces[key].group]) {
@@ -179,11 +178,16 @@ export default class Puzzle extends Component {
 
 	}
 
-	handleMouseMove(e) {
+	handlePointerMove(e) {
 		if (this.state.draggedPiece === null || !e.isPrimary) {
 			return;
 		}
-		e.preventDefault();
+		
+		// Ignore events from touches that started within puzzle area but moved out of bounds
+		const hitElement = document.elementFromPoint(e.clientX, e.clientY);
+		if (!hitElement || !hitElement.classList.contains('puzzle-area')) {
+			return;
+		}
 
 		const key = this.state.draggedPiece;
 		const pieces = this.state.pieces.slice();
@@ -202,7 +206,7 @@ export default class Puzzle extends Component {
 		this.setState({pieces: pieces});
 	}
 
-	handleMouseUp() {
+	handlePointerUp() {
 		if (this.state.draggedPiece === null) {
 			return;
 		}
@@ -234,7 +238,7 @@ export default class Puzzle extends Component {
 				// isDragged={model.group === this.state.pieces[this.state.draggedPiece].group}
 				blockPointerEvents={this.state.draggedPiece !== null}
 				edgeDrawer={this.edgeDrawer}
-				onPointerDown={this.mouseDownHandlers[model.key]}/>
+				onPointerDown={this.pointerDownHandlers[model.key]}/>
 		);
 	}
 
@@ -248,9 +252,9 @@ export default class Puzzle extends Component {
 			const children = this.state.pieces.map(model => this.renderPiece(model));
 			board = (
 				<div 
-					className='puzzle-area'
-					onPointerMove={(e) => this.handleMouseMove(e)}
-					onPointerUp={() => this.handleMouseUp()}
+					className={'puzzle-area' + (this.state.draggedPiece !== null ? ' no-scroll' : '')}
+					onPointerMove={(e) => this.handlePointerMove(e)}
+					onPointerUp={() => this.handlePointerUp()}
 					style={boardStyle}>
 					{ children }
 				</div>);
