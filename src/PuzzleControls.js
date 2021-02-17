@@ -85,15 +85,15 @@ export default class PuzzleControls extends Component {
             <div className='container mt-4'>
                 <form className='form-inline justify-content-center'>
                     <label className='mr-2' htmlFor={selectId}>Choose an image:</label>
-                    <select id={selectId} className='custom-select mr-sm-4 mb-2 mb-md-0' onChange={this.handleSelectChange}>
+                    <select id={selectId} className='custom-select mr-sm-4' onChange={this.handleSelectChange}>
                         {this.renderSelectOptions()}
                     </select>
                     <div className='w-100 d-md-none'></div>
-                    <label className='mr-2' htmlFor={rowInputId}>Rows:</label>
-                    <input id={rowInputId} className='mr-2' type='number' min={minPuzzleDimension} max={maxPuzzleDimension}
+                    <label className='mr-2 my-2 my-md-0' htmlFor={rowInputId}>Rows:</label>
+                    <input id={rowInputId} className='mr-2 my-2 my-md-0' type='number' min={minPuzzleDimension} max={maxPuzzleDimension}
                            name='rows' value={rowsVal} onChange={this.handleDimensionsChange} onBlur={this.handleDimensionsBlur}/>
-                    <label className='mr-2' htmlFor={colInputId}>Columns:</label>
-                    <input id={colInputId} className='mr-4' type='number' min={minPuzzleDimension} max={maxPuzzleDimension} 
+                    <label className='mr-2 my-2 my-md-0' htmlFor={colInputId}>Columns:</label>
+                    <input id={colInputId} className='mr-4 my-2 my-md-0' type='number' min={minPuzzleDimension} max={maxPuzzleDimension} 
                            name='cols' value={colsVal} onChange={this.handleDimensionsChange} onBlur={this.handleDimensionsBlur}/>
                     <button className='btn btn-dark' type='button' onClick={this.newPuzzle}>New puzzle</button>
                 </form>
