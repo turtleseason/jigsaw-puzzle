@@ -13,7 +13,7 @@ import './Puzzle.css';
 
 
 const MAX_WIDTH_SCALE = .7;  // The maximum percentage of the window width that the puzzle image should take up. 
-const MAX_HEIGHT_SCALE = .9;  // The maximum percentage of the window height that the puzzle image should take up. 
+const MAX_HEIGHT_SCALE = .7;  // The maximum percentage of the window height that the puzzle image should take up. 
 
 export default class Puzzle extends Component {
 	constructor(props) {
@@ -96,7 +96,7 @@ export default class Puzzle extends Component {
 				const key = availableKeys.splice(keyIndex, 1)[0];
 				keysByGridPos[col][row] = key;
 				
-				// const pos = this.getGridPosition(col, row, 5);
+				// const pos = this.getGridPosition(col, row, 0);
 				const pos = this.getRandomPosition();
 				const bgPos = this.getBackgroundPosition(col, row);
 

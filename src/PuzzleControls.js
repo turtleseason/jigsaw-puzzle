@@ -95,7 +95,7 @@ export default class PuzzleControls extends Component {
                     <label className='mr-2' htmlFor={colInputId}>Columns:</label>
                     <input id={colInputId} className='mr-4' type='number' min={minPuzzleDimension} max={maxPuzzleDimension} 
                            name='cols' value={colsVal} onChange={this.handleDimensionsChange} onBlur={this.handleDimensionsBlur}/>
-                    <button className='btn btn-light' type='button' onClick={this.newPuzzle}>New puzzle</button>
+                    <button className='btn btn-dark' type='button' onClick={this.newPuzzle}>New puzzle</button>
                 </form>
             </div>
         );

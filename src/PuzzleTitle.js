@@ -34,7 +34,7 @@ export default class PuzzleTitle extends Component {
             }
             author += puzzleImage.author;
         }
-        const info = puzzleImage.source ? <button type='button' className='btn btn-link pt-0 pb-0 px-1' onClick={this.toggleModal}>more info</button> : '';
+        const info = puzzleImage.source ? <button type='button' className='btn btn-link btn-sm text-muted px-1' onClick={this.toggleModal}>more info</button> : '';
 
         return (
             <div className='container mt-3'>
