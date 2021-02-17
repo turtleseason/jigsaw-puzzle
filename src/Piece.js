@@ -27,7 +27,7 @@ export default class Piece extends PureComponent {
 			<div
 				className={className}
 				tempid={model.key}
-				onMouseDown={(e) => this.props.onMouseDown(e)}
+				onPointerDown={(e) => this.props.onPointerDown(e)}
 				style={{
 					backgroundPosition: this.backgroundPositionString,
 					clipPath: this.clipPathString,

@@ -158,7 +158,7 @@ export default class Puzzle extends Component {
 	}
 
 	handleMouseDown(key, e) {
-		if (e.button !== 0 || this.state.draggedPiece !== null) {
+		if (this.state.draggedPiece !== null || !e.isPrimary || (e.pointerType === 'mouse' && e.button !== 0)) {
 			return;
 		}
 
@@ -175,10 +175,11 @@ export default class Puzzle extends Component {
 			offsetX: e.clientX - (this.state.pieces[key].pos.left * this.state.scaleFactor),
 			offsetY: e.clientY - (this.state.pieces[key].pos.top * this.state.scaleFactor)
 		});
+
 	}
 
 	handleMouseMove(e) {
-		if (this.state.draggedPiece === null) {
+		if (this.state.draggedPiece === null || !e.isPrimary) {
 			return;
 		}
 
@@ -231,7 +232,7 @@ export default class Puzzle extends Component {
 				// isDragged={model.group === this.state.pieces[this.state.draggedPiece].group}
 				blockPointerEvents={this.state.draggedPiece !== null}
 				edgeDrawer={this.edgeDrawer}
-				onMouseDown={this.mouseDownHandlers[model.key]}/>
+				onPointerDown={this.mouseDownHandlers[model.key]}/>
 		);
 	}
 
@@ -246,8 +247,8 @@ export default class Puzzle extends Component {
 			board = (
 				<div 
 					className='puzzle-area'
-					onMouseMove={(e) => this.handleMouseMove(e)}
-					onMouseUp={() => this.handleMouseUp()}
+					onPointerMove={(e) => this.handleMouseMove(e)}
+					onPointerUp={() => this.handleMouseUp()}
 					style={boardStyle}>
 					{ children }
 				</div>);

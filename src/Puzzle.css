@@ -41,6 +41,7 @@
 
 .puzzle-piece {
     position: absolute;
+    touch-action: none;
 }
 
 .puzzle-piece.block-pointer-events {
