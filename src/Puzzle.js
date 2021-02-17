@@ -161,6 +161,7 @@ export default class Puzzle extends Component {
 		if (this.state.draggedPiece !== null || !e.isPrimary || (e.pointerType === 'mouse' && e.button !== 0)) {
 			return;
 		}
+		e.preventDefault();
 
 		const pieces = this.state.pieces.slice();
 		for (const k of this.state.groups[pieces[key].group]) {
@@ -182,6 +183,7 @@ export default class Puzzle extends Component {
 		if (this.state.draggedPiece === null || !e.isPrimary) {
 			return;
 		}
+		e.preventDefault();
 
 		const key = this.state.draggedPiece;
 		const pieces = this.state.pieces.slice();
