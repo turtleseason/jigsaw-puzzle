@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/jigsaw-puzzle/static/css/main.53dd710d.chunk.css",
+    "main.js": "/jigsaw-puzzle/static/js/main.cc69c4cf.chunk.js",
+    "main.js.map": "/jigsaw-puzzle/static/js/main.cc69c4cf.chunk.js.map",
+    "runtime-main.js": "/jigsaw-puzzle/static/js/runtime-main.3c5101f7.js",
+    "runtime-main.js.map": "/jigsaw-puzzle/static/js/runtime-main.3c5101f7.js.map",
+    "static/css/2.150d169a.chunk.css": "/jigsaw-puzzle/static/css/2.150d169a.chunk.css",
+    "static/js/2.fce40f1b.chunk.js": "/jigsaw-puzzle/static/js/2.fce40f1b.chunk.js",
+    "static/js/2.fce40f1b.chunk.js.map": "/jigsaw-puzzle/static/js/2.fce40f1b.chunk.js.map",
+    "index.html": "/jigsaw-puzzle/index.html",
+    "static/css/2.150d169a.chunk.css.map": "/jigsaw-puzzle/static/css/2.150d169a.chunk.css.map",
+    "static/css/main.53dd710d.chunk.css.map": "/jigsaw-puzzle/static/css/main.53dd710d.chunk.css.map",
+    "static/js/2.fce40f1b.chunk.js.LICENSE.txt": "/jigsaw-puzzle/static/js/2.fce40f1b.chunk.js.LICENSE.txt",
+    "static/media/casey-horner-80UR4DM2Rz0-unsplash.001ae9f7.jpg": "/jigsaw-puzzle/static/media/casey-horner-80UR4DM2Rz0-unsplash.001ae9f7.jpg",
+    "static/media/david-clode-eOSqRq2Qm1c-unsplash.42540cb6.jpg": "/jigsaw-puzzle/static/media/david-clode-eOSqRq2Qm1c-unsplash.42540cb6.jpg",
+    "static/media/ito-jakuchu-red-parrot-on-the-branch-of-a-tree.a8f36cd5.jpg": "/jigsaw-puzzle/static/media/ito-jakuchu-red-parrot-on-the-branch-of-a-tree.a8f36cd5.jpg",
+    "static/media/scott-webb-lYzgtps0UtQ-unsplash.509dd0a5.jpg": "/jigsaw-puzzle/static/media/scott-webb-lYzgtps0UtQ-unsplash.509dd0a5.jpg",
+    "static/media/travel-sourced-FsmcD6uKcHk-unsplash.97041d06.jpg": "/jigsaw-puzzle/static/media/travel-sourced-FsmcD6uKcHk-unsplash.97041d06.jpg",
+    "static/media/van-gogh-roses-nga.8fa9d120.jpg": "/jigsaw-puzzle/static/media/van-gogh-roses-nga.8fa9d120.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3c5101f7.js",
+    "static/css/2.150d169a.chunk.css",
+    "static/js/2.fce40f1b.chunk.js",
+    "static/css/main.53dd710d.chunk.css",
+    "static/js/main.cc69c4cf.chunk.js"
+  ]
+}
