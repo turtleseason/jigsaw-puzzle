@@ -8,6 +8,14 @@ export function randomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
+// Restricts x to the range between min and max (inclusive).
+export function clamp(x, min, max) {
+    if (min > max) {
+        throw Error(`clamp: min (${min}) is greater than max (${max}).`);
+    }
+    return Math.max(Math.min(x, max), min);
+}
+
 // Creates an object where the "keys" iterable provides the keys
 // and each value is the result of passing its corresponding key to keyToValueFunc.
 export function objectMap(keys, keyToValueFunc) {
