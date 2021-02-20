@@ -7,7 +7,7 @@
     user-select: none;
 }
 
-@media (min-width:1000px) {
+@media (min-width: 992px) {
     .puzzle-container {
         width: 80%;
     }

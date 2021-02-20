@@ -176,7 +176,7 @@ export default class PuzzleControls extends Component {
             <form className='container mt-4'>
                 <div className='form-group row'>
                     <div className='input-group'>
-                        <div className='input-group-prepend w-50'>
+                        <div className='input-group-prepend col-12 col-lg-6 pr-lg-0'>
                             <div className={`btn ${this.state.usingUserImage ? 'btn-outline-dark' : 'btn-dark'} d-flex align-items-center w-100`} onClick={this.usePresetImage}>
                                 <input readOnly className='col-auto' type='radio' id='btn1' checked={!this.state.usingUserImage} onKeyDown={this.handleRadioKeyDown}/>
                                 <label className='col-auto col-form-label' htmlFor='btn1'>Choose an image:</label>
@@ -186,13 +186,14 @@ export default class PuzzleControls extends Component {
                                 </select>
                             </div>
                         </div>
+
                             
-                        <div className='input-group-append w-50'>
+                        <div className='input-group-append col-12 col-lg-6 pl-lg-0'>
                             <div className={`btn ${this.state.usingUserImage ? 'btn-dark' : 'btn-outline-dark'} d-flex align-items-center w-100`} onClick={this.useUserImage}>
+                                <input readOnly className='col-auto order-first order-lg-last ml-lg-3' type='radio' id='btn2' checked={this.state.usingUserImage} onKeyDown={this.handleRadioKeyDown}/>
                                 <label className='col-auto col-form-label' htmlFor='btn2'>Or use your own:</label>
                                 <CustomInput className='col text-left' type='file' accept='image/*' id='file-input'
                                                 innerRef={this.fileInput} invalid={this.state.invalidUserImage} onChange={this.handleFileChange}/>
-                                <input readOnly className='col-auto ml-3' type='radio' id='btn2' checked={this.state.usingUserImage} onKeyDown={this.handleRadioKeyDown}/>
                             </div>
                         </div>
                     </div>
