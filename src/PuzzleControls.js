@@ -60,8 +60,8 @@ export default class PuzzleControls extends Component {
             case 'ArrowUp':
             case 'Left':
             case 'Up':
-                if (e.target.id === 'btn2') {
-                    document.getElementById('btn1').focus();
+                if (e.target.id === 'radioBtn2') {
+                    document.getElementById('radioBtn1').focus();
                     e.preventDefault();
                 }
                 return;
@@ -69,8 +69,8 @@ export default class PuzzleControls extends Component {
             case 'ArrowDown':
             case 'Down':
             case 'Right':
-                if (e.target.id === 'btn1') {
-                    document.getElementById('btn2').focus();
+                if (e.target.id === 'radioBtn1') {
+                    document.getElementById('radioBtn2').focus();
                     e.preventDefault();
                 }
                 return;
@@ -172,16 +172,21 @@ export default class PuzzleControls extends Component {
         const rowsVal = isNaN(this.state.rows) ? '' : this.state.rows;
         const colsVal = isNaN(this.state.cols) ? '' : this.state.cols;
 
+        const presetBtnStyle = this.state.usingUserImage ? 'btn-outline-dark' : 'btn-dark';
+        const userBtnStyle = this.state.usingUserImage ? 'btn-dark' : 'btn-outline-dark';
+
         return (
             <form className='container mt-4'>
                 <div className='form-group row'>
                     <div className='input-group'>
                         <div className='input-group-prepend col-12 col-lg-6 pr-lg-0'>
-                            <div className={`btn ${this.state.usingUserImage ? 'btn-outline-dark' : 'btn-dark'} d-flex align-items-center w-100`} onClick={this.usePresetImage}>
-                                <input readOnly className='col-auto' type='radio' id='btn1' checked={!this.state.usingUserImage} onKeyDown={this.handleRadioKeyDown}/>
-                                <label className='col-auto col-form-label' htmlFor='btn1'>Choose an image:</label>
-                                <label htmlFor='puzzle-image-select' className='sr-only'>Select a preset image</label>
-                                <select id='puzzle-image-select' className='custom-select mr-sm-4 col' onChange={this.handleSelectChange}>
+                            <div className={`btn ${presetBtnStyle} d-flex flex-wrap flex-sm-nowrap align-items-center w-100`} onClick={this.usePresetImage}>
+                                <input readOnly className='col-auto' id='radioBtn1' type='radio'
+                                    checked={!this.state.usingUserImage} onKeyDown={this.handleRadioKeyDown}/>
+                                <label className='col col-sm-4 col-md-3 col-lg-auto col-form-label' htmlFor='radioBtn1'>Choose an image:</label>
+                                <div className='w-100 d-sm-none'></div>
+                                <label className='sr-only' htmlFor='puzzle-image-select'>Select image</label>
+                                <select className='custom-select col mr-lg-4' id='puzzle-image-select' onChange={this.handleSelectChange}>
                                     {this.renderSelectOptions()}
                                 </select>
                             </div>
@@ -189,26 +194,28 @@ export default class PuzzleControls extends Component {
 
                             
                         <div className='input-group-append col-12 col-lg-6 pl-lg-0'>
-                            <div className={`btn ${this.state.usingUserImage ? 'btn-dark' : 'btn-outline-dark'} d-flex align-items-center w-100`} onClick={this.useUserImage}>
-                                <input readOnly className='col-auto order-first order-lg-last ml-lg-3' type='radio' id='btn2' checked={this.state.usingUserImage} onKeyDown={this.handleRadioKeyDown}/>
-                                <label className='col-auto col-form-label' htmlFor='btn2'>Or use your own:</label>
-                                <CustomInput className='col text-left' type='file' accept='image/*' id='file-input'
-                                                innerRef={this.fileInput} invalid={this.state.invalidUserImage} onChange={this.handleFileChange}/>
+                            <div className={`btn ${userBtnStyle} d-flex flex-wrap flex-sm-nowrap align-items-center w-100`} onClick={this.useUserImage}>
+                                <input readOnly className='col-auto order-first order-lg-last ml-lg-3' id='radioBtn2' type='radio'
+                                    checked={this.state.usingUserImage} onKeyDown={this.handleRadioKeyDown}/>
+                                <label className='col col-sm-4 col-md-3 col-lg-auto col-form-label' htmlFor='radioBtn2'>Or use your own:</label>
+                                <div className='w-100 d-sm-none'></div>
+                                <CustomInput className='col text-left' id='file-input' type='file' accept='image/*' innerRef={this.fileInput}
+                                    invalid={this.state.invalidUserImage} onChange={this.handleFileChange}/>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div className='form-group row justify-content-center'>
-                    <label className='mr-2  col-form-label' htmlFor='row-input'>Rows:</label>
-                    <input id={'row-input'} className='mr-2 my-2 my-md-0' type='number' min={minPuzzleDimension} max={maxPuzzleDimension}
+                    <label className='mr-2 my-2 col-form-label' htmlFor='row-input'>Rows:</label>
+                    <input className='mr-2 my-2' id={'row-input'} type='number' min={minPuzzleDimension} max={maxPuzzleDimension}
                         name='rows' value={rowsVal} onChange={this.handleDimensionsChange} onBlur={this.handleDimensionsBlur}/>
                     
-                    <label className='mr-2 col-form-label' htmlFor='col-input'>Columns:</label>
-                    <input id='col-input' className='mr-4 my-2 my-md-0' type='number' min={minPuzzleDimension} max={maxPuzzleDimension} 
+                    <label className='mr-2 my-2 col-form-label' htmlFor='col-input'>Columns:</label>
+                    <input className='mr-4 my-2' id='col-input' type='number' min={minPuzzleDimension} max={maxPuzzleDimension} 
                         name='cols' value={colsVal} onChange={this.handleDimensionsChange} onBlur={this.handleDimensionsBlur}/>
                     
-                    <button className='btn btn-dark' type='button' disabled={this.state.usingUserImage && this.state.invalidUserImage} onClick={this.newPuzzle}>New puzzle</button>
+                    <button className='btn btn-dark btn-lg' type='button' disabled={this.state.usingUserImage && this.state.invalidUserImage} onClick={this.newPuzzle}>New puzzle</button>
                 </div>
             </form>
         );

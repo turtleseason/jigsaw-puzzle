@@ -21,7 +21,9 @@ export default class DetailsModal extends Component {
                         </Row>
                         <Row className='mt-md-3'>
                             <Col>
-                                <p>See the original at: <a href={image.source.sourceUrl} target='_blank' rel='external noopener'>{image.source.sourceUrl}</a></p>
+                                <p class="text-break">
+                                    See the original at: <a href={image.source.sourceUrl} target='_blank' rel='external noopener'>{image.source.sourceUrl}</a>
+                                </p>
                                 {image.source.description ? <p>{image.source.description}</p> : null}
                             </Col>
                         </Row>
