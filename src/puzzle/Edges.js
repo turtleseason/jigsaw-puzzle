@@ -1,4 +1,4 @@
-import { randomInt } from './util';
+import { randomInt } from '../util';
 
 
 export const BUMP = 'b';

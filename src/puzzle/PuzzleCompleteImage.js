@@ -1,5 +1,6 @@
 import { Component } from 'react';
 
+
 export default class PuzzleCompleteImage extends Component {
     constructor(props) {
         super(props);

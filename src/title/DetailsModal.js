@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
-import { Container, Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 
 
 export default class DetailsModal extends Component {

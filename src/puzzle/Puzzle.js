@@ -5,10 +5,10 @@ import Piece from './Piece';
 import PieceModel from './PieceModel';
 import PuzzleCompleteImage from './PuzzleCompleteImage';
 
-import { getRandomEdgeType, getOppositeEdge } from './Edges';
+import { getRandomEdgeType } from './Edges';
 import { BUMP, RECESS, FLAT } from './Edges';
 import { LEFT, TOP, RIGHT, BOTTOM, Sides } from './Sides';
-import { range, randomInt, objectMap } from './util';
+import { range, randomInt, objectMap } from '../util';
 
 import './Puzzle.css';
 

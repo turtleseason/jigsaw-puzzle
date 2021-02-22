@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Puzzle from './Puzzle';
-import PuzzleTitle from './PuzzleTitle';
-import PuzzleControls from './PuzzleControls';
+import Puzzle from './puzzle/Puzzle.js';
+import PuzzleTitle from './title/PuzzleTitle.js';
+import PuzzleControls from './controls/PuzzleControls.js';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 

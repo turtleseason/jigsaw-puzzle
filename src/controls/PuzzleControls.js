@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { CustomInput } from 'reactstrap';
 import { ImageInfo } from './ImageInfo';
 
-import { clamp } from './util';
+import { clamp } from '../util';
 
 import presetImages from './providedImages';
 
