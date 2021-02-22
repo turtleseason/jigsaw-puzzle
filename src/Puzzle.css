@@ -1,4 +1,3 @@
-
 .puzzle-container {
     position: relative;
     height: 95%;
@@ -37,7 +36,7 @@
     background-position: center;
 }
 
-.puzzle-piece, .puzzle-area.puzzle-complete {
+.puzzle-piece, .puzzle-area.puzzle-complete, .puzzle-complete-img {
     background-color: transparent;
     background-image: var(--puzzle-img);
     background-repeat: no-repeat;
@@ -50,4 +49,15 @@
 
 .puzzle-piece.block-pointer-events {
     pointer-events: none;
+}
+
+.puzzle-complete-img {
+    position: absolute;
+    transition: top 2s ease, left 2s ease;
+}
+
+@media (prefers-reduced-motion) {
+    .puzzle-complete-img {
+        transition: none;
+    }
 }

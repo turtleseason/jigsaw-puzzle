@@ -3,6 +3,7 @@ import EdgePathDrawer from './EdgePathDrawer';
 import EdgeStyleInfo from './EdgeStyleInfo';
 import Piece from './Piece';
 import PieceModel from './PieceModel';
+import PuzzleCompleteImage from './PuzzleCompleteImage';
 
 import { getRandomEdgeType, getOppositeEdge } from './Edges';
 import { BUMP, RECESS, FLAT } from './Edges';
@@ -26,6 +27,10 @@ export default class Puzzle extends Component {
 		this.pieceHeight = 2 * this.borderSize + this.innerHeight;
 
 		this.pointerDownHandlers = range(this.props.rows * this.props.cols).map(i => this.handlePointerDown.bind(this, i));
+		this.handlePointerMove = this.handlePointerMove.bind(this);
+		this.handlePointerUp = this.handlePointerUp.bind(this);
+		this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
+
 		this.edgeDrawer = new EdgePathDrawer(this.pieceWidth, this.pieceHeight, this.borderSize);
 		this.nextzIndex = 1;
 
@@ -119,6 +124,7 @@ export default class Puzzle extends Component {
 				pieces[key] = new PieceModel(key, col, row, pos, bgPos, 0, edges, neighbors);
 			}
 		}
+		this.topLeftKey = keysByGridPos[0][0];
 		return pieces;
 	}
 
@@ -229,6 +235,22 @@ export default class Puzzle extends Component {
 		this.setState({groups: groups, pieces: pieces, draggedPiece: null, gameComplete: gameComplete});
 	}
 
+	handleTransitionEnd() {
+		this.setState({endAnimationComplete: true});
+	}
+
+	getTopLeftPos() {
+		const pos = this.state.pieces[this.topLeftKey].pos;
+		return {left: pos.left + this.borderSize, top: pos.top + this.borderSize};
+	}
+
+	getCenteredImagePos() {
+		const bg = document.querySelector('.puzzle-background');
+		const destLeft = (bg.clientWidth / this.state.scaleFactor - this.props.imgWidth) / 2;
+		const destTop = (bg.clientHeight / this.state.scaleFactor - this.props.imgHeight) / 2;
+		return {left: destLeft, top: destTop};
+	}
+
 	renderPiece(model) {
 		return (
 			<Piece key={model.key}
@@ -246,24 +268,33 @@ export default class Puzzle extends Component {
 		const boardStyle = {transform: `scale(${this.state.scaleFactor})`, width: (100 / this.state.scaleFactor) + '%', height: (100 / this.state.scaleFactor) + '%'};
 
 		let board;
-		if (this.state.gameComplete) {
+		if (this.state.gameComplete && this.state.endAnimationComplete) {
 			board = (<div className='puzzle-area puzzle-complete' style={boardStyle}></div>);
+		} else if (this.state.gameComplete) {
+			board = (
+				<div className='puzzle-area' style={boardStyle}>
+					<PuzzleCompleteImage startPos={this.getTopLeftPos()} destPos={this.getCenteredImagePos()}
+					width={this.props.imgWidth} height={this.props.imgHeight} onTransitionEnd={this.handleTransitionEnd}/>
+				</div>);
 		} else {
 			const children = this.state.pieces.map(model => this.renderPiece(model));
 			board = (
 				<div 
 					className={'puzzle-area' + (this.state.draggedPiece !== null ? ' no-scroll' : '')}
-					onPointerMove={(e) => this.handlePointerMove(e)}
-					onPointerUp={() => this.handlePointerUp()}
+					onPointerMove={this.handlePointerMove}
+					onPointerUp={this.handlePointerUp}
 					style={boardStyle}>
 					{ children }
 				</div>);
 		}
 		
 		return (
-			<div className='puzzle-container mt-2 pb-3'>
+			<div className='puzzle-container mt-2'>
 				<div className='puzzle-background'></div>
 				{board}
+				{/* Use a separate div for padding because adding padding directly to the puzzle container
+				    can cause the game-completed image to jump at the end of its motion */}
+				<div className='pb-3'></div>
 			</div>
 		);
 	}
