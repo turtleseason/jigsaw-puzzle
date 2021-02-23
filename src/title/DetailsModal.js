@@ -13,7 +13,7 @@ export default class DetailsModal extends Component {
                 body = ( 
                     <ModalBody>
                         <Row>
-                            <Col md='8'><img src={image.url} width='100%'/></Col>
+                            <Col md='8'><img src={image.url} alt='Image preview' width='100%'/></Col>
                             <Col md='4' className='mt-3 mt-md-0 pl-md-0'>
                                 <p>{credit}</p>
                                 <p>Source: {image.source.sourceName}</p>
