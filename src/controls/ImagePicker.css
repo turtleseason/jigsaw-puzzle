@@ -1,0 +1,20 @@
+a.unstyled, a.unstyled:hover {
+    color: inherit;
+}
+
+i {
+    font-size: 1.25em;
+}
+
+.input-group-prepend div.btn,
+.input-group-append div.btn {
+    /* Prevents tooltip from hiding behind controls while fading in/out */
+    z-index: auto;
+}
+
+@media (max-width: 991.98px) {
+    .form-group .input-group > .input-group-prepend > .btn,
+    .form-group .input-group > .input-group-append > .btn {
+		border-radius: .25rem;
+	}
+}

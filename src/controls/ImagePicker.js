@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { CustomInput } from 'reactstrap';
+import { CustomInput, UncontrolledTooltip } from 'reactstrap';
 
 import { ImageInfo } from './ImageInfo';
 import { clamp } from '../util';
 import presetImages from './providedImages';
+
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import './ImagePicker.css';
 
 
 export default class ImagePicker extends Component {
@@ -151,6 +154,12 @@ export default class ImagePicker extends Component {
                         <div className='w-100 d-sm-none'></div>
                         <CustomInput className='col text-left' id='file-input' type='file' accept='image/*' innerRef={this.fileInput}
                             invalid={this.state.invalidUserImage} onChange={this.handleFileChange}/>
+                        <a className='unstyled ml-2' id='show-tooltip' href='#' onClick={(e) => {e.preventDefault(); e.stopPropagation();}}>
+                            <i className='bi-info-circle'></i>
+                        </a>
+                        <UncontrolledTooltip placement='top' target='show-tooltip'>
+                            Images are only used locally in your browser and are never uploaded or sent over the Internet.
+                        </UncontrolledTooltip>
                     </div>
                 </div>
             </div>
