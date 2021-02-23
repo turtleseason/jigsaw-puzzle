@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/jigsaw-puzzle/static/css/main.42e67a05.chunk.css",
-    "main.js": "/jigsaw-puzzle/static/js/main.d0e42c88.chunk.js",
-    "main.js.map": "/jigsaw-puzzle/static/js/main.d0e42c88.chunk.js.map",
+    "main.js": "/jigsaw-puzzle/static/js/main.ae7a8c45.chunk.js",
+    "main.js.map": "/jigsaw-puzzle/static/js/main.ae7a8c45.chunk.js.map",
     "runtime-main.js": "/jigsaw-puzzle/static/js/runtime-main.3c5101f7.js",
     "runtime-main.js.map": "/jigsaw-puzzle/static/js/runtime-main.3c5101f7.js.map",
     "static/css/2.80d7d614.chunk.css": "/jigsaw-puzzle/static/css/2.80d7d614.chunk.css",
@@ -25,6 +25,6 @@
     "static/css/2.80d7d614.chunk.css",
     "static/js/2.a2202f33.chunk.js",
     "static/css/main.42e67a05.chunk.css",
-    "static/js/main.d0e42c88.chunk.js"
+    "static/js/main.ae7a8c45.chunk.js"
   ]
 }
