@@ -1,17 +1,18 @@
 {
   "files": {
-    "main.css": "/jigsaw-puzzle/static/css/main.c4d398ae.chunk.css",
-    "main.js": "/jigsaw-puzzle/static/js/main.d0443076.chunk.js",
-    "main.js.map": "/jigsaw-puzzle/static/js/main.d0443076.chunk.js.map",
+    "main.css": "/jigsaw-puzzle/static/css/main.1e459bc2.chunk.css",
+    "main.js": "/jigsaw-puzzle/static/js/main.3c72275e.chunk.js",
+    "main.js.map": "/jigsaw-puzzle/static/js/main.3c72275e.chunk.js.map",
     "runtime-main.js": "/jigsaw-puzzle/static/js/runtime-main.3c5101f7.js",
     "runtime-main.js.map": "/jigsaw-puzzle/static/js/runtime-main.3c5101f7.js.map",
-    "static/css/2.150d169a.chunk.css": "/jigsaw-puzzle/static/css/2.150d169a.chunk.css",
-    "static/js/2.3a338cb3.chunk.js": "/jigsaw-puzzle/static/js/2.3a338cb3.chunk.js",
-    "static/js/2.3a338cb3.chunk.js.map": "/jigsaw-puzzle/static/js/2.3a338cb3.chunk.js.map",
+    "static/css/2.80d7d614.chunk.css": "/jigsaw-puzzle/static/css/2.80d7d614.chunk.css",
+    "static/js/2.85179301.chunk.js": "/jigsaw-puzzle/static/js/2.85179301.chunk.js",
+    "static/js/2.85179301.chunk.js.map": "/jigsaw-puzzle/static/js/2.85179301.chunk.js.map",
     "index.html": "/jigsaw-puzzle/index.html",
-    "static/css/2.150d169a.chunk.css.map": "/jigsaw-puzzle/static/css/2.150d169a.chunk.css.map",
-    "static/css/main.c4d398ae.chunk.css.map": "/jigsaw-puzzle/static/css/main.c4d398ae.chunk.css.map",
-    "static/js/2.3a338cb3.chunk.js.LICENSE.txt": "/jigsaw-puzzle/static/js/2.3a338cb3.chunk.js.LICENSE.txt",
+    "static/css/2.80d7d614.chunk.css.map": "/jigsaw-puzzle/static/css/2.80d7d614.chunk.css.map",
+    "static/css/main.1e459bc2.chunk.css.map": "/jigsaw-puzzle/static/css/main.1e459bc2.chunk.css.map",
+    "static/js/2.85179301.chunk.js.LICENSE.txt": "/jigsaw-puzzle/static/js/2.85179301.chunk.js.LICENSE.txt",
+    "static/media/bootstrap-icons.css": "/jigsaw-puzzle/static/media/bootstrap-icons.cc252f2c.woff",
     "static/media/casey-horner-80UR4DM2Rz0-unsplash.001ae9f7.jpg": "/jigsaw-puzzle/static/media/casey-horner-80UR4DM2Rz0-unsplash.001ae9f7.jpg",
     "static/media/david-clode-eOSqRq2Qm1c-unsplash.42540cb6.jpg": "/jigsaw-puzzle/static/media/david-clode-eOSqRq2Qm1c-unsplash.42540cb6.jpg",
     "static/media/ito-jakuchu-red-parrot-on-the-branch-of-a-tree.a8f36cd5.jpg": "/jigsaw-puzzle/static/media/ito-jakuchu-red-parrot-on-the-branch-of-a-tree.a8f36cd5.jpg",
@@ -21,9 +22,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.3c5101f7.js",
-    "static/css/2.150d169a.chunk.css",
-    "static/js/2.3a338cb3.chunk.js",
-    "static/css/main.c4d398ae.chunk.css",
-    "static/js/main.d0443076.chunk.js"
+    "static/css/2.80d7d614.chunk.css",
+    "static/js/2.85179301.chunk.js",
+    "static/css/main.1e459bc2.chunk.css",
+    "static/js/main.3c72275e.chunk.js"
   ]
 }
