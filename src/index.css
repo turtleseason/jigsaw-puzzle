@@ -6,11 +6,11 @@ html, body, .scroll-div, #react-root {
 }
 
 html, body {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 .scroll-div {
-	overflow: auto;
+    overflow: auto;
 }
 
 input[type="number"] {

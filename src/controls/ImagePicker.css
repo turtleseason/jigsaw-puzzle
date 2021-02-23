@@ -15,6 +15,6 @@ i {
 @media (max-width: 991.98px) {
     .form-group .input-group > .input-group-prepend > .btn,
     .form-group .input-group > .input-group-append > .btn {
-		border-radius: .25rem;
-	}
+        border-radius: .25rem;
+    }
 }
