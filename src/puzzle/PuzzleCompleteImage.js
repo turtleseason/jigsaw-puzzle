@@ -8,7 +8,8 @@ export default class PuzzleCompleteImage extends Component {
     }
 
     componentDidMount() {
-        requestAnimationFrame(() => this.setState({...this.props.destPos}));
+        // Change on the second frame to ensure the image is drawn at the original position at least once.
+        requestAnimationFrame(() => requestAnimationFrame(() => this.setState({...this.props.destPos})));
     }
 
     render() {
