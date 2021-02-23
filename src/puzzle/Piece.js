@@ -33,8 +33,8 @@ export default class Piece extends PureComponent {
                     clipPath: this.clipPathString,
                     width: this.props.width,
                     height: this.props.height,
-                    left: model.pos.left,
-                    top: model.pos.top,
+                    left: model.displayPos.left,
+                    top: model.displayPos.top,
                     zIndex: (model.zIndex > 0 ? model.zIndex : 'auto')
                 }}>
             </div>

@@ -3,12 +3,13 @@ import EdgePathDrawer from './EdgePathDrawer';
 import EdgeStyleInfo from './EdgeStyleInfo';
 import Piece from './Piece';
 import PieceModel from './PieceModel';
+import GroupModel from './GroupModel';
 import PuzzleCompleteImage from './PuzzleCompleteImage';
 
 import { getRandomEdgeType } from './Edges';
 import { BUMP, RECESS, FLAT } from './Edges';
 import { LEFT, TOP, RIGHT, BOTTOM, Sides } from './Sides';
-import { range, randomInt, objectMap } from '../util';
+import { range, randomInt } from '../util';
 
 import './Puzzle.css';
 
@@ -20,7 +21,7 @@ export default class Puzzle extends Component {
     constructor(props) {
         super(props);
 
-        this.innerWidth =  this.props.imgWidth / this.props.cols;    
+        this.innerWidth =  this.props.imgWidth / this.props.cols;
         this.innerHeight = this.props.imgHeight / this.props.rows;
         this.borderSize = Math.min(this.innerHeight, this.innerWidth) / 4;
         this.pieceWidth = 2 * this.borderSize + this.innerWidth;
@@ -29,17 +30,17 @@ export default class Puzzle extends Component {
         this.pointerDownHandlers = range(this.props.rows * this.props.cols).map(i => this.handlePointerDown.bind(this, i));
         this.handlePointerMove = this.handlePointerMove.bind(this);
         this.handlePointerUp = this.handlePointerUp.bind(this);
+        this.handleResize = this.handleResize.bind(this);
         this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
 
         this.edgeDrawer = new EdgePathDrawer(this.pieceWidth, this.pieceHeight, this.borderSize);
         this.nextzIndex = 1;
 
         const pieces = this.createPieces();
-        const groups = objectMap(range(pieces.length), (i) => [i]);
+        this.groups = this.createGroups(pieces);
 
         this.state = {
             pieces: pieces,
-            groups: groups,
             gameComplete: false,
             draggedPiece: null,
         }
@@ -47,19 +48,38 @@ export default class Puzzle extends Component {
 
     componentDidMount() {
         this.setScaleFactor();
-
-        this.resizeListener = this.setScaleFactor.bind(this);
-        window.addEventListener('resize', this.resizeListener);
+        window.addEventListener('resize', this.handleResize);
     }
 
     componentWillUnmount() {
-        window.removeEventListener('resize', this.resizeListener);
+        window.removeEventListener('resize', this.handleResize);
     }
 
     setScaleFactor() {
         const widthScale = MAX_WIDTH_SCALE * document.documentElement.clientWidth / this.props.imgWidth;
         const heightScale = MAX_HEIGHT_SCALE * document.documentElement.clientHeight / this.props.imgHeight;
-        this.setState({scaleFactor: Math.min(widthScale, heightScale)});
+        const scaleFactor = Math.min(widthScale, heightScale);
+        this.setState({scaleFactor: scaleFactor});
+        return scaleFactor;
+    }
+
+    clampPiecesToBoardBounds(scaleFactor) {
+        const bg = document.querySelector('.puzzle-background');
+        const maxBoundX = bg.clientWidth / scaleFactor - this.pieceWidth;
+        const maxBoundY = bg.clientHeight / scaleFactor - this.pieceHeight;
+
+        const pieces = this.state.pieces.slice();
+        for (const [i, piece] of pieces.entries()) {
+            const group = this.groups[piece.group];
+            const xBound = maxBoundX - (this.innerWidth * (group.bounds[RIGHT] - piece.col));
+            const yBound = maxBoundY - (this.innerHeight * (group.bounds[BOTTOM] - piece.row));
+
+            pieces[i] = piece.clone();
+            pieces[i].setDisplayPos(
+                piece.pos.left > xBound ? xBound : piece.pos.left,
+                piece.pos.top > yBound ? yBound : piece.pos.top);
+        }
+        this.setState({pieces: pieces});
     }
 
     getGridPosition(col, row, spacing) {
@@ -128,39 +148,53 @@ export default class Puzzle extends Component {
         return pieces;
     }
 
+    createGroups(pieces) {
+        const groups = {};
+        for (const piece of pieces) {
+            const g = new GroupModel(piece.key);
+            g.addPiece(piece.key, piece.row, piece.col);
+            groups[piece.key] = g;
+        }
+        return groups;
+    }
+
     alignPiece(piece, alignWith) {
-        piece.pos = {left: alignWith.pos.left + this.innerWidth * (piece.col - alignWith.col),
-                     top: alignWith.pos.top + this.innerHeight * (piece.row - alignWith.row)};
+        piece.setPos(alignWith.displayPos.left + this.innerWidth * (piece.col - alignWith.col),
+                     alignWith.displayPos.top + this.innerHeight * (piece.row - alignWith.row));
     }
     
     isTouching(piece, side, other) {
         const snapRange = 7 / this.state.scaleFactor;
         if (side === RIGHT) {
-            return Math.abs(piece.pos.top - other.pos.top) <= snapRange
-                && Math.abs((other.pos.left - piece.pos.left) - this.innerWidth) <= snapRange;
+            return Math.abs(piece.displayPos.top - other.displayPos.top) <= snapRange
+                && Math.abs((other.displayPos.left - piece.displayPos.left) - this.innerWidth) <= snapRange;
         } else if (side === LEFT) {
-            return Math.abs(piece.pos.top - other.pos.top) <= snapRange
-                && Math.abs((piece.pos.left - other.pos.left) - this.innerWidth) <= snapRange;
+            return Math.abs(piece.displayPos.top - other.displayPos.top) <= snapRange
+                && Math.abs((piece.displayPos.left - other.displayPos.left) - this.innerWidth) <= snapRange;
         } else if (side === TOP) {
-            return Math.abs(piece.pos.left - other.pos.left) <= snapRange
-                && Math.abs((piece.pos.top - other.pos.top) - this.innerHeight) <= snapRange;
+            return Math.abs(piece.displayPos.left - other.displayPos.left) <= snapRange
+                && Math.abs((piece.displayPos.top - other.displayPos.top) - this.innerHeight) <= snapRange;
         } else if (side === BOTTOM) {
-            return Math.abs(piece.pos.left - other.pos.left) <= snapRange
-                && Math.abs((other.pos.top - piece.pos.top) - this.innerHeight) <= snapRange;
+            return Math.abs(piece.displayPos.left - other.displayPos.left) <= snapRange
+                && Math.abs((other.displayPos.top - piece.displayPos.top) - this.innerHeight) <= snapRange;
         }
     }
 
-    mergeGroups(pieces, groups, g1, g2) {
-        groups[g1] = groups[g1].concat(groups[g2]);
-        const refPiece = pieces[groups[g1][0]];
-        for (const k of groups[g2]) {
-            const p = {...pieces[k]};
+    mergeGroups(pieces, g1, g2) {
+        // Update all pieces in the merged group with their new position and z-index
+        const refPiece = pieces[this.groups[g1].pieces[0]];
+        for (const k of this.groups[g2].pieces) {
+            const p = pieces[k].clone();
             p.group = g1;
             p.zIndex = refPiece.zIndex;
             this.alignPiece(p, refPiece);
             pieces[k] = p;
         }
-        delete groups[g2];
+
+        // Merge GroupModels
+        this.groups[g1].mergeWith(this.groups[g2]);
+
+        delete this.groups[g2];
     }
 
     handlePointerDown(key, e) {
@@ -169,17 +203,19 @@ export default class Puzzle extends Component {
         }
 
         const pieces = this.state.pieces.slice();
-        for (const k of this.state.groups[pieces[key].group]) {
-            pieces[k] = {...pieces[k]};
+        const groupKey = pieces[key].group;
+        for (const k of this.groups[groupKey].pieces) {
+            pieces[k] = pieces[k].clone();
             pieces[k].zIndex = this.nextzIndex;
+            pieces[k].setPos(pieces[k].displayPos.left, pieces[k].displayPos.top);
         }
         this.nextzIndex++;
 
         this.setState({
             pieces: pieces,
             draggedPiece: key,
-            offsetX: e.clientX - (this.state.pieces[key].pos.left * this.state.scaleFactor),
-            offsetY: e.clientY - (this.state.pieces[key].pos.top * this.state.scaleFactor)
+            offsetX: e.clientX - (pieces[key].pos.left * this.state.scaleFactor),
+            offsetY: e.clientY - (pieces[key].pos.top * this.state.scaleFactor)
         });
 
     }
@@ -198,15 +234,16 @@ export default class Puzzle extends Component {
         const key = this.state.draggedPiece;
         const pieces = this.state.pieces.slice();
         
-        const p = {...pieces[key]};
+        const p = pieces[key].clone();
         pieces[key] = p;
         
         const left = (e.clientX - this.state.offsetX) / this.state.scaleFactor;
         const top = (e.clientY - this.state.offsetY) / this.state.scaleFactor;
-        p.pos = {left: left, top: top };
+        p.setPos(left, top);
 
-        for (const k of this.state.groups[p.group]) {
-            pieces[k] = {...pieces[k]};
+        const group = this.groups[p.group];
+        for (const k of group.pieces) {
+            pieces[k] = pieces[k].clone();
             this.alignPiece(pieces[k], p);
         }
         this.setState({pieces: pieces});
@@ -218,21 +255,26 @@ export default class Puzzle extends Component {
         }
 
         const key = this.state.draggedPiece;
-        const groups = {...this.state.groups};
         const pieces = this.state.pieces.slice();
 
-        for (const k of this.state.groups[pieces[key].group]) {
+        const groupKey = pieces[key].group;
+        for (const k of this.groups[groupKey].pieces) {
             const p = pieces[k];
             for (const side of Sides) {
                 const neighbor = pieces[p.neighbors[side]];
                 if (neighbor && neighbor.group !== p.group && this.isTouching(p, side, neighbor)) {
-                    this.mergeGroups(pieces, groups, p.group, neighbor.group);
+                    this.mergeGroups(pieces, p.group, neighbor.group);
                 }
             }
         }
 
-        const gameComplete = Object.keys(groups).length === 1;
-        this.setState({groups: groups, pieces: pieces, draggedPiece: null, gameComplete: gameComplete});
+        const gameComplete = Object.keys(this.groups).length === 1;
+        this.setState({pieces: pieces, draggedPiece: null, gameComplete: gameComplete});
+    }
+
+    handleResize() {
+        const scaleFactor = this.setScaleFactor();
+        this.clampPiecesToBoardBounds(scaleFactor);
     }
 
     handleTransitionEnd() {
@@ -240,7 +282,7 @@ export default class Puzzle extends Component {
     }
 
     getTopLeftPos() {
-        const pos = this.state.pieces[this.topLeftKey].pos;
+        const pos = this.state.pieces[this.topLeftKey].displayPos;
         return {left: pos.left + this.borderSize, top: pos.top + this.borderSize};
     }
 
