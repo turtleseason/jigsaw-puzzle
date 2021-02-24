@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/jigsaw-puzzle/static/css/main.42e67a05.chunk.css",
-    "main.js": "/jigsaw-puzzle/static/js/main.ae7a8c45.chunk.js",
-    "main.js.map": "/jigsaw-puzzle/static/js/main.ae7a8c45.chunk.js.map",
+    "main.css": "/jigsaw-puzzle/static/css/main.7b672b95.chunk.css",
+    "main.js": "/jigsaw-puzzle/static/js/main.fde7d929.chunk.js",
+    "main.js.map": "/jigsaw-puzzle/static/js/main.fde7d929.chunk.js.map",
     "runtime-main.js": "/jigsaw-puzzle/static/js/runtime-main.3c5101f7.js",
     "runtime-main.js.map": "/jigsaw-puzzle/static/js/runtime-main.3c5101f7.js.map",
     "static/css/2.80d7d614.chunk.css": "/jigsaw-puzzle/static/css/2.80d7d614.chunk.css",
-    "static/js/2.a2202f33.chunk.js": "/jigsaw-puzzle/static/js/2.a2202f33.chunk.js",
-    "static/js/2.a2202f33.chunk.js.map": "/jigsaw-puzzle/static/js/2.a2202f33.chunk.js.map",
+    "static/js/2.c065931e.chunk.js": "/jigsaw-puzzle/static/js/2.c065931e.chunk.js",
+    "static/js/2.c065931e.chunk.js.map": "/jigsaw-puzzle/static/js/2.c065931e.chunk.js.map",
     "index.html": "/jigsaw-puzzle/index.html",
     "static/css/2.80d7d614.chunk.css.map": "/jigsaw-puzzle/static/css/2.80d7d614.chunk.css.map",
-    "static/css/main.42e67a05.chunk.css.map": "/jigsaw-puzzle/static/css/main.42e67a05.chunk.css.map",
-    "static/js/2.a2202f33.chunk.js.LICENSE.txt": "/jigsaw-puzzle/static/js/2.a2202f33.chunk.js.LICENSE.txt",
+    "static/css/main.7b672b95.chunk.css.map": "/jigsaw-puzzle/static/css/main.7b672b95.chunk.css.map",
+    "static/js/2.c065931e.chunk.js.LICENSE.txt": "/jigsaw-puzzle/static/js/2.c065931e.chunk.js.LICENSE.txt",
     "static/media/bootstrap-icons.css": "/jigsaw-puzzle/static/media/bootstrap-icons.cc252f2c.woff",
     "static/media/casey-horner-80UR4DM2Rz0-unsplash.001ae9f7.jpg": "/jigsaw-puzzle/static/media/casey-horner-80UR4DM2Rz0-unsplash.001ae9f7.jpg",
     "static/media/david-clode-eOSqRq2Qm1c-unsplash.42540cb6.jpg": "/jigsaw-puzzle/static/media/david-clode-eOSqRq2Qm1c-unsplash.42540cb6.jpg",
@@ -23,8 +23,8 @@
   "entrypoints": [
     "static/js/runtime-main.3c5101f7.js",
     "static/css/2.80d7d614.chunk.css",
-    "static/js/2.a2202f33.chunk.js",
-    "static/css/main.42e67a05.chunk.css",
-    "static/js/main.ae7a8c45.chunk.js"
+    "static/js/2.c065931e.chunk.js",
+    "static/css/main.7b672b95.chunk.css",
+    "static/js/main.fde7d929.chunk.js"
   ]
 }
