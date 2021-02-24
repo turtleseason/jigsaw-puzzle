@@ -134,7 +134,7 @@ export default class ImagePicker extends Component {
         return (
             <div className='input-group'>
                 <div className='input-group-prepend col-12 col-lg-6 pr-lg-0'>
-                    <div className={`btn ${presetBtnStyle} d-flex flex-wrap flex-sm-nowrap align-items-center w-100`} onClick={this.usePresetImage}>
+                    <div className={`btn ${presetBtnStyle} d-flex flex-wrap flex-sm-nowrap align-items-center w-100 br-when-stacked`} onClick={this.usePresetImage}>
                         <input readOnly className='col-auto' id='radioBtn1' type='radio'
                             checked={!this.state.usingUserImage} onKeyDown={this.handleRadioKeyDown}/>
                         <label className='col col-sm-4 col-md-3 col-lg-auto col-form-label' htmlFor='radioBtn1'>Choose an image:</label>
@@ -147,7 +147,7 @@ export default class ImagePicker extends Component {
                 </div>
 
                 <div className='input-group-append col-12 col-lg-6 pl-lg-0'>
-                    <div className={`btn ${userBtnStyle} d-flex flex-wrap flex-sm-nowrap align-items-center w-100`} onClick={this.useUserImage}>
+                    <div className={`btn ${userBtnStyle} d-flex flex-wrap flex-sm-nowrap align-items-center w-100 br-when-stacked`} onClick={this.useUserImage}>
                         <input readOnly className='col-auto order-first order-lg-last ml-lg-3' id='radioBtn2' type='radio'
                             checked={this.state.usingUserImage} onKeyDown={this.handleRadioKeyDown}/>
                         <label className='col col-sm-4 col-md-3 col-lg-auto col-form-label' htmlFor='radioBtn2'>Or use your own:</label>
@@ -155,7 +155,7 @@ export default class ImagePicker extends Component {
                         <CustomInput className='col text-left' id='file-input' type='file' accept='image/*' innerRef={this.fileInput}
                             invalid={this.state.invalidUserImage} onChange={this.handleFileChange}/>
                         <a className='unstyled ml-2' id='show-tooltip' href='#' onClick={(e) => {e.preventDefault(); e.stopPropagation();}}>
-                            <i className='bi-info-circle'></i>
+                            <i className='bi-info-circle icon-lg'></i>
                         </a>
                         <UncontrolledTooltip placement='top' target='show-tooltip'>
                             Images are only used locally in your browser and are never uploaded or sent over the Internet.

@@ -1,3 +1,7 @@
+:root {
+    --puzzle-bg: #adb5bd;
+}
+
 .puzzle-container {
     position: relative;
     height: 95%;
@@ -13,7 +17,7 @@
 }
 
 .puzzle-background {
-    background: #adb5bd;
+    background: var(--puzzle-bg, #adb5bd);
     border-radius: 1em;
     width: 100%;
     height: 100%;

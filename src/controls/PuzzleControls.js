@@ -1,6 +1,7 @@
 import { Component } from 'react';
 
 import ImagePicker from './ImagePicker';
+import SettingsModal from './SettingsModal';
 import presetImages from './providedImages';
 
 
@@ -11,13 +12,13 @@ export default class PuzzleControls extends Component {
     constructor(props) {
         super(props);
 
-        this.handleDimensionsChange = this.handleDimensionsChange.bind(this);
-        this.handleDimensionsBlur = this.handleDimensionsBlur.bind(this);
-        
+        this.toggleModal = this.toggleModal.bind(this);
         this.setSelectedImage = this.setSelectedImage.bind(this);
+        this.setDimension = this.setDimension.bind(this);
         this.newPuzzle = this.newPuzzle.bind(this);
         
         this.state = {
+            modalOpen: false,
             selectedImage: presetImages[0],
             rows: presetImages[0].defaultRows,
             cols: presetImages[0].defaultCols
@@ -28,28 +29,20 @@ export default class PuzzleControls extends Component {
         this.newPuzzle();
     }
 
-    handleDimensionsChange(e) {
-        this.setState({[e.target.name]: e.target.valueAsNumber});
+    toggleModal() {
+        this.setState((state) => { return {modalOpen: !state.modalOpen} });
     }
-
-    handleDimensionsBlur(e) {
-        this.setState({[e.target.name]: this.validateDimension(e.target.value)});
-    }
-
-    validateDimension(val) {
-        let result = parseInt(val, 10);
-        if (isNaN(result) || result < minPuzzleDimension) {
-            result = minPuzzleDimension;
-        } else if (result > maxPuzzleDimension) {
-            result = maxPuzzleDimension;
-        }
-        return result;
-    }
-
+    
     setSelectedImage(imageInfo) {
-        const rows = imageInfo ? imageInfo.defaultRows : this.state.rows;
-        const cols = imageInfo ? imageInfo.defaultCols : this.state.cols;
-        this.setState({selectedImage: imageInfo, rows: rows, cols: cols});
+        if (imageInfo !== this.state.selectedImage) {
+            const rows = imageInfo ? imageInfo.defaultRows : this.state.rows;
+            const cols = imageInfo ? imageInfo.defaultCols : this.state.cols;
+            this.setState({selectedImage: imageInfo, rows: rows, cols: cols});
+        }
+    }
+    
+    setDimension(name, val) {
+        this.setState({[name]: val});
     }
 
     newPuzzle() {
@@ -57,40 +50,48 @@ export default class PuzzleControls extends Component {
             return;
         }
 
-        const rows = this.validateDimension(this.state.rows);
-        const cols = this.validateDimension(this.state.cols);
-
         const img = this.state.selectedImage;
         document.documentElement.style.setProperty('--puzzle-img', `url(${img.url})`);
         
         const sizeTester = new Image();
         sizeTester.onerror = () => console.log("Failed to load image");
-        sizeTester.onload = () => this.props.newPuzzle(sizeTester.naturalWidth, sizeTester.naturalHeight, rows, cols, img);
+        sizeTester.onload = () => this.props.newPuzzle(
+            sizeTester.naturalWidth,
+            sizeTester.naturalHeight,
+            this.state.rows,
+            this.state.cols,
+            img
+        );
         sizeTester.src = img.url;
     };
 
     render() {
-        const rowsVal = isNaN(this.state.rows) ? '' : this.state.rows;
-        const colsVal = isNaN(this.state.cols) ? '' : this.state.cols;
-
         return (
-            <form className='container mt-4'>
-                <div className='form-group row'>
+            <div className='container mt-4'>
+                <div className='row mb-3'>
                     <ImagePicker setSelectedImage={this.setSelectedImage} minPuzzleDimension={minPuzzleDimension}/>
                 </div>
 
-                <div className='form-group row justify-content-center'>
-                    <label className='mr-2 my-2 col-form-label' htmlFor='row-input'>Rows:</label>
-                    <input className='mr-2 my-2' id={'row-input'} type='number' min={minPuzzleDimension} max={maxPuzzleDimension}
-                        name='rows' value={rowsVal} onChange={this.handleDimensionsChange} onBlur={this.handleDimensionsBlur}/>
+                <div className='row justify-content-center align-items-end mx-n1'>
+                    <div className='col d-none d-md-block px-2'></div>
                     
-                    <label className='mr-2 my-2 col-form-label' htmlFor='col-input'>Columns:</label>
-                    <input className='mr-4 my-2' id='col-input' type='number' min={minPuzzleDimension} max={maxPuzzleDimension} 
-                        name='cols' value={colsVal} onChange={this.handleDimensionsChange} onBlur={this.handleDimensionsBlur}/>
-                    
-                    <button className='btn btn-dark btn-lg' type='button' disabled={!this.state.selectedImage} onClick={this.newPuzzle}>New puzzle</button>
+                    <div className='col-auto px-2'>
+                        <button className='btn btn-dark btn-lg px-4' type='button' onClick={this.newPuzzle}
+                            disabled={!this.state.selectedImage || this.state.modalOpen}>
+                            New puzzle
+                        </button>
+                    </div>
+
+                    <div className='col-auto col-md px-2'>
+                        <button className='btn btn-outline-dark' type='button' onClick={this.toggleModal}>
+                            <i className='bi bi-gear-fill pr-2'></i>Settings
+                        </button>
+                    </div>
+
+                    <SettingsModal toggleModal={this.toggleModal} isOpen={this.state.modalOpen} rows={this.state.rows} cols={this.state.cols} setDimension={this.setDimension}
+                        minPuzzleDimension={minPuzzleDimension} maxPuzzleDimension={maxPuzzleDimension}/>
                 </div>
-            </form>
+            </div>
         );
     }
 }

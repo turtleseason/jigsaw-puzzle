@@ -2,7 +2,7 @@ a.unstyled, a.unstyled:hover {
     color: inherit;
 }
 
-i {
+.icon-lg {
     font-size: 1.25em;
 }
 
@@ -13,8 +13,8 @@ i {
 }
 
 @media (max-width: 991.98px) {
-    .form-group .input-group > .input-group-prepend > .btn,
-    .form-group .input-group > .input-group-append > .btn {
+    .input-group > .input-group-prepend > .btn.br-when-stacked,
+    .input-group > .input-group-append > .btn.br-when-stacked {
         border-radius: .25rem;
     }
 }
