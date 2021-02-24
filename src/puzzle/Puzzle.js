@@ -36,19 +36,19 @@ export default class Puzzle extends Component {
         this.edgeDrawer = new EdgePathDrawer(this.pieceWidth, this.pieceHeight, this.borderSize);
         this.nextzIndex = 1;
 
-        const pieces = this.createPieces();
-        this.groups = this.createGroups(pieces);
-
         this.state = {
-            pieces: pieces,
             gameComplete: false,
             draggedPiece: null,
         }
     }
 
     componentDidMount() {
-        this.setScaleFactor();
+        const scaleFactor = this.setScaleFactor();
         window.addEventListener('resize', this.handleResize);
+
+        const pieces = this.createPieces(scaleFactor);
+        this.groups = this.createGroups(pieces);
+        this.setState({pieces: pieces});
     }
 
     componentWillUnmount() {
@@ -62,11 +62,17 @@ export default class Puzzle extends Component {
         this.setState({scaleFactor: scaleFactor});
         return scaleFactor;
     }
+    
+    getBoardDimensions() {
+        // Return a dummy value if board not found? Or just let it throw an error?
+        const board = document.querySelector('.puzzle-background');
+        return {width: board.clientWidth, height: board.clientHeight};
+    }
 
     clampPiecesToBoardBounds(scaleFactor) {
-        const bg = document.querySelector('.puzzle-background');
-        const maxBoundX = bg.clientWidth / scaleFactor - this.pieceWidth;
-        const maxBoundY = bg.clientHeight / scaleFactor - this.pieceHeight;
+        const dim = this.getBoardDimensions();
+        const maxBoundX = dim.width / scaleFactor - this.pieceWidth;
+        const maxBoundY = dim.height / scaleFactor - this.pieceHeight;
 
         const pieces = this.state.pieces.slice();
         for (const [i, piece] of pieces.entries()) {
@@ -88,9 +94,17 @@ export default class Puzzle extends Component {
         return {left: left, top: top};
     }
     
-    getRandomPosition() {
-        const left = Math.random() * (.2 * this.props.imgWidth);
-        const top = Math.random() * (this.props.imgHeight - this.pieceHeight);
+    getRandomPosition(scaleFactor) {
+        const dim = this.getBoardDimensions();
+
+        let left, top;
+        if (dim.width > dim.height) {
+            left = Math.random() * (.15 * dim.width / scaleFactor);
+            top = Math.random() * (dim.height / scaleFactor - this.pieceHeight) ;
+        } else {
+            left = Math.random() * (dim.width / scaleFactor - this.pieceWidth);
+            top = Math.random() * (.15 * dim.height) / scaleFactor;
+        }
         return {left: left, top: top};
     }
     
@@ -109,7 +123,7 @@ export default class Puzzle extends Component {
         return new EdgeStyleInfo(type, neckWidth, offset, c1, c2);
     }
 
-    createPieces() {
+    createPieces(scaleFactor) {
         const pieces = [];
         const availableKeys = range(this.props.cols * this.props.rows);
         // Use map() instead of fill() to ensure that each inner array is a unique object.
@@ -122,7 +136,7 @@ export default class Puzzle extends Component {
                 keysByGridPos[col][row] = key;
                 
                 // const pos = this.getGridPosition(col, row, 0);
-                const pos = this.getRandomPosition();
+                const pos = this.getRandomPosition(scaleFactor);
                 const bgPos = this.getBackgroundPosition(col, row);
 
                 const neighbors = {};
@@ -287,9 +301,9 @@ export default class Puzzle extends Component {
     }
 
     getCenteredImagePos() {
-        const bg = document.querySelector('.puzzle-background');
-        const destLeft = (bg.clientWidth / this.state.scaleFactor - this.props.imgWidth) / 2;
-        const destTop = (bg.clientHeight / this.state.scaleFactor - this.props.imgHeight) / 2;
+        const dim = this.getBoardDimensions();
+        const destLeft = (dim.width / this.state.scaleFactor - this.props.imgWidth) / 2;
+        const destTop = (dim.height / this.state.scaleFactor - this.props.imgHeight) / 2;
         return {left: destLeft, top: destTop};
     }
 
@@ -319,7 +333,7 @@ export default class Puzzle extends Component {
                     width={this.props.imgWidth} height={this.props.imgHeight} onTransitionEnd={this.handleTransitionEnd}/>
                 </div>);
         } else {
-            const children = this.state.pieces.map(model => this.renderPiece(model));
+            const children = this.state.pieces ? this.state.pieces.map(model => this.renderPiece(model)) : null;
             board = (
                 <div 
                     className={'puzzle-area' + (this.state.draggedPiece !== null ? ' no-scroll' : '')}
