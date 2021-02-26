@@ -18,3 +18,8 @@ a.unstyled, a.unstyled:hover {
         border-radius: .25rem;
     }
 }
+
+.btn-dark .custom-select:focus,
+.btn-dark .custom-file-input:focus ~ .custom-file-label {
+    box-shadow: 0 0 0 .2rem rgba(160, 206, 255, 0.9);
+}

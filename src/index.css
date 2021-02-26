@@ -9,12 +9,17 @@ html, body {
     overflow: hidden;
 }
 
+nav img {
+    height: 1.25em;
+}
+
 .scroll-div {
     overflow: auto;
 }
 
 input[type="number"] {
     width: 3.5em;
+    max-height: 2.5em;
 }
 
 
@@ -25,4 +30,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 h1, .h1 {
     font-size: 2rem;
+}
+
+.navbar-text {
+    padding: 0;
 }

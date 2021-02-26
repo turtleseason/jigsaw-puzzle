@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="icon" type="image/png" sizes="32x32" href="/jigsaw-puzzle/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/jigsaw-puzzle/favicon-16x16.png">
-		<title>Jigsaw Puzzle</title>
-	</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#000000">
+        <meta name="msapplication-config" content="/jigsaw-puzzle/browserconfig.xml">
+        
+        <link rel="apple-touch-icon" sizes="180x180" href="/jigsaw-puzzle/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/jigsaw-puzzle/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/jigsaw-puzzle/favicon-16x16.png">
+        <link rel="manifest" href="/jigsaw-puzzle/site.webmanifest">
+        <link rel="mask-icon" href="/jigsaw-puzzle/safari-pinned-tab.svg" color="#000000">
+        <link rel="shortcut icon" href="/jigsaw-puzzle/favicon.ico">
+        
+        <title>Jigsaw Puzzle</title>
+    </head>
 
-	<body>
-		<noscript>
-			<div class='alert alert-danger text-center'>This site requires Javascript to function.</div>
-		</noscript>
-
-		<div class="scroll-div">
-			<div class="container mt-4 text-center">
-				<h1>Jigsaw Puzzle</h1>
-			</div>
-	
-			<div id="react-root"> </div>
-		</div>
-	</body>
+    <body>
+        <div class="scroll-div">
+            <nav class="navbar navbar-expand navbar-dark bg-dark justify-content-end">
+                <div class="navbar-text d-flex align-items-center mr-2">
+                    <img src="/jigsaw-puzzle/GitHub-Mark-Light-32px.png" alt="github logo"><a class="ml-2" href="https://github.com/turtleseason/jigsaw-puzzle" rel="external noopener"><small class="align-text-top">Visit repository</small></a>
+                </div>
+            </nav>
+        
+            <noscript>
+                <div class='alert alert-danger text-center'>This site requires JavaScript to function.</div>
+            </noscript>
+        
+            <div class="container mt-4 text-center">
+                <h1>Jigsaw Puzzle</h1>
+            </div>
+    
+            <div id="react-root"> </div>
+        </div>
+    </body>
 </html>
