@@ -1,43 +1,33 @@
 import { PureComponent } from 'react';
-import { Sides } from './Sides';
 
 
 export default class Piece extends PureComponent {
     constructor(props) {
         super(props);
 
+        // This never changes over the lifetime of the object, so just calculate it once
         const bgPos = this.props.model.bgPos;
-        // These will never change over the lifetime of the object, so just calculate them once
         this.backgroundPositionString = `${bgPos.left}px ${bgPos.top}px`;
-        this.clipPathString = this.getClipPathString(this.props.edgeDrawer);
     }
     
-    getClipPathString(edgeDrawer) {
-        let clipPathString = 'path(\'';
-        for (const side of Sides) {
-            clipPathString += edgeDrawer.getPathString(side, this.props.model.edges[side]);
-        }
-        return clipPathString + '\')';
-    }
-
     render() {
         const model = this.props.model;
         const className = 'puzzle-piece' + (this.props.blockPointerEvents ? ' block-pointer-events' : '');
         return (
-            <div
+            <svg
                 className={className}
-                tempid={model.key}
+                data-id={model.key}
                 onPointerDown={(e) => this.props.onPointerDown(e)}
+                clipPath={'url(#clip-' + model.key + ')'}
                 style={{
                     backgroundPosition: this.backgroundPositionString,
-                    clipPath: this.clipPathString,
                     width: this.props.width,
                     height: this.props.height,
                     left: model.displayPos.left,
                     top: model.displayPos.top,
                     zIndex: (model.zIndex > 0 ? model.zIndex : 'auto')
                 }}>
-            </div>
+            </svg>
         );
     }
 }

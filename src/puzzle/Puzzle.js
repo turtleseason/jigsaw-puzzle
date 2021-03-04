@@ -1,9 +1,10 @@
 import { Component } from 'react';
+import ClipPathContainer from './ClipPathContainer';
 import EdgePathDrawer from './EdgePathDrawer';
 import EdgeStyleInfo from './EdgeStyleInfo';
+import GroupModel from './GroupModel';
 import Piece from './Piece';
 import PieceModel from './PieceModel';
-import GroupModel from './GroupModel';
 import PuzzleCompleteImage from './PuzzleCompleteImage';
 
 import { getRandomEdgeType } from './Edges';
@@ -315,13 +316,16 @@ export default class Puzzle extends Component {
                 height={this.pieceHeight}
                 // isDragged={model.group === this.state.pieces[this.state.draggedPiece].group}
                 blockPointerEvents={this.state.draggedPiece !== null}
-                edgeDrawer={this.edgeDrawer}
                 onPointerDown={this.pointerDownHandlers[model.key]}/>
         );
     }
 
     render() {
-        const boardStyle = {transform: `scale(${this.state.scaleFactor})`, width: (100 / this.state.scaleFactor) + '%', height: (100 / this.state.scaleFactor) + '%'};
+        const boardStyle = {
+            transform: `scale(${this.state.scaleFactor})`,
+            width: (100 / this.state.scaleFactor) + '%',
+            height: (100 / this.state.scaleFactor) + '%'
+        };
 
         let board;
         if (this.state.gameComplete && this.state.endAnimationComplete) {
@@ -340,6 +344,7 @@ export default class Puzzle extends Component {
                     onPointerMove={this.handlePointerMove}
                     onPointerUp={this.handlePointerUp}
                     style={boardStyle}>
+                    <ClipPathContainer edgeDrawer={this.edgeDrawer} pieces={this.state.pieces}/>
                     { children }
                 </div>);
         }
