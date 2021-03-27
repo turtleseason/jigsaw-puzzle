@@ -25,3 +25,8 @@ export function objectMap(keys, keyToValueFunc) {
     }
     return obj;
 }
+
+export function isEmptyOrWhitespace(str) {
+    const regExp = /^\s*$/;
+    return regExp.test(str);
+}

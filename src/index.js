@@ -5,6 +5,7 @@ import PuzzleTitle from './title/PuzzleTitle.js';
 import PuzzleControls from './controls/PuzzleControls.js';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import './index.css';
 
 

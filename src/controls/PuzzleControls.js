@@ -77,7 +77,7 @@ export default class PuzzleControls extends Component {
                     
                     <div className='col-auto px-2'>
                         <button className='btn btn-dark btn-lg px-4' type='button' onClick={this.newPuzzle}
-                            disabled={!this.state.selectedImage || this.state.modalOpen}>
+                            disabled={!this.state.selectedImage}>
                             New puzzle
                         </button>
                     </div>
