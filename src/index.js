@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Puzzle from './puzzle/Puzzle.js';
 import PuzzleTitle from './title/PuzzleTitle.js';
 import PuzzleControls from './controls/PuzzleControls.js';
+import CompatibilityInfo from './info/CompatibilityInfo.js';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -28,4 +29,11 @@ ReactDOM.render(
         <PuzzleControls newPuzzle={renderPuzzle} />
     </React.StrictMode>,
     document.getElementById('react-root')
+);
+
+ReactDOM.render(
+    <React.StrictMode>
+        <CompatibilityInfo />
+    </React.StrictMode>,
+    document.getElementById('compatibility-info-root')
 );
