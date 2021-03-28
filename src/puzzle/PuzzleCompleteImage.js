@@ -14,9 +14,12 @@ export default class PuzzleCompleteImage extends Component {
 
     render() {
         return (
-            <div className='puzzle-complete-img' onTransitionEnd={this.props.onTransitionEnd} 
-                style={{width: this.props.width, height: this.props.height, left: this.state.left, top: this.state.top}}>
-            </div>
+            <img className='puzzle-complete-img'
+                 src={this.props.imgUrl}
+                 width={this.props.width}
+                 height={this.props.height}
+                 style={{left: this.state.left, top: this.state.top}}
+                 onTransitionEnd={this.props.onTransitionEnd}/>
         ); 
     }
 }

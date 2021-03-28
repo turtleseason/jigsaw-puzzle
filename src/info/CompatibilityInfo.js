@@ -18,7 +18,7 @@ export default class CompatibilityInfo extends Component {
             <>
                 <i className='bi bi-list-check text-light mr-2'></i>
                 <a className='text-light' href='#' onClick={this.toggleModal}>
-                    <small className='align-text-top'>Browser compatibility</small>
+                    <small className='align-text-top'>Browser support</small>
                 </a>
                 <CompatibilityInfoModal toggle={this.toggleModal} isOpen={this.state.modalOpen} />
             </>

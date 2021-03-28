@@ -196,7 +196,7 @@ export default class Puzzle extends Component {
     }
 
     mergeGroups(pieces, g1, g2) {
-        // Update all pieces in the merged group with their new position and z-index
+        // First, update all the PieceModels in the group to be merged
         const refPiece = pieces[this.groups[g1].pieces[0]];
         for (const k of this.groups[g2].pieces) {
             const p = pieces[k].clone();
@@ -206,7 +206,7 @@ export default class Puzzle extends Component {
             pieces[k] = p;
         }
 
-        // Merge GroupModels
+        // Then, merge the GroupModels
         this.groups[g1].mergeWith(this.groups[g2]);
 
         delete this.groups[g2];
@@ -311,12 +311,12 @@ export default class Puzzle extends Component {
     renderPiece(model) {
         return (
             <Piece key={model.key}
-                model={model}
-                width={this.pieceWidth}
-                height={this.pieceHeight}
-                // isDragged={model.group === this.state.pieces[this.state.draggedPiece].group}
-                blockPointerEvents={this.state.draggedPiece !== null}
-                onPointerDown={this.pointerDownHandlers[model.key]}/>
+                   model={model}
+                   width={this.pieceWidth}
+                   height={this.pieceHeight}
+                   imgUrl={this.props.imgUrl}
+                   blockPointerEvents={this.state.draggedPiece !== null}
+                   onPointerDown={this.pointerDownHandlers[model.key]}/>
         );
     }
 
@@ -333,19 +333,22 @@ export default class Puzzle extends Component {
         } else if (this.state.gameComplete) {
             board = (
                 <div className='puzzle-area' style={boardStyle}>
-                    <PuzzleCompleteImage startPos={this.getTopLeftPos()} destPos={this.getCenteredImagePos()}
-                    width={this.props.imgWidth} height={this.props.imgHeight} onTransitionEnd={this.handleTransitionEnd}/>
+                    <PuzzleCompleteImage imgUrl={this.props.imgUrl}
+                                         startPos={this.getTopLeftPos()}
+                                         destPos={this.getCenteredImagePos()}
+                                         width={this.props.imgWidth}
+                                         height={this.props.imgHeight}
+                                         onTransitionEnd={this.handleTransitionEnd}/>
                 </div>);
         } else {
             const children = this.state.pieces ? this.state.pieces.map(model => this.renderPiece(model)) : null;
             board = (
-                <div 
-                    className={'puzzle-area' + (this.state.draggedPiece !== null ? ' no-scroll' : '')}
-                    onPointerMove={this.handlePointerMove}
-                    onPointerUp={this.handlePointerUp}
-                    style={boardStyle}>
+                <div className={'puzzle-area' + (this.state.draggedPiece !== null ? ' no-scroll' : '')}
+                     onPointerMove={this.handlePointerMove}
+                     onPointerUp={this.handlePointerUp}
+                     style={boardStyle}>
                     <ClipPathContainer edgeDrawer={this.edgeDrawer} pieces={this.state.pieces}/>
-                    { children }
+                    {children}
                 </div>);
         }
         

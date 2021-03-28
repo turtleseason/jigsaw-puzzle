@@ -17,7 +17,7 @@ function renderPuzzle(width, height, rows, columns, image) {
         <React.StrictMode>
             <PuzzleControls newPuzzle={renderPuzzle} />
             <PuzzleTitle puzzleImage={image} />
-            <Puzzle key={++puzzleKey} imgWidth={width} imgHeight={height} rows={rows} cols={columns} />
+            <Puzzle key={++puzzleKey} imgUrl={image.url} imgWidth={width} imgHeight={height} rows={rows} cols={columns} />
         </React.StrictMode>,
         document.getElementById('react-root')
     );

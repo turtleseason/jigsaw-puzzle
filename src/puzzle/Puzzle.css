@@ -37,13 +37,7 @@
 }
 
 .puzzle-area.puzzle-complete {
-    background-position: center;
-}
-
-.puzzle-piece, .puzzle-area.puzzle-complete, .puzzle-complete-img {
-    background-color: transparent;
-    background-image: var(--puzzle-img);
-    background-repeat: no-repeat;
+    background: var(--puzzle-img) center no-repeat, transparent;
 }
 
 .puzzle-piece {
