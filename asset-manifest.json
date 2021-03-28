@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/jigsaw-puzzle/static/css/main.a1e991a0.chunk.css",
-    "main.js": "/jigsaw-puzzle/static/js/main.74fc7e1a.chunk.js",
-    "main.js.map": "/jigsaw-puzzle/static/js/main.74fc7e1a.chunk.js.map",
+    "main.css": "/jigsaw-puzzle/static/css/main.7305d8f5.chunk.css",
+    "main.js": "/jigsaw-puzzle/static/js/main.3b2fb887.chunk.js",
+    "main.js.map": "/jigsaw-puzzle/static/js/main.3b2fb887.chunk.js.map",
     "runtime-main.js": "/jigsaw-puzzle/static/js/runtime-main.3c5101f7.js",
     "runtime-main.js.map": "/jigsaw-puzzle/static/js/runtime-main.3c5101f7.js.map",
     "static/css/2.3cec7fa6.chunk.css": "/jigsaw-puzzle/static/css/2.3cec7fa6.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/2.0dec83cb.chunk.js.map": "/jigsaw-puzzle/static/js/2.0dec83cb.chunk.js.map",
     "index.html": "/jigsaw-puzzle/index.html",
     "static/css/2.3cec7fa6.chunk.css.map": "/jigsaw-puzzle/static/css/2.3cec7fa6.chunk.css.map",
-    "static/css/main.a1e991a0.chunk.css.map": "/jigsaw-puzzle/static/css/main.a1e991a0.chunk.css.map",
+    "static/css/main.7305d8f5.chunk.css.map": "/jigsaw-puzzle/static/css/main.7305d8f5.chunk.css.map",
     "static/js/2.0dec83cb.chunk.js.LICENSE.txt": "/jigsaw-puzzle/static/js/2.0dec83cb.chunk.js.LICENSE.txt",
     "static/media/bootstrap-icons.css": "/jigsaw-puzzle/static/media/bootstrap-icons.cc252f2c.woff",
     "static/media/casey-horner-80UR4DM2Rz0-unsplash.001ae9f7.jpg": "/jigsaw-puzzle/static/media/casey-horner-80UR4DM2Rz0-unsplash.001ae9f7.jpg",
@@ -24,7 +24,7 @@
     "static/js/runtime-main.3c5101f7.js",
     "static/css/2.3cec7fa6.chunk.css",
     "static/js/2.0dec83cb.chunk.js",
-    "static/css/main.a1e991a0.chunk.css",
-    "static/js/main.74fc7e1a.chunk.js"
+    "static/css/main.7305d8f5.chunk.css",
+    "static/js/main.3b2fb887.chunk.js"
   ]
 }
