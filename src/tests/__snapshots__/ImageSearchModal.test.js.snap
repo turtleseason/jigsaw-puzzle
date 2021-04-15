@@ -1,0 +1,1298 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`happy path works (with page navigation): snapshot on page 2 of search results 1`] = `
+<div
+  class="modal fade show"
+  role="dialog"
+  style="display: block;"
+  tabindex="-1"
+>
+  <div
+    class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+    role="document"
+  >
+    <div
+      class="modal-content"
+    >
+      <div
+        class="modal-header"
+      >
+        <h5
+          class="modal-title"
+        >
+          Find images
+        </h5>
+        <button
+          aria-label="Close"
+          class="close"
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+          >
+            ×
+          </span>
+        </button>
+      </div>
+      <div
+        class="modal-body"
+      >
+        <p>
+          Browse images from Unsplash.com by searching below.
+        </p>
+        <div
+          class="form-group row mx-0"
+        >
+          <label
+            class="col-form-label mr-2"
+            for="img-search-input"
+          >
+            Search by keyword
+          </label>
+          <input
+            aria-describedby="searchValidationFeedback"
+            class="col col-lg-4 form-control  px-2 mr-2"
+            id="img-search-input"
+            type="text"
+            value="cat"
+          />
+          <button
+            class="btn btn-dark mr-auto"
+            type="button"
+          >
+            Search
+          </button>
+          <div
+            class="w-100 d-lg-none"
+          />
+          <div
+            class="col invalid-feedback align-self-center"
+            id="searchValidationFeedback"
+          >
+            Please enter a search term.
+          </div>
+        </div>
+        <div
+          class="search-results-container text-center"
+        >
+          <div
+            class="search-results"
+          >
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result "
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image10-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user10-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User10 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link10.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result "
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image11-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user11-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User11 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link11.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result result-selected"
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image12-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user12-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User12 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link12.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result "
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image13-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user13-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User13 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link13.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result "
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image14-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user14-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User14 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link14.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result "
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image15-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user15-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User15 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link15.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result "
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image16-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user16-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User16 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link16.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex-sm-nowrap modal-footer"
+      >
+        <nav
+          aria-label="Search results pages"
+          class="custom-pagination container mr-sm-3"
+        >
+          <div
+            class="row justify-content-between align-items-center"
+          >
+            <div
+              class="col-auto p-0"
+            >
+              <a
+                href="#"
+              >
+                &lt; Back
+              </a>
+            </div>
+            <div
+              class="col-auto"
+            >
+              <ul>
+                <li
+                  class="invisible"
+                />
+                <li>
+                  <a
+                    href="#"
+                  >
+                    1
+                  </a>
+                </li>
+                <li>
+                  <span>
+                    2
+                  </span>
+                </li>
+                <li
+                  class="invisible"
+                />
+                <li
+                  class="invisible"
+                />
+              </ul>
+            </div>
+            <div
+              class="col-auto p-0"
+            >
+              <a
+                class="invisible"
+                href="#"
+              >
+                More &gt;
+              </a>
+            </div>
+          </div>
+        </nav>
+        <button
+          class="btn btn-dark flex-shrink-0"
+          type="button"
+        >
+          Use selected image
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`happy path works: snapshot with search results 1`] = `
+<div
+  class="modal fade"
+  role="dialog"
+  style="display: block;"
+  tabindex="-1"
+>
+  <div
+    class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+    role="document"
+  >
+    <div
+      class="modal-content"
+    >
+      <div
+        class="modal-header"
+      >
+        <h5
+          class="modal-title"
+        >
+          Find images
+        </h5>
+        <button
+          aria-label="Close"
+          class="close"
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+          >
+            ×
+          </span>
+        </button>
+      </div>
+      <div
+        class="modal-body"
+      >
+        <p>
+          Browse images from Unsplash.com by searching below.
+        </p>
+        <div
+          class="form-group row mx-0"
+        >
+          <label
+            class="col-form-label mr-2"
+            for="img-search-input"
+          >
+            Search by keyword
+          </label>
+          <input
+            aria-describedby="searchValidationFeedback"
+            class="col col-lg-4 form-control  px-2 mr-2"
+            id="img-search-input"
+            type="text"
+            value="cat"
+          />
+          <button
+            class="btn btn-dark mr-auto"
+            type="button"
+          >
+            Search
+          </button>
+          <div
+            class="w-100 d-lg-none"
+          />
+          <div
+            class="col invalid-feedback align-self-center"
+            id="searchValidationFeedback"
+          >
+            Please enter a search term.
+          </div>
+        </div>
+        <div
+          class="search-results-container text-center"
+        >
+          <div
+            class="search-results"
+          >
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result "
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image0-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user0-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User0 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link0.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result result-selected"
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image1-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user1-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User1 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link1.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result "
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image2-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user2-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User2 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link2.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result "
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image3-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user3-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User3 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link3.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result "
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image4-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user4-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User4 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link4.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result "
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image5-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user5-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User5 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link5.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result "
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image6-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user6-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User6 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link6.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result "
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image7-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user7-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User7 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link7.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result "
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image8-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user8-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User8 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link8.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="result-container mb-2"
+              data-testid="result"
+              tabindex="0"
+            >
+              <div
+                class="result "
+              >
+                <div
+                  class="placeholder"
+                  style="padding-top: 177.77777777777777%;"
+                >
+                  <img
+                    alt="alt text"
+                    src="/image9-small.jpg"
+                  />
+                  <span
+                    class="badge badge-dark"
+                  >
+                    By 
+                    <a
+                      class="text-light"
+                      href="/user9-link.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      User9 Name
+                    </a>
+                     
+                    on 
+                    <a
+                      class="text-light"
+                      href="/image-link9.html"
+                      rel="external"
+                      target="_blank"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex-sm-nowrap modal-footer"
+      >
+        <nav
+          aria-label="Search results pages"
+          class="custom-pagination container mr-sm-3"
+        >
+          <div
+            class="row justify-content-between align-items-center"
+          >
+            <div
+              class="col-auto p-0"
+            >
+              <a
+                class="invisible"
+                href="#"
+              >
+                &lt; Back
+              </a>
+            </div>
+            <div
+              class="col-auto"
+            >
+              <ul>
+                <li
+                  class="invisible"
+                />
+                <li
+                  class="invisible"
+                />
+                <li>
+                  <span>
+                    1
+                  </span>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                  >
+                    2
+                  </a>
+                </li>
+                <li
+                  class="invisible"
+                />
+              </ul>
+            </div>
+            <div
+              class="col-auto p-0"
+            >
+              <a
+                href="#"
+              >
+                More &gt;
+              </a>
+            </div>
+          </div>
+        </nav>
+        <button
+          class="btn btn-dark flex-shrink-0"
+          type="button"
+        >
+          Use selected image
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders correctly with no results 1`] = `
+<div
+  class="modal fade"
+  role="dialog"
+  style="display: block;"
+  tabindex="-1"
+>
+  <div
+    class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+    role="document"
+  >
+    <div
+      class="modal-content"
+    >
+      <div
+        class="modal-header"
+      >
+        <h5
+          class="modal-title"
+        >
+          Find images
+        </h5>
+        <button
+          aria-label="Close"
+          class="close"
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+          >
+            ×
+          </span>
+        </button>
+      </div>
+      <div
+        class="modal-body"
+      >
+        <p>
+          Browse images from Unsplash.com by searching below.
+        </p>
+        <div
+          class="form-group row mx-0"
+        >
+          <label
+            class="col-form-label mr-2"
+            for="img-search-input"
+          >
+            Search by keyword
+          </label>
+          <input
+            aria-describedby="searchValidationFeedback"
+            class="col col-lg-4 form-control  px-2 mr-2"
+            id="img-search-input"
+            type="text"
+            value="cat"
+          />
+          <button
+            class="btn btn-dark mr-auto"
+            type="button"
+          >
+            Search
+          </button>
+          <div
+            class="w-100 d-lg-none"
+          />
+          <div
+            class="col invalid-feedback align-self-center"
+            id="searchValidationFeedback"
+          >
+            Please enter a search term.
+          </div>
+        </div>
+        <div
+          class="search-results-container text-center"
+        >
+          <div
+            class="text-secondary"
+          >
+            No results found. :(
+          </div>
+          <div
+            class="search-results"
+          />
+        </div>
+      </div>
+      <div
+        class="flex-sm-nowrap modal-footer"
+      >
+        <button
+          class="btn btn-dark flex-shrink-0"
+          disabled=""
+          type="button"
+        >
+          Use selected image
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders error message correctly (proxy error) 1`] = `
+<div
+  class="search-error alert alert-warning text-center"
+  role="alert"
+>
+  <h6
+    class="alert-heading"
+  >
+    Something went wrong :0
+  </h6>
+  <p>
+    <small
+      class=""
+    >
+      Error details: 
+      Status code 400 (proxy)
+       - Bad Request
+    </small>
+  </p>
+  <p>
+    Please try again. If you keep getting an error, feel free to 
+     
+    <a
+      class="alert-link"
+      href="https://github.com/turtleseason/jigsaw-puzzle/issues"
+      rel="external"
+    >
+      open an issue on GitHub
+    </a>
+     
+    and let me know.
+  </p>
+  <p
+    class="mt-n2"
+  >
+    You can still search photos directly on 
+    <a>
+      Unsplash.com
+    </a>
+     and 
+    <a>
+      enter an image's ID here
+    </a>
+    , or download an image to your computer and load it using the file selector.
+  </p>
+</div>
+`;
+
+exports[`renders error message correctly (upstream error) 1`] = `
+<div
+  class="search-error alert alert-warning text-center"
+  role="alert"
+>
+  <h6
+    class="alert-heading"
+  >
+    Something went wrong :0
+  </h6>
+  <p>
+    <small
+      class=""
+    >
+      Error details: 
+      Status code 400 (upstream)
+       - Pretend something bad happened
+    </small>
+  </p>
+  <p>
+    Please try again. If you keep getting an error, feel free to 
+     
+    <a
+      class="alert-link"
+      href="https://github.com/turtleseason/jigsaw-puzzle/issues"
+      rel="external"
+    >
+      open an issue on GitHub
+    </a>
+     
+    and let me know.
+  </p>
+  <p
+    class="mt-n2"
+  >
+    You can still search photos directly on 
+    <a>
+      Unsplash.com
+    </a>
+     and 
+    <a>
+      enter an image's ID here
+    </a>
+    , or download an image to your computer and load it using the file selector.
+  </p>
+</div>
+`;
+
+exports[`renders rate limit error message correctly (proxy) 1`] = `
+<div
+  class="search-error alert alert-warning text-center"
+  role="alert"
+>
+  <h6
+    class="alert-heading"
+  >
+    Rate limit exceeded (API Proxy)
+  </h6>
+  <p>
+    Please try again in a moment.
+    <br />
+    (If you get this error frequently, feel free to 
+     
+    <a
+      class="alert-link"
+      href="https://github.com/turtleseason/jigsaw-puzzle/issues"
+      rel="external"
+    >
+      open an issue on GitHub
+    </a>
+     
+    and let me know.)
+  </p>
+  <p
+    class="mt-n2"
+  >
+    You can still search photos directly on 
+    <a>
+      Unsplash.com
+    </a>
+     and 
+    <a>
+      enter an image's ID here
+    </a>
+    , or download an image to your computer and load it using the file selector.
+  </p>
+</div>
+`;
+
+exports[`renders rate limit error message correctly (upstream) 1`] = `
+<div
+  class="search-error alert alert-warning text-center"
+  role="alert"
+>
+  <h6
+    class="alert-heading"
+  >
+    Rate limit exceeded (API)
+  </h6>
+  <p>
+    The hourly limit for requests from this site to the Unsplash server has been reached.
+  </p>
+  <p>
+    Feel free to 
+    <a
+      class="alert-link"
+      href="https://github.com/turtleseason/jigsaw-puzzle/issues"
+      rel="external"
+    >
+      open an issue on GitHub
+    </a>
+     
+    to let me know - 
+    <br />
+    if this happens often, I can look into applying for a higher rate limit.
+  </p>
+  <p
+    class="mt-n2"
+  >
+    You can still search photos directly on 
+    <a>
+      Unsplash.com
+    </a>
+     and 
+    <a>
+      enter an image's ID here
+    </a>
+    , or download an image to your computer and load it using the file selector.
+  </p>
+</div>
+`;

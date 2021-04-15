@@ -8,16 +8,17 @@ export default class ImageSearchModalResults extends Component {
     }
 
     handleKeyDown(index, e) {
-        if (e.key === 'Enter' && e.target.tagName !== 'A') {
+        if ((e.key === 'Enter' || e.key === 'Space') && e.target.tagName !== 'A') {
             this.props.chooseImage(this.props.images[this.props.page][index]);
             e.preventDefault();
         }
     }
 
+    // TODO: redo with better semantic markup
     renderImage(img, index) {
         const isSelected = this.props.selectedImage === img;
         return(
-            <div className={'result-container mb-2'} key={img.id} tabIndex='0'
+            <div data-testid='result' className={'result-container mb-2'} key={img.id} tabIndex='0'
                 onClick={() => this.handleImageClick(index)} onKeyDown={(e) => this.handleKeyDown(index, e)}>
                 <div className={`result ${isSelected ? 'result-selected' : ''}`}>
                     <div className='placeholder' style={{paddingTop: (img.height / img.width) * 100 + '%'}}>
@@ -33,7 +34,7 @@ export default class ImageSearchModalResults extends Component {
     }
 
     render() {
-        const images = this.props.page >= 0 ? this.props.images[this.props.page] : null;
+        const images = this.props.images[this.props.page];
 
         const initialText = <div className='text-secondary'>Image results will go here, and it will be very cool.</div>;
         const noResultsText = <div className='text-secondary'>No results found. :(</div>;
@@ -44,11 +45,11 @@ export default class ImageSearchModalResults extends Component {
 
         return (
             <div className='search-results-container text-center'>
-                {!this.props.isLoading && this.props.page < 0 ? initialText : null}
-                {!this.props.isLoading && this.props.page >= 0 && images.length === 0 ? noResultsText : null}
+                {!this.props.isLoading && !images ? initialText : null}
+                {!this.props.isLoading && images && images.length === 0 ? noResultsText : null}
                 {this.props.isLoading ? spinner : null}
                 <div className='search-results'>
-                    {this.props.page >= 0 ? images.map((img, index) => this.renderImage(img, index)) : null}
+                    {images ? images.map((img, index) => this.renderImage(img, index)) : null}
                 </div>
             </div>
         );

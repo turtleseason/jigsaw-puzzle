@@ -1,0 +1,281 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination renders correctly at end of page range 1`] = `
+<DocumentFragment>
+  <nav
+    aria-label="Search results pages"
+    class="custom-pagination container "
+  >
+    <div
+      class="row justify-content-between align-items-center"
+    >
+      <div
+        class="col-auto p-0"
+      >
+        <a
+          href="#"
+        >
+          &lt; Back
+        </a>
+      </div>
+      <div
+        class="col-auto"
+      >
+        <ul>
+          <li>
+            ...
+          </li>
+          <li>
+            <a
+              href="#"
+            >
+              9
+            </a>
+          </li>
+          <li>
+            <span>
+              10
+            </span>
+          </li>
+          <li
+            class="invisible"
+          />
+          <li
+            class="invisible"
+          />
+        </ul>
+      </div>
+      <div
+        class="col-auto p-0"
+      >
+        <a
+          class="invisible"
+          href="#"
+        >
+          More &gt;
+        </a>
+      </div>
+    </div>
+  </nav>
+</DocumentFragment>
+`;
+
+exports[`Pagination renders correctly at start of page range 1`] = `
+<DocumentFragment>
+  <nav
+    aria-label="Search results pages"
+    class="custom-pagination container "
+  >
+    <div
+      class="row justify-content-between align-items-center"
+    >
+      <div
+        class="col-auto p-0"
+      >
+        <a
+          class="invisible"
+          href="#"
+        >
+          &lt; Back
+        </a>
+      </div>
+      <div
+        class="col-auto"
+      >
+        <ul>
+          <li
+            class="invisible"
+          />
+          <li
+            class="invisible"
+          />
+          <li
+            class="invisible"
+          />
+          <li>
+            <span>
+              1
+            </span>
+          </li>
+          <li>
+            <a
+              href="#"
+            >
+              2
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+            >
+              3
+            </a>
+          </li>
+          <li>
+            ...
+          </li>
+        </ul>
+      </div>
+      <div
+        class="col-auto p-0"
+      >
+        <a
+          href="#"
+        >
+          More &gt;
+        </a>
+      </div>
+    </div>
+  </nav>
+</DocumentFragment>
+`;
+
+exports[`Pagination renders correctly for whole page range 1`] = `
+<DocumentFragment>
+  <nav
+    aria-label="Search results pages"
+    class="custom-pagination container "
+  >
+    <div
+      class="row justify-content-between align-items-center"
+    >
+      <div
+        class="col-auto p-0"
+      >
+        <a
+          href="#"
+        >
+          &lt; Back
+        </a>
+      </div>
+      <div
+        class="col-auto"
+      >
+        <ul>
+          <li
+            class="invisible"
+          />
+          <li
+            class="invisible"
+          />
+          <li>
+            <a
+              href="#"
+            >
+              1
+            </a>
+          </li>
+          <li>
+            <span>
+              2
+            </span>
+          </li>
+          <li>
+            <a
+              href="#"
+            >
+              3
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+            >
+              4
+            </a>
+          </li>
+          <li
+            class="invisible"
+          />
+        </ul>
+      </div>
+      <div
+        class="col-auto p-0"
+      >
+        <a
+          href="#"
+        >
+          More &gt;
+        </a>
+      </div>
+    </div>
+  </nav>
+</DocumentFragment>
+`;
+
+exports[`Pagination renders correctly in middle of page range 1`] = `
+<DocumentFragment>
+  <nav
+    aria-label="Search results pages"
+    class="custom-pagination container "
+  >
+    <div
+      class="row justify-content-between align-items-center"
+    >
+      <div
+        class="col-auto p-0"
+      >
+        <a
+          href="#"
+        >
+          &lt; Back
+        </a>
+      </div>
+      <div
+        class="col-auto"
+      >
+        <ul>
+          <li>
+            ...
+          </li>
+          <li>
+            <a
+              href="#"
+            >
+              3
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+            >
+              4
+            </a>
+          </li>
+          <li>
+            <span>
+              5
+            </span>
+          </li>
+          <li>
+            <a
+              href="#"
+            >
+              6
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+            >
+              7
+            </a>
+          </li>
+          <li>
+            ...
+          </li>
+        </ul>
+      </div>
+      <div
+        class="col-auto p-0"
+      >
+        <a
+          href="#"
+        >
+          More &gt;
+        </a>
+      </div>
+    </div>
+  </nav>
+</DocumentFragment>
+`;

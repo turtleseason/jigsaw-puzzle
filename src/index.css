@@ -22,6 +22,27 @@ input[type="number"] {
     max-height: 2.5em;
 }
 
+.custom-pagination ul {
+    margin: 0;
+    padding: 0;
+}
+
+.custom-pagination li {
+    display: inline-block;
+    width: 1.5em;
+    text-align: center;
+}
+
+.modal-dialog-scrollable .modal-body {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion) {
+    .modal-dialog-scrollable .modal-body {
+        scroll-behavior: auto;
+    }
+}
+
 
 /* Bootstrap overrides */
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
