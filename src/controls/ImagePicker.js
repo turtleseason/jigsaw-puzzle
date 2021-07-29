@@ -174,9 +174,12 @@ export default class ImagePicker extends Component {
                             <label className='col col-sm-4 col-md-3 col-lg-auto col-form-label' htmlFor='radioBtn1'>Choose an image:</label>
                             <div className='w-100 d-sm-none'></div>
                             <label className='sr-only' htmlFor='puzzle-image-select'>Select image</label>
-                            <select className='custom-select col mr-lg-4' id='puzzle-image-select' value={this.state.selectedOption} onChange={this.handleSelectChange}>
+                            <select className='custom-select col' id='puzzle-image-select' value={this.state.selectedOption} onChange={this.handleSelectChange}>
                                 {this.renderSelectOptions()}
                             </select>
+                            <button className='btn btn-link p-0 ml-2' type='button' aria-label='Find more images' style={{ color: 'inherit' }} onClick={this.toggleModal}>
+                                <i className='bi-search icon-lg'></i>
+                            </button>
                         </div>
                     </div>
 
@@ -188,9 +191,10 @@ export default class ImagePicker extends Component {
                             <div className='w-100 d-sm-none'></div>
                             <CustomInput className='col text-left' id='file-input' type='file' accept='image/*' innerRef={this.fileInput}
                                 invalid={this.state.invalidUserImage} onChange={this.handleFileChange}/>
-                            <a className='unstyled ml-2' id='show-tooltip' href='#' onClick={(e) => {e.preventDefault(); e.stopPropagation();}}>
+                            <button className='btn btn-link p-0 ml-2' id='show-tooltip' type='button' style={{ color: 'inherit' }}
+                                onClick={(e) => {e.preventDefault(); e.stopPropagation();}}>
                                 <i className='bi-info-circle icon-lg'></i>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
