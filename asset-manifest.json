@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/jigsaw-puzzle/static/css/main.a460b0c4.chunk.css",
-    "main.js": "/jigsaw-puzzle/static/js/main.00e6985e.chunk.js",
-    "main.js.map": "/jigsaw-puzzle/static/js/main.00e6985e.chunk.js.map",
-    "runtime-main.js": "/jigsaw-puzzle/static/js/runtime-main.3c5101f7.js",
-    "runtime-main.js.map": "/jigsaw-puzzle/static/js/runtime-main.3c5101f7.js.map",
-    "static/css/2.3cec7fa6.chunk.css": "/jigsaw-puzzle/static/css/2.3cec7fa6.chunk.css",
-    "static/js/2.f7fb42f2.chunk.js": "/jigsaw-puzzle/static/js/2.f7fb42f2.chunk.js",
-    "static/js/2.f7fb42f2.chunk.js.map": "/jigsaw-puzzle/static/js/2.f7fb42f2.chunk.js.map",
+    "main.css": "/jigsaw-puzzle/static/css/main.d7d55458.chunk.css",
+    "main.js": "/jigsaw-puzzle/static/js/main.e32c7599.chunk.js",
+    "main.js.map": "/jigsaw-puzzle/static/js/main.e32c7599.chunk.js.map",
+    "runtime-main.js": "/jigsaw-puzzle/static/js/runtime-main.4d5d9898.js",
+    "runtime-main.js.map": "/jigsaw-puzzle/static/js/runtime-main.4d5d9898.js.map",
+    "static/css/2.233e8319.chunk.css": "/jigsaw-puzzle/static/css/2.233e8319.chunk.css",
+    "static/js/2.fcb5cf53.chunk.js": "/jigsaw-puzzle/static/js/2.fcb5cf53.chunk.js",
+    "static/js/2.fcb5cf53.chunk.js.map": "/jigsaw-puzzle/static/js/2.fcb5cf53.chunk.js.map",
     "index.html": "/jigsaw-puzzle/index.html",
-    "static/css/2.3cec7fa6.chunk.css.map": "/jigsaw-puzzle/static/css/2.3cec7fa6.chunk.css.map",
-    "static/css/main.a460b0c4.chunk.css.map": "/jigsaw-puzzle/static/css/main.a460b0c4.chunk.css.map",
-    "static/js/2.f7fb42f2.chunk.js.LICENSE.txt": "/jigsaw-puzzle/static/js/2.f7fb42f2.chunk.js.LICENSE.txt",
-    "static/media/bootstrap-icons.css": "/jigsaw-puzzle/static/media/bootstrap-icons.cc252f2c.woff",
+    "static/css/2.233e8319.chunk.css.map": "/jigsaw-puzzle/static/css/2.233e8319.chunk.css.map",
+    "static/css/main.d7d55458.chunk.css.map": "/jigsaw-puzzle/static/css/main.d7d55458.chunk.css.map",
+    "static/js/2.fcb5cf53.chunk.js.LICENSE.txt": "/jigsaw-puzzle/static/js/2.fcb5cf53.chunk.js.LICENSE.txt",
+    "static/media/bootstrap-icons.css": "/jigsaw-puzzle/static/media/bootstrap-icons.dfd0ea12.woff2",
     "static/media/casey-horner-80UR4DM2Rz0-unsplash.001ae9f7.jpg": "/jigsaw-puzzle/static/media/casey-horner-80UR4DM2Rz0-unsplash.001ae9f7.jpg",
     "static/media/david-clode-eOSqRq2Qm1c-unsplash.42540cb6.jpg": "/jigsaw-puzzle/static/media/david-clode-eOSqRq2Qm1c-unsplash.42540cb6.jpg",
     "static/media/ito-jakuchu-red-parrot-on-the-branch-of-a-tree.a8f36cd5.jpg": "/jigsaw-puzzle/static/media/ito-jakuchu-red-parrot-on-the-branch-of-a-tree.a8f36cd5.jpg",
@@ -21,10 +21,10 @@
     "static/media/van-gogh-roses-nga.8fa9d120.jpg": "/jigsaw-puzzle/static/media/van-gogh-roses-nga.8fa9d120.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.3c5101f7.js",
-    "static/css/2.3cec7fa6.chunk.css",
-    "static/js/2.f7fb42f2.chunk.js",
-    "static/css/main.a460b0c4.chunk.css",
-    "static/js/main.00e6985e.chunk.js"
+    "static/js/runtime-main.4d5d9898.js",
+    "static/css/2.233e8319.chunk.css",
+    "static/js/2.fcb5cf53.chunk.js",
+    "static/css/main.d7d55458.chunk.css",
+    "static/js/main.e32c7599.chunk.js"
   ]
 }
