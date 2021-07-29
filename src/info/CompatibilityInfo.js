@@ -16,10 +16,10 @@ export default class CompatibilityInfo extends Component {
     render() {
         return (
             <>
-                <i className='bi bi-list-check text-light mr-2'></i>
-                <a className='text-light' href='#' onClick={this.toggleModal}>
+                <button className='btn btn-link text-light' type='button' onClick={this.toggleModal}>
+                    <i className='bi bi-list-check text-light mr-2'></i>
                     <small className='align-text-top'>Browser support</small>
-                </a>
+                </button>
                 <CompatibilityInfoModal toggle={this.toggleModal} isOpen={this.state.modalOpen} />
             </>
         );

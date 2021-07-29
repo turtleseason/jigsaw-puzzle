@@ -24,8 +24,8 @@ export default class ImageSearchModalResults extends Component {
                     <div className='placeholder' style={{paddingTop: (img.height / img.width) * 100 + '%'}}>
                         <img src={img.urls.small} alt={img.alt_description}/>
                         <span className='badge badge-dark'>
-                            By <a className='text-light' href={img.user.links.html} rel='external' target='_blank'>{img.user.name}</a>
-                            {' '}on <a className='text-light' href={img.links.html} rel='external' target='_blank'>Unsplash</a>
+                            By <a className='text-light' href={img.user.links.html} rel='external noreferrer' target='_blank'>{img.user.name}</a>
+                            {' '}on <a className='text-light' href={img.links.html} rel='external noreferrer' target='_blank'>Unsplash</a>
                         </span>
                     </div>
                 </div>

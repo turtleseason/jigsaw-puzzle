@@ -81,6 +81,8 @@ export default class ImagePicker extends Component {
                     e.preventDefault();
                 }
                 return;
+            default:
+                return;
         }
     }
 

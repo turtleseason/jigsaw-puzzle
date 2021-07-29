@@ -16,6 +16,7 @@ export default class PuzzleCompleteImage extends Component {
         return (
             <img className='puzzle-complete-img'
                  src={this.props.imgUrl}
+                 alt='Completed puzzle'
                  width={this.props.width}
                  height={this.props.height}
                  style={{left: this.state.left, top: this.state.top}}

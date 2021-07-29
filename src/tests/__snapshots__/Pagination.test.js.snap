@@ -12,28 +12,38 @@ exports[`Pagination renders correctly at end of page range 1`] = `
       <div
         class="col-auto p-0"
       >
-        <a
-          href="#"
+        <button
+          class="btn btn-link"
+          type="button"
         >
           &lt; Back
-        </a>
+        </button>
       </div>
       <div
         class="col-auto"
       >
         <ul>
           <li>
-            ...
+            <span
+              class="btn"
+              style="cursor: default;"
+            >
+              ...
+            </span>
           </li>
           <li>
-            <a
-              href="#"
+            <button
+              class="btn btn-link"
+              type="button"
             >
               9
-            </a>
+            </button>
           </li>
           <li>
-            <span>
+            <span
+              class="btn"
+              style="cursor: default;"
+            >
               10
             </span>
           </li>
@@ -48,12 +58,12 @@ exports[`Pagination renders correctly at end of page range 1`] = `
       <div
         class="col-auto p-0"
       >
-        <a
-          class="invisible"
-          href="#"
+        <button
+          class="btn btn-link invisible"
+          type="button"
         >
           More &gt;
-        </a>
+        </button>
       </div>
     </div>
   </nav>
@@ -72,12 +82,12 @@ exports[`Pagination renders correctly at start of page range 1`] = `
       <div
         class="col-auto p-0"
       >
-        <a
-          class="invisible"
-          href="#"
+        <button
+          class="btn btn-link invisible"
+          type="button"
         >
           &lt; Back
-        </a>
+        </button>
       </div>
       <div
         class="col-auto"
@@ -93,37 +103,48 @@ exports[`Pagination renders correctly at start of page range 1`] = `
             class="invisible"
           />
           <li>
-            <span>
+            <span
+              class="btn"
+              style="cursor: default;"
+            >
               1
             </span>
           </li>
           <li>
-            <a
-              href="#"
+            <button
+              class="btn btn-link"
+              type="button"
             >
               2
-            </a>
+            </button>
           </li>
           <li>
-            <a
-              href="#"
+            <button
+              class="btn btn-link"
+              type="button"
             >
               3
-            </a>
+            </button>
           </li>
           <li>
-            ...
+            <span
+              class="btn"
+              style="cursor: default;"
+            >
+              ...
+            </span>
           </li>
         </ul>
       </div>
       <div
         class="col-auto p-0"
       >
-        <a
-          href="#"
+        <button
+          class="btn btn-link"
+          type="button"
         >
           More &gt;
-        </a>
+        </button>
       </div>
     </div>
   </nav>
@@ -142,11 +163,12 @@ exports[`Pagination renders correctly for whole page range 1`] = `
       <div
         class="col-auto p-0"
       >
-        <a
-          href="#"
+        <button
+          class="btn btn-link"
+          type="button"
         >
           &lt; Back
-        </a>
+        </button>
       </div>
       <div
         class="col-auto"
@@ -159,30 +181,36 @@ exports[`Pagination renders correctly for whole page range 1`] = `
             class="invisible"
           />
           <li>
-            <a
-              href="#"
+            <button
+              class="btn btn-link"
+              type="button"
             >
               1
-            </a>
+            </button>
           </li>
           <li>
-            <span>
+            <span
+              class="btn"
+              style="cursor: default;"
+            >
               2
             </span>
           </li>
           <li>
-            <a
-              href="#"
+            <button
+              class="btn btn-link"
+              type="button"
             >
               3
-            </a>
+            </button>
           </li>
           <li>
-            <a
-              href="#"
+            <button
+              class="btn btn-link"
+              type="button"
             >
               4
-            </a>
+            </button>
           </li>
           <li
             class="invisible"
@@ -192,11 +220,12 @@ exports[`Pagination renders correctly for whole page range 1`] = `
       <div
         class="col-auto p-0"
       >
-        <a
-          href="#"
+        <button
+          class="btn btn-link"
+          type="button"
         >
           More &gt;
-        </a>
+        </button>
       </div>
     </div>
   </nav>
@@ -215,65 +244,84 @@ exports[`Pagination renders correctly in middle of page range 1`] = `
       <div
         class="col-auto p-0"
       >
-        <a
-          href="#"
+        <button
+          class="btn btn-link"
+          type="button"
         >
           &lt; Back
-        </a>
+        </button>
       </div>
       <div
         class="col-auto"
       >
         <ul>
           <li>
-            ...
+            <span
+              class="btn"
+              style="cursor: default;"
+            >
+              ...
+            </span>
           </li>
           <li>
-            <a
-              href="#"
+            <button
+              class="btn btn-link"
+              type="button"
             >
               3
-            </a>
+            </button>
           </li>
           <li>
-            <a
-              href="#"
+            <button
+              class="btn btn-link"
+              type="button"
             >
               4
-            </a>
+            </button>
           </li>
           <li>
-            <span>
+            <span
+              class="btn"
+              style="cursor: default;"
+            >
               5
             </span>
           </li>
           <li>
-            <a
-              href="#"
+            <button
+              class="btn btn-link"
+              type="button"
             >
               6
-            </a>
+            </button>
           </li>
           <li>
-            <a
-              href="#"
+            <button
+              class="btn btn-link"
+              type="button"
             >
               7
-            </a>
+            </button>
           </li>
           <li>
-            ...
+            <span
+              class="btn"
+              style="cursor: default;"
+            >
+              ...
+            </span>
           </li>
         </ul>
       </div>
       <div
         class="col-auto p-0"
       >
-        <a
-          href="#"
+        <button
+          class="btn btn-link"
+          type="button"
         >
           More &gt;
-        </a>
+        </button>
       </div>
     </div>
   </nav>

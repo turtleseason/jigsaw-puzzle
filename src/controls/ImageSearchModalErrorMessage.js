@@ -55,8 +55,8 @@ export default class ImageSearchModalErrorMessage extends Component {
                 <h6 className='alert-heading'>{errDisplay.title}</h6>
                 {errDisplay.text}
                 <p className='mt-n2'>
-                    You can still search photos directly on <a>Unsplash.com</a> and <a>enter an image's ID here</a>, 
-                    or download an image to your computer and load it using the file selector.
+                    You can still search photos directly on <a href='https://unsplash.com/' target='_blank' rel='external noreferrer'>Unsplash.com</a>,
+                    {' '}download an image to your computer, and load it using the file selector.
                 </p>
             </div>
         );

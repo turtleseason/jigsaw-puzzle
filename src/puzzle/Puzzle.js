@@ -8,7 +8,7 @@ import PieceModel from './PieceModel';
 import PuzzleCompleteImage from './PuzzleCompleteImage';
 
 import { getRandomEdgeType } from './Edges';
-import { BUMP, RECESS, FLAT } from './Edges';
+import { FLAT } from './Edges';
 import { LEFT, TOP, RIGHT, BOTTOM, Sides } from './Sides';
 import { range, randomInt } from '../util';
 

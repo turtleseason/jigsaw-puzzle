@@ -2,7 +2,7 @@
 
 exports[`happy path works (with page navigation): snapshot on page 2 of search results 1`] = `
 <div
-  class="modal fade show"
+  class="modal fade"
   role="dialog"
   style="display: block;"
   tabindex="-1"
@@ -101,7 +101,7 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
                     <a
                       class="text-light"
                       href="/user10-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User10 Name
@@ -111,7 +111,7 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
                     <a
                       class="text-light"
                       href="/image-link10.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -143,7 +143,7 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
                     <a
                       class="text-light"
                       href="/user11-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User11 Name
@@ -153,7 +153,7 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
                     <a
                       class="text-light"
                       href="/image-link11.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -185,7 +185,7 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
                     <a
                       class="text-light"
                       href="/user12-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User12 Name
@@ -195,7 +195,7 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
                     <a
                       class="text-light"
                       href="/image-link12.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -227,7 +227,7 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
                     <a
                       class="text-light"
                       href="/user13-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User13 Name
@@ -237,7 +237,7 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
                     <a
                       class="text-light"
                       href="/image-link13.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -269,7 +269,7 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
                     <a
                       class="text-light"
                       href="/user14-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User14 Name
@@ -279,7 +279,7 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
                     <a
                       class="text-light"
                       href="/image-link14.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -311,7 +311,7 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
                     <a
                       class="text-light"
                       href="/user15-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User15 Name
@@ -321,7 +321,7 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
                     <a
                       class="text-light"
                       href="/image-link15.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -353,7 +353,7 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
                     <a
                       class="text-light"
                       href="/user16-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User16 Name
@@ -363,7 +363,7 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
                     <a
                       class="text-light"
                       href="/image-link16.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -388,11 +388,12 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
             <div
               class="col-auto p-0"
             >
-              <a
-                href="#"
+              <button
+                class="btn btn-link"
+                type="button"
               >
                 &lt; Back
-              </a>
+              </button>
             </div>
             <div
               class="col-auto"
@@ -402,14 +403,18 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
                   class="invisible"
                 />
                 <li>
-                  <a
-                    href="#"
+                  <button
+                    class="btn btn-link"
+                    type="button"
                   >
                     1
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <span>
+                  <span
+                    class="btn"
+                    style="cursor: default;"
+                  >
                     2
                   </span>
                 </li>
@@ -424,12 +429,12 @@ exports[`happy path works (with page navigation): snapshot on page 2 of search r
             <div
               class="col-auto p-0"
             >
-              <a
-                class="invisible"
-                href="#"
+              <button
+                class="btn btn-link invisible"
+                type="button"
               >
                 More &gt;
-              </a>
+              </button>
             </div>
           </div>
         </nav>
@@ -546,7 +551,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/user0-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User0 Name
@@ -556,7 +561,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/image-link0.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -588,7 +593,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/user1-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User1 Name
@@ -598,7 +603,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/image-link1.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -630,7 +635,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/user2-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User2 Name
@@ -640,7 +645,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/image-link2.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -672,7 +677,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/user3-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User3 Name
@@ -682,7 +687,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/image-link3.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -714,7 +719,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/user4-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User4 Name
@@ -724,7 +729,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/image-link4.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -756,7 +761,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/user5-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User5 Name
@@ -766,7 +771,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/image-link5.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -798,7 +803,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/user6-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User6 Name
@@ -808,7 +813,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/image-link6.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -840,7 +845,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/user7-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User7 Name
@@ -850,7 +855,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/image-link7.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -882,7 +887,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/user8-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User8 Name
@@ -892,7 +897,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/image-link8.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -924,7 +929,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/user9-link.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       User9 Name
@@ -934,7 +939,7 @@ exports[`happy path works: snapshot with search results 1`] = `
                     <a
                       class="text-light"
                       href="/image-link9.html"
-                      rel="external"
+                      rel="external noreferrer"
                       target="_blank"
                     >
                       Unsplash
@@ -959,12 +964,12 @@ exports[`happy path works: snapshot with search results 1`] = `
             <div
               class="col-auto p-0"
             >
-              <a
-                class="invisible"
-                href="#"
+              <button
+                class="btn btn-link invisible"
+                type="button"
               >
                 &lt; Back
-              </a>
+              </button>
             </div>
             <div
               class="col-auto"
@@ -977,16 +982,20 @@ exports[`happy path works: snapshot with search results 1`] = `
                   class="invisible"
                 />
                 <li>
-                  <span>
+                  <span
+                    class="btn"
+                    style="cursor: default;"
+                  >
                     1
                   </span>
                 </li>
                 <li>
-                  <a
-                    href="#"
+                  <button
+                    class="btn btn-link"
+                    type="button"
                   >
                     2
-                  </a>
+                  </button>
                 </li>
                 <li
                   class="invisible"
@@ -996,11 +1005,12 @@ exports[`happy path works: snapshot with search results 1`] = `
             <div
               class="col-auto p-0"
             >
-              <a
-                href="#"
+              <button
+                class="btn btn-link"
+                type="button"
               >
                 More &gt;
-              </a>
+              </button>
             </div>
           </div>
         </nav>
@@ -1153,14 +1163,16 @@ exports[`renders error message correctly (proxy error) 1`] = `
     class="mt-n2"
   >
     You can still search photos directly on 
-    <a>
+    <a
+      href="https://unsplash.com/"
+      rel="external noreferrer"
+      target="_blank"
+    >
       Unsplash.com
     </a>
-     and 
-    <a>
-      enter an image's ID here
-    </a>
-    , or download an image to your computer and load it using the file selector.
+    ,
+     
+    download an image to your computer, and load it using the file selector.
   </p>
 </div>
 `;
@@ -1201,14 +1213,16 @@ exports[`renders error message correctly (upstream error) 1`] = `
     class="mt-n2"
   >
     You can still search photos directly on 
-    <a>
+    <a
+      href="https://unsplash.com/"
+      rel="external noreferrer"
+      target="_blank"
+    >
       Unsplash.com
     </a>
-     and 
-    <a>
-      enter an image's ID here
-    </a>
-    , or download an image to your computer and load it using the file selector.
+    ,
+     
+    download an image to your computer, and load it using the file selector.
   </p>
 </div>
 `;
@@ -1242,14 +1256,16 @@ exports[`renders rate limit error message correctly (proxy) 1`] = `
     class="mt-n2"
   >
     You can still search photos directly on 
-    <a>
+    <a
+      href="https://unsplash.com/"
+      rel="external noreferrer"
+      target="_blank"
+    >
       Unsplash.com
     </a>
-     and 
-    <a>
-      enter an image's ID here
-    </a>
-    , or download an image to your computer and load it using the file selector.
+    ,
+     
+    download an image to your computer, and load it using the file selector.
   </p>
 </div>
 `;
@@ -1285,14 +1301,16 @@ exports[`renders rate limit error message correctly (upstream) 1`] = `
     class="mt-n2"
   >
     You can still search photos directly on 
-    <a>
+    <a
+      href="https://unsplash.com/"
+      rel="external noreferrer"
+      target="_blank"
+    >
       Unsplash.com
     </a>
-     and 
-    <a>
-      enter an image's ID here
-    </a>
-    , or download an image to your computer and load it using the file selector.
+    ,
+     
+    download an image to your computer, and load it using the file selector.
   </p>
 </div>
 `;

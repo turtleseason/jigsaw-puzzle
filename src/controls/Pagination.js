@@ -17,7 +17,7 @@ export default class Pagination extends Component {
         const end = this.props.currentPage + this.props.numPageLinks + 1;
 
         if (start >= this.props.minPage) {
-            links.push(<li key={start}>...</li>);
+            links.push(<li key={start}><span className='btn' style={{ cursor: 'default' }}>...</span></li>);
         } else {
             links.push(<li key={start} className='invisible'></li>);
         }
@@ -25,16 +25,16 @@ export default class Pagination extends Component {
         for (let i = start + 1; i < end; i++) {
             let content = null;
             if (i === this.props.currentPage) {
-                content = <span>{i}</span>
+                content = <span className='btn' style={{ cursor: 'default' }}>{i}</span>
             }
             else if (i >= this.props.minPage && i <= this.props.maxPage) {
-                content = <a href='#' onClick={(e) => this.handleNavigate(e, i)}>{i}</a>;
+                content = <button className='btn btn-link' type='button' onClick={(e) => this.handleNavigate(e, i)}>{i}</button>;
             }
             links.push(<li className={!content ? 'invisible' : null} key={i}>{content}</li>);
         }
 
         if (end <= this.props.maxPage) {
-            links.push(<li key={end}>...</li>);
+            links.push(<li key={end}><span className='btn' style={{ cursor: 'default' }}>...</span></li>);
         } else {
             links.push(<li key={end} className='invisible'></li>);
         }
@@ -57,10 +57,10 @@ export default class Pagination extends Component {
             <nav className={outerClassName} aria-label={outerAriaLabel} {...customAttributes}>
                 <div className='row justify-content-between align-items-center'>
                     <div className='col-auto p-0'>
-                        <a className={isFirst ? 'invisible' : null} href='#'
+                        <button className={'btn btn-link' + (isFirst ? ' invisible' : '')} type='button'
                             onClick={isFirst ? null : (e) => this.handleNavigate(e, this.props.currentPage - 1)}>
                             {'< Back'}
-                        </a>
+                        </button>
                     </div>
 
                     <div className='col-auto'>
@@ -68,10 +68,10 @@ export default class Pagination extends Component {
                     </div>
 
                     <div className='col-auto p-0'>
-                        <a className={isLast ? 'invisible' : null} href='#'
+                        <button className={'btn btn-link' + (isLast ? ' invisible' : '')} type='button'
                            onClick={isLast ? null : (e) => this.handleNavigate(e, this.props.currentPage + 1)}>
                             {'More >'}
-                        </a>
+                        </button>
                     </div>
                 </div>
             </nav>

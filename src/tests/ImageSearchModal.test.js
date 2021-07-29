@@ -106,7 +106,7 @@ test('happy path works (with page navigation)', async () => {
 
     const firstPageResults = await screen.findAllByTestId('result');
 
-    userEvent.click(await screen.findByRole('link', { name: '2' }));
+    userEvent.click(await screen.findByRole('button', { name: '2' }));
 
     await waitForElementToBeRemoved(firstPageResults[0]);
 
