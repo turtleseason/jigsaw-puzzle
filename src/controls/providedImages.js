@@ -9,7 +9,7 @@ import img6 from './images/travel-sourced-FsmcD6uKcHk-unsplash.jpg';
 
 
 const providedImages = [
-    new ImageInfo('Red Parrot on the Branch of a Tree', img1, 6, 8, 'Itō Jakuchū', 
+    new ImageInfo('Red Parrot on the Branch of a Tree', img1, 6, 8, 'Itō Jakuchū',
         new ImageSource('Metropolitan Museum of Art', true, false, 'https://www.metmuseum.org/art/collection/search/57123'), 'Red Parrot'),
     new ImageInfo('Coral', img2, 7, 10, 'David Clode',
         new ImageSource('Unsplash', false, true, 'https://unsplash.com/photos/eOSqRq2Qm1c')),

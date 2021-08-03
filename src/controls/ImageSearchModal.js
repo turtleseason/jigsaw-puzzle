@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-import { clamp, isEmptyOrWhitespace } from '../util.js'
+import { clamp, isEmptyOrWhitespace } from '../util.js';
 import { ImageInfo, ImageSource } from './ImageInfo.js';
 import ImageSearchModalErrorMessage, { ErrorInfo } from './ImageSearchModalErrorMessage.js';
 import ImageSearchModalResults from './ImageSearchModalResults.js';
@@ -11,7 +11,7 @@ import Pagination from './Pagination.js';
 import './ImageSearchModal.css';
 
 
-const  MAX_SEARCH_PAGES = 10;
+const MAX_SEARCH_PAGES = 10;
 
 export default class ImageSearchModal extends Component {
 
@@ -40,11 +40,11 @@ export default class ImageSearchModal extends Component {
             isSearchLoading: false,
             error: null,
             selectedImage: null
-        }
+        };
     }
 
     handleInputChange(e) {
-        this.setState({searchString: e.target.value});
+        this.setState({ searchString: e.target.value });
     }
 
     handleInputKeyDown(e) {
@@ -73,12 +73,12 @@ export default class ImageSearchModal extends Component {
         if (!this.state.images[newPage - 1]) {
             this.searchImages(newPage);
         } else {
-            this.setState({page: newPage});
+            this.setState({ page: newPage });
         }
     }
 
     handleSearchButtonClick() {
-        this.setState({images: []}, () => this.searchImages(1));
+        this.setState({ images: [] }, () => this.searchImages(1));
     }
 
     handleChooseButtonClick() {
@@ -87,7 +87,7 @@ export default class ImageSearchModal extends Component {
     }
 
     selectImage(image) {
-        this.setState({selectedImage: image});
+        this.setState({ selectedImage: image });
     }
 
     getSearchUrl(query, page) {
@@ -104,7 +104,7 @@ export default class ImageSearchModal extends Component {
 
         const maxPage = Math.min(totalPages, MAX_SEARCH_PAGES);
 
-        this.setState({images: images, page: page, maxPage: maxPage});
+        this.setState({ images: images, page: page, maxPage: maxPage });
     }
 
     chooseImage() {
@@ -113,7 +113,7 @@ export default class ImageSearchModal extends Component {
         // Note: This passes in the raw image dimensions, while the used image is likely to be smaller (1080px) -
         // which is fine as long as generateDefaultDimensions only uses the aspect ratio, but that could change in the future.
         const dim = this.props.generateDefaultDimensions(img.width, img.height);
-        
+
         this.props.setImage(new ImageInfo(`Unsplash Photo (${img.id})`, img.urls.regular, dim.rows, dim.cols, img.user.name,
             new ImageSource('Unsplash', false, true, img.links.html)));
 
@@ -122,7 +122,7 @@ export default class ImageSearchModal extends Component {
 
     validateQuery(query) {
         const isValid = query && !isEmptyOrWhitespace(query);
-        this.setState({isSearchStringValid: isValid});
+        this.setState({ isSearchStringValid: isValid });
         return isValid;
     }
 
@@ -131,14 +131,14 @@ export default class ImageSearchModal extends Component {
         if (!this.validateQuery(query)) {
             return;
         }
-        
+
         // console.log('Searching: ' + query);
-        this.setState({isSearchLoading: true});
+        this.setState({ isSearchLoading: true });
 
         fetch(this.getSearchUrl(query, page)).then(response => {
             if (!response.ok) {
                 console.warn(`Proxy server returned an error: ${response.status}, ${response.statusText}`);
-                this.setState({error: new ErrorInfo('proxy', response.status, response.statusText)});
+                this.setState({ error: new ErrorInfo('proxy', response.status, response.statusText) });
                 throw new Error(`Failed response: ${response.status}, ${response.statusText}`);
             }
             return response.json();
@@ -148,20 +148,20 @@ export default class ImageSearchModal extends Component {
             if (upstreamResponse.errors) {
                 console.warn(`Upstream server returned an error (status code ${upstreamResponse.status}):
                     ${upstreamResponse.errors.join(', ')}`);
-                this.setState({error: new ErrorInfo('upstream', upstreamResponse.status, upstreamResponse.errors.join(', '))});
+                this.setState({ error: new ErrorInfo('upstream', upstreamResponse.status, upstreamResponse.errors.join(', ')) });
                 throw new Error(`Upstream failed response (status code ${upstreamResponse.status}):
                     ${upstreamResponse.errors.join(', ')}`);
             }
 
-            this.setState({error: null});
+            this.setState({ error: null });
             this.addImages(upstreamResponse.response.results, page, upstreamResponse.response.total_pages);
         }).catch(err => {
             if (err instanceof TypeError) {
-                this.setState({error: new ErrorInfo('network')});
+                this.setState({ error: new ErrorInfo('network') });
             }
             console.warn(`${err.name}: ${err.message}`);
         }).finally(() => {
-            this.setState({isSearchLoading: false})
+            this.setState({ isSearchLoading: false });
         });
     }
 
@@ -195,9 +195,9 @@ export default class ImageSearchModal extends Component {
 
                     <div className={`form-group row mx-0`} ref={this.searchBoxRef}>
                         <label className='col-form-label mr-2' htmlFor='img-search-input'>Search by keyword</label>
-                        <input className={`col col-lg-4 form-control ${!this.state.isSearchStringValid? 'is-invalid' : ''} px-2 mr-2`}
+                        <input className={`col col-lg-4 form-control ${!this.state.isSearchStringValid ? 'is-invalid' : ''} px-2 mr-2`}
                             id='img-search-input' type='text' value={this.state.searchString} aria-describedby='searchValidationFeedback'
-                            onKeyDown={this.handleInputKeyDown} onChange={this.handleInputChange}/>
+                            onKeyDown={this.handleInputKeyDown} onChange={this.handleInputChange} />
                         <button className='btn btn-dark mr-auto' type='button' onClick={this.handleSearchButtonClick}>Search</button>
                         <div className='w-100 d-lg-none'></div>
                         <div className='col invalid-feedback align-self-center' id='searchValidationFeedback'>
@@ -205,7 +205,7 @@ export default class ImageSearchModal extends Component {
                         </div>
                     </div>
 
-                    <ImageSearchModalErrorMessage error={this.state.error}/>
+                    <ImageSearchModalErrorMessage error={this.state.error} />
 
                     <ImageSearchModalResults images={this.state.images} page={this.state.page - 1} isLoading={this.state.isSearchLoading}
                         selectedImage={this.state.selectedImage} chooseImage={this.selectImage} />
@@ -214,9 +214,9 @@ export default class ImageSearchModal extends Component {
                 <ModalFooter className='flex-sm-nowrap'>
                     {hasResults ?
                         <Pagination className='mr-sm-3'
-                                    currentPage={this.state.page}
-                                    maxPage={this.state.maxPage}
-                                    onPageChange={this.handlePageChange}/>
+                            currentPage={this.state.page}
+                            maxPage={this.state.maxPage}
+                            onPageChange={this.handlePageChange} />
                         : null}
 
                     <button className='btn btn-dark flex-shrink-0' type='button' disabled={!this.state.selectedImage}
@@ -238,4 +238,4 @@ ImageSearchModal.propTypes = {
     toggleModal: PropTypes.func.isRequired,
     // Whether the modal should be shown.
     isOpen: PropTypes.bool.isRequired,
-}
+};

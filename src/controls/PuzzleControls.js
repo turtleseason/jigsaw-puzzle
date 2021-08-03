@@ -16,7 +16,7 @@ export default class PuzzleControls extends Component {
         this.setSelectedImage = this.setSelectedImage.bind(this);
         this.setDimension = this.setDimension.bind(this);
         this.newPuzzle = this.newPuzzle.bind(this);
-        
+
         this.state = {
             modalOpen: false,
             selectedImage: presetImages[0],
@@ -30,19 +30,19 @@ export default class PuzzleControls extends Component {
     }
 
     toggleModal() {
-        this.setState((state) => { return {modalOpen: !state.modalOpen} });
+        this.setState((state) => { return { modalOpen: !state.modalOpen }; });
     }
-    
+
     setSelectedImage(imageInfo) {
         if (imageInfo !== this.state.selectedImage) {
             const rows = imageInfo ? imageInfo.defaultRows : this.state.rows;
             const cols = imageInfo ? imageInfo.defaultCols : this.state.cols;
-            this.setState({selectedImage: imageInfo, rows: rows, cols: cols});
+            this.setState({ selectedImage: imageInfo, rows: rows, cols: cols });
         }
     }
-    
+
     setDimension(name, val) {
-        this.setState({[name]: val});
+        this.setState({ [name]: val });
     }
 
     newPuzzle() {
@@ -52,7 +52,7 @@ export default class PuzzleControls extends Component {
 
         const img = this.state.selectedImage;
         document.documentElement.style.setProperty('--puzzle-img', `url(${img.url})`);
-        
+
         const sizeTester = new Image();
         sizeTester.onerror = () => console.log("Failed to load image");
         sizeTester.onload = () => this.props.newPuzzle(
@@ -69,12 +69,12 @@ export default class PuzzleControls extends Component {
         return (
             <div className='container mt-4'>
                 <div className='row mb-3'>
-                    <ImagePicker setSelectedImage={this.setSelectedImage} minPuzzleDimension={minPuzzleDimension}/>
+                    <ImagePicker setSelectedImage={this.setSelectedImage} minPuzzleDimension={minPuzzleDimension} />
                 </div>
 
                 <div className='row justify-content-center align-items-end mx-n1'>
                     <div className='col d-none d-md-block px-2'></div>
-                    
+
                     <div className='col-auto px-2'>
                         <button className='btn btn-dark btn-lg px-4' type='button' onClick={this.newPuzzle}
                             disabled={!this.state.selectedImage}>
@@ -89,7 +89,7 @@ export default class PuzzleControls extends Component {
                     </div>
 
                     <SettingsModal toggleModal={this.toggleModal} isOpen={this.state.modalOpen} rows={this.state.rows} cols={this.state.cols} setDimension={this.setDimension}
-                        minPuzzleDimension={minPuzzleDimension} maxPuzzleDimension={maxPuzzleDimension}/>
+                        minPuzzleDimension={minPuzzleDimension} maxPuzzleDimension={maxPuzzleDimension} />
                 </div>
             </div>
         );

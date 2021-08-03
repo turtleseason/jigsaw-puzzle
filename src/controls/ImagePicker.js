@@ -37,14 +37,14 @@ export default class ImagePicker extends Component {
             modalOpen: false,
         };
     }
-    
+
     usePresetImage() {
-        this.setState({usingUserImage: false});
+        this.setState({ usingUserImage: false });
         this.props.setSelectedImage(this.selectedPreset);
     }
 
     useUserImage() {
-        this.setState({usingUserImage: true});
+        this.setState({ usingUserImage: true });
         this.props.setSelectedImage(this.userImage);
     }
 
@@ -55,14 +55,15 @@ export default class ImagePicker extends Component {
 
     setUnsplashImage(image) {
         this.setState({
-            unsplashImage: image, selectedOption: 'unsplash'});
+            unsplashImage: image, selectedOption: 'unsplash'
+        });
         this.setPresetImage(image);
     }
-    
+
     // Maintain arrow key navigation between the radio buttons even though they aren't
     // actually part of the same radio group (so that they can be separate tab stops).
     handleRadioKeyDown(e) {
-        switch(e.key) {
+        switch (e.key) {
             case 'ArrowLeft':
             case 'ArrowUp':
             case 'Left':
@@ -94,27 +95,27 @@ export default class ImagePicker extends Component {
             this.toggleModal();
         } else if (select.selectedIndex === select.length - 2 && this.state.unsplashImage) {
             this.setPresetImage(this.state.unsplashImage);
-            this.setState({selectedOption: 'unsplash'});
+            this.setState({ selectedOption: 'unsplash' });
         } else if (select.selectedIndex !== -1) {
             this.setPresetImage(presetImages[select.selectedIndex]);
-            this.setState({selectedOption: 'preset' + select.selectedIndex});
+            this.setState({ selectedOption: 'preset' + select.selectedIndex });
         }
     }
 
     handleFileChange() {
         this.useUserImage();
-        
+
         const file = this.fileInput.current.files[0];
         const fileUrl = URL.createObjectURL(file);
-        
+
         const testLoader = new Image();
         testLoader.onerror = () => {
             URL.revokeObjectURL(fileUrl);
             if (this.userImage) {
                 URL.revokeObjectURL(this.userImage.url);
             }
-            this.userImage = null;            
-            this.setState({invalidUserImage: true});
+            this.userImage = null;
+            this.setState({ invalidUserImage: true });
             this.props.setSelectedImage(null);
         };
         testLoader.onload = () => {
@@ -123,7 +124,7 @@ export default class ImagePicker extends Component {
             }
             const dim = this.generateDefaultDimensions(testLoader.naturalWidth, testLoader.naturalHeight);
             this.userImage = new ImageInfo(file.name, fileUrl, dim.rows, dim.cols);
-            this.setState({invalidUserImage: false});
+            this.setState({ invalidUserImage: false });
             this.props.setSelectedImage(this.userImage);
         };
         testLoader.src = fileUrl;
@@ -141,11 +142,11 @@ export default class ImagePicker extends Component {
         const rows = clamp(Math.round(target / (aspect + 1)), minBound, target - minBound);
         const cols = target - rows;
 
-        return {rows: rows, cols: cols};
+        return { rows: rows, cols: cols };
     }
 
     toggleModal() {
-        this.setState({modalOpen: !this.state.modalOpen});
+        this.setState({ modalOpen: !this.state.modalOpen });
     }
 
     renderSelectOptions() {
@@ -154,11 +155,11 @@ export default class ImagePicker extends Component {
             const img = presetImages[i];
             options.push(<option key={i} value={'preset' + i}>{img.shortName}</option>);
         }
-        options.push(<option key={-1} disabled>―――――――</option>)
+        options.push(<option key={-1} disabled>―――――――</option>);
         if (this.state.unsplashImage) {
-            options.push(<option key={-2} value={'unsplash'}>{`Unsplash photo by ${this.state.unsplashImage.author}`}</option>)
+            options.push(<option key={-2} value={'unsplash'}>{`Unsplash photo by ${this.state.unsplashImage.author}`}</option>);
         }
-        options.push(<option key={-3}>More...</option>)
+        options.push(<option key={-3}>More...</option>);
         return options;
     }
 
@@ -172,7 +173,7 @@ export default class ImagePicker extends Component {
                     <div className='input-group-prepend col-12 col-lg-6 pr-lg-0'>
                         <div className={`btn ${presetBtnStyle} d-flex flex-wrap flex-sm-nowrap align-items-center w-100 br-when-stacked`} onClick={this.usePresetImage}>
                             <input readOnly className='col-auto' id='radioBtn1' type='radio'
-                                checked={!this.state.usingUserImage} onKeyDown={this.handleRadioKeyDown}/>
+                                checked={!this.state.usingUserImage} onKeyDown={this.handleRadioKeyDown} />
                             <label className='col col-sm-4 col-md-3 col-lg-auto col-form-label' htmlFor='radioBtn1'>Choose an image:</label>
                             <div className='w-100 d-sm-none'></div>
                             <label className='sr-only' htmlFor='puzzle-image-select'>Select image</label>
@@ -188,13 +189,13 @@ export default class ImagePicker extends Component {
                     <div className='input-group-append col-12 col-lg-6 pl-lg-0'>
                         <div className={`btn ${userBtnStyle} d-flex flex-wrap flex-sm-nowrap align-items-center w-100 br-when-stacked`} onClick={this.useUserImage}>
                             <input readOnly className='col-auto order-first order-lg-last ml-lg-3' id='radioBtn2' type='radio'
-                                checked={this.state.usingUserImage} onKeyDown={this.handleRadioKeyDown}/>
+                                checked={this.state.usingUserImage} onKeyDown={this.handleRadioKeyDown} />
                             <label className='col col-sm-4 col-md-3 col-lg-auto col-form-label' htmlFor='radioBtn2'>Or use your own:</label>
                             <div className='w-100 d-sm-none'></div>
                             <CustomInput className='col text-left' id='file-input' type='file' accept='image/*' innerRef={this.fileInput}
-                                invalid={this.state.invalidUserImage} onChange={this.handleFileChange}/>
+                                invalid={this.state.invalidUserImage} onChange={this.handleFileChange} />
                             <button className='btn btn-link p-0 ml-2' id='show-tooltip' type='button' style={{ color: 'inherit' }}
-                                onClick={(e) => {e.preventDefault(); e.stopPropagation();}}>
+                                onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}>
                                 <i className='bi-info-circle icon-lg'></i>
                             </button>
                         </div>
@@ -203,7 +204,7 @@ export default class ImagePicker extends Component {
                 <UncontrolledTooltip placement='top' target='show-tooltip'>
                     Images are only used locally in your browser and are never uploaded or sent over the Internet.
                 </UncontrolledTooltip>
-                <ImageSearchModal toggleModal={this.toggleModal} isOpen={this.state.modalOpen} setImage={this.setUnsplashImage} generateDefaultDimensions={this.generateDefaultDimensions}/>
+                <ImageSearchModal toggleModal={this.toggleModal} isOpen={this.state.modalOpen} setImage={this.setUnsplashImage} generateDefaultDimensions={this.generateDefaultDimensions} />
             </>
         );
     }

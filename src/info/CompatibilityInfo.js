@@ -6,11 +6,11 @@ export default class CompatibilityInfo extends Component {
     constructor(props) {
         super(props);
         this.toggleModal = this.toggleModal.bind(this);
-        this.state = {modalOpen: false};
+        this.state = { modalOpen: false };
     }
 
     toggleModal() {
-        this.setState({modalOpen: !this.state.modalOpen});
+        this.setState({ modalOpen: !this.state.modalOpen });
     }
 
     render() {

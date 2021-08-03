@@ -5,7 +5,7 @@ export default class GroupModel {
     constructor(key) {
         this.key = key;
         this.pieces = [];
-        this.bounds = {[LEFT]: -1, [TOP]: -1, [RIGHT]: -1, [BOTTOM]: -1};
+        this.bounds = { [LEFT]: -1, [TOP]: -1, [RIGHT]: -1, [BOTTOM]: -1 };
     }
 
     addPiece(key, row, col) {

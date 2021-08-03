@@ -12,9 +12,9 @@ export default class ClipPath extends PureComponent {
     }
 
     render() {
-        return(
+        return (
             <clipPath id={'clip-' + this.props.pieceKey}>
-                <path d={this.getClipPathString(this.props.edges)}/>
+                <path d={this.getClipPathString(this.props.edges)} />
             </clipPath>
         );
     }

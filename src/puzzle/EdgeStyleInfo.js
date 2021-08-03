@@ -16,7 +16,7 @@ export default class EdgeStyleInfo {
     // if this is a bump edge, opposite() returns a matching recess edge, and vice-versa.
     // Will fail if called on a flat edge.
     opposite() {
-        const other = {...this};
+        const other = { ...this };
         other.type = getOppositeEdge(this.type);
         return other;
     }

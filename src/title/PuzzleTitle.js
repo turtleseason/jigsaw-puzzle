@@ -6,11 +6,11 @@ export default class PuzzleTitle extends Component {
     constructor(props) {
         super(props);
         this.toggleModal = this.toggleModal.bind(this);
-        this.state = {modalOpen: false};
+        this.state = { modalOpen: false };
     }
 
     toggleModal() {
-        this.setState((state) => { return {modalOpen: !state.modalOpen} });
+        this.setState((state) => { return { modalOpen: !state.modalOpen }; });
     }
 
     render() {
@@ -30,7 +30,7 @@ export default class PuzzleTitle extends Component {
             } else if (isPhoto) {
                 author += 'Photo by ';
             } else {
-                author += 'By '
+                author += 'By ';
             }
             author += puzzleImage.author;
         }
@@ -39,7 +39,7 @@ export default class PuzzleTitle extends Component {
         return (
             <div className='container-fluid container-md mt-3'>
                 <div className='row justify-content-center flex-sm-nowrap mx-n2'>
-                    <div className='col-2 d-none d-md-block px-2'> </div> 
+                    <div className='col-2 d-none d-md-block px-2'> </div>
                     <div className='col-auto flex-shrink-1 px-2'>
                         <p className='h5'>{title}{author}</p>
                     </div>

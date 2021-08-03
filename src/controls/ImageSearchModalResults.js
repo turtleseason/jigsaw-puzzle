@@ -17,12 +17,12 @@ export default class ImageSearchModalResults extends Component {
     // TODO: redo with better semantic markup
     renderImage(img, index) {
         const isSelected = this.props.selectedImage === img;
-        return(
+        return (
             <div data-testid='result' className={'result-container mb-2'} key={img.id} tabIndex='0'
                 onClick={() => this.handleImageClick(index)} onKeyDown={(e) => this.handleKeyDown(index, e)}>
                 <div className={`result ${isSelected ? 'result-selected' : ''}`}>
-                    <div className='placeholder' style={{paddingTop: (img.height / img.width) * 100 + '%'}}>
-                        <img src={img.urls.small} alt={img.alt_description}/>
+                    <div className='placeholder' style={{ paddingTop: (img.height / img.width) * 100 + '%' }}>
+                        <img src={img.urls.small} alt={img.alt_description} />
                         <span className='badge badge-dark'>
                             By <a className='text-light' href={img.user.links.html} rel='external noreferrer' target='_blank'>{img.user.name}</a>
                             {' '}on <a className='text-light' href={img.links.html} rel='external noreferrer' target='_blank'>Unsplash</a>
@@ -39,9 +39,9 @@ export default class ImageSearchModalResults extends Component {
         const initialText = <div className='text-secondary'>Image results will go here, and it will be very cool.</div>;
         const noResultsText = <div className='text-secondary'>No results found. :(</div>;
         const spinner = (
-                <div className='spinner-border my-1' role='status'>
-                    <span className='sr-only'>Loading...</span>
-                </div>);
+            <div className='spinner-border my-1' role='status'>
+                <span className='sr-only'>Loading...</span>
+            </div>);
 
         return (
             <div className='search-results-container text-center'>
@@ -62,4 +62,4 @@ ImageSearchModalResults.propTypes = {
     isLoading: PropTypes.bool,
     selectedImage: PropTypes.object,
     chooseImage: PropTypes.func,
-}
+};

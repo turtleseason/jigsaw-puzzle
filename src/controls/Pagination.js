@@ -25,7 +25,7 @@ export default class Pagination extends Component {
         for (let i = start + 1; i < end; i++) {
             let content = null;
             if (i === this.props.currentPage) {
-                content = <span className='btn' style={{ cursor: 'default' }}>{i}</span>
+                content = <span className='btn' style={{ cursor: 'default' }}>{i}</span>;
             }
             else if (i >= this.props.minPage && i <= this.props.maxPage) {
                 content = <button className='btn btn-link' type='button' onClick={(e) => this.handleNavigate(e, i)}>{i}</button>;
@@ -43,7 +43,7 @@ export default class Pagination extends Component {
     }
 
     render() {
-        const {currentPage, minPage, maxPage, numPageLinks, onPageChange, className, ariaLabel, ...customAttributes} = this.props;
+        const { currentPage, minPage, maxPage, numPageLinks, onPageChange, className, ariaLabel, ...customAttributes } = this.props;
 
         const outerClassName = 'custom-pagination container ' + (className || '');
         const outerAriaLabel = ariaLabel || 'Search results pages';
@@ -69,7 +69,7 @@ export default class Pagination extends Component {
 
                     <div className='col-auto p-0'>
                         <button className={'btn btn-link' + (isLast ? ' invisible' : '')} type='button'
-                           onClick={isLast ? null : (e) => this.handleNavigate(e, this.props.currentPage + 1)}>
+                            onClick={isLast ? null : (e) => this.handleNavigate(e, this.props.currentPage + 1)}>
                             {'More >'}
                         </button>
                     </div>
@@ -89,7 +89,7 @@ Pagination.propTypes = {
     onPageChange: PropTypes.func,    // Callback raised when a page link is clicked; it is given one parameter, the page number to navigate to
     className: PropTypes.string,     // An optional class string to append to the default classes
     ariaLabel: PropTypes.string,     // An optional label string to replace the default aria-label
-}
+};
 
 Pagination.defaultProps = {
     minPage: 1,

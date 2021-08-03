@@ -4,7 +4,7 @@ import ClipPath from './ClipPath.js';
 
 export default class ClipPathContainer extends PureComponent {
     renderClipPath(model) {
-        return <ClipPath key={model.key} edgeDrawer={this.props.edgeDrawer} pieceKey={model.key} edges={model.edges}/>;
+        return <ClipPath key={model.key} edgeDrawer={this.props.edgeDrawer} pieceKey={model.key} edges={model.edges} />;
     }
 
     render() {

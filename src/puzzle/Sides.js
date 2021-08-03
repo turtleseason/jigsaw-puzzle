@@ -11,4 +11,4 @@ export const Sides = {
         yield RIGHT;
         yield BOTTOM;
     }
-}
+};

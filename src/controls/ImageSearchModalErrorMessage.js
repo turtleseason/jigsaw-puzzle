@@ -14,18 +14,18 @@ export default class ImageSearchModalErrorMessage extends Component {
     getErrorDisplay() {
         const err = this.props.error;
         if (err.statusCode === 429 && err.type === 'upstream') {
-            return { 
+            return {
                 title: 'Rate limit exceeded (API)',
                 text: (<>
                     <p>The hourly limit for requests from this site to the Unsplash server has been reached.</p>
                     <p>Feel free to <a className='alert-link' href='https://github.com/turtleseason/jigsaw-puzzle/issues' rel='external'>open an issue on GitHub</a>
-                    {' '}to let me know - <br/>if this happens often, I can look into applying for a higher rate limit.</p>
+                        {' '}to let me know - <br />if this happens often, I can look into applying for a higher rate limit.</p>
                 </>)
             };
         } else if (err.statusCode === 429 && err.type === 'proxy') {
-            return { 
+            return {
                 title: 'Rate limit exceeded (API Proxy)',
-                text: (<p>Please try again in a moment.<br/>(If you get this error frequently, feel free to {' '}
+                text: (<p>Please try again in a moment.<br />(If you get this error frequently, feel free to {' '}
                     <a className='alert-link' href='https://github.com/turtleseason/jigsaw-puzzle/issues' rel='external'>open an issue on GitHub</a>
                     {' '}and let me know.)</p>)
             };
@@ -37,10 +37,10 @@ export default class ImageSearchModalErrorMessage extends Component {
                 text: (<>
                     <p><small className=''>Error details: {errInfo}{errDetails}</small></p>
                     <p>Please try again. If you keep getting an error, feel free to {' '}
-                    <a className='alert-link' href='https://github.com/turtleseason/jigsaw-puzzle/issues' rel='external'>open an issue on GitHub</a>
-                    {' '}and let me know.</p>
+                        <a className='alert-link' href='https://github.com/turtleseason/jigsaw-puzzle/issues' rel='external'>open an issue on GitHub</a>
+                        {' '}and let me know.</p>
                 </>)
-            }
+            };
         }
     }
 
@@ -65,4 +65,4 @@ export default class ImageSearchModalErrorMessage extends Component {
 
 ImageSearchModalErrorMessage.propTypes = {
     error: PropTypes.instanceOf(ErrorInfo),
-}
+};

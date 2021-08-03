@@ -12,7 +12,7 @@ export function getRandomEdgeType() {
 }
 
 export function getOppositeEdge(edge) {
-    switch(edge) {
+    switch (edge) {
         case BUMP:
             return RECESS;
         case RECESS:

@@ -11,7 +11,7 @@ export class ImageInfo {
 }
 
 export class ImageSource {
-    constructor(sourceName, nameIsTitle=false, isPhoto=false, sourceUrl='', description='') {
+    constructor(sourceName, nameIsTitle = false, isPhoto = false, sourceUrl = '', description = '') {
         this.sourceName = sourceName;
         this.nameIsTitle = nameIsTitle;
         this.sourceUrl = sourceUrl;

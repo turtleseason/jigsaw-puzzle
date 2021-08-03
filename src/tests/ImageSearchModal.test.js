@@ -11,7 +11,7 @@ import { testSearchResults } from './testData/testSearchResults.js';
 const proxyUrl = process.env.REACT_APP_PROXY_URL;
 
 const searchURL = `${proxyUrl}/search/:query/page/:pageNumber`;
-const downloadURL = `${proxyUrl}/download/:photoId/`
+const downloadURL = `${proxyUrl}/download/:photoId/`;
 
 const server = setupServer(
     rest.get(searchURL, (req, res, ctx) =>
@@ -37,19 +37,19 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 test('renders without exploding', async () => {
-    render(<ImageSearchModal isOpen={true} setImage={() => {}} generateDefaultDimensions={() => {}} toggleModal={() => {}}/>);
+    render(<ImageSearchModal isOpen={true} setImage={() => { }} generateDefaultDimensions={() => { }} toggleModal={() => { }} />);
 });
 
 test('happy path works', async () => {
     const mockSetImage = jest.fn();
-    const mockDimensions = jest.fn(() => { return { rows: 4, cols: 2 } });
+    const mockDimensions = jest.fn(() => { return { rows: 4, cols: 2 }; });
 
     render(
         <ImageSearchModal
             isOpen={true}
             setImage={mockSetImage}
             generateDefaultDimensions={mockDimensions}
-            toggleModal={() => {}}
+            toggleModal={() => { }}
         />
     );
 
@@ -86,7 +86,7 @@ test('happy path works', async () => {
 
 test('happy path works (with page navigation)', async () => {
     const mockSetImage = jest.fn();
-    const mockDimensions = jest.fn(() => { return { rows: 4, cols: 2 } });
+    const mockDimensions = jest.fn(() => { return { rows: 4, cols: 2 }; });
     const mockScroll = jest.fn();
 
     // Stub DOM method that doesn't exist in the testing environment
@@ -97,7 +97,7 @@ test('happy path works (with page navigation)', async () => {
             isOpen={true}
             setImage={mockSetImage}
             generateDefaultDimensions={mockDimensions}
-            toggleModal={() => {}}
+            toggleModal={() => { }}
         />
     );
 
@@ -150,7 +150,7 @@ test('renders correctly with no results', async () => {
         }))
     ));
 
-    render(<ImageSearchModal isOpen={true} setImage={() => {}} generateDefaultDimensions={() => {}} toggleModal={() => {}}/>);
+    render(<ImageSearchModal isOpen={true} setImage={() => { }} generateDefaultDimensions={() => { }} toggleModal={() => { }} />);
 
     userEvent.type(screen.getByRole('textbox', { name: /Search by keyword/i }), 'cat');
     userEvent.click(screen.getByRole('button', { name: /Search/i }));
@@ -161,9 +161,9 @@ test('renders correctly with no results', async () => {
 
 test('search fails if empty/whitespace', async () => {
     server.use(rest.get(searchURL, () => { throw Error('Unexpected network request'); }));
-    
-    render(<ImageSearchModal isOpen={true} setImage={() => {}} generateDefaultDimensions={() => {}} toggleModal={() => {}}/>);
-    
+
+    render(<ImageSearchModal isOpen={true} setImage={() => { }} generateDefaultDimensions={() => { }} toggleModal={() => { }} />);
+
     const input = screen.getByRole('textbox', { name: /Search by keyword/i });
 
     // Would be good to rewrite the form so that the validity state is more accessible instead of checking for a class
@@ -200,10 +200,10 @@ test('search escapes special characters', async () => {
                 total: 17,
                 total_pages: 2,
             }
-        }))
+        }));
     }));
 
-    render(<ImageSearchModal isOpen={true} setImage={() => {}} generateDefaultDimensions={() => { }} toggleModal={() => {}}/>);
+    render(<ImageSearchModal isOpen={true} setImage={() => { }} generateDefaultDimensions={() => { }} toggleModal={() => { }} />);
 
     userEvent.type(screen.getByRole('textbox', { name: /Search by keyword/i }), query);
     userEvent.click(screen.getByRole('button', { name: /Search/i }));
@@ -214,7 +214,7 @@ test('search escapes special characters', async () => {
 test('renders error message correctly (proxy error)', async () => {
     server.use(rest.get(searchURL, (req, res, ctx) => res(ctx.status(400))));
 
-    render(<ImageSearchModal isOpen={true} setImage={() => {}} generateDefaultDimensions={() => {}} toggleModal={() => {}}/>);
+    render(<ImageSearchModal isOpen={true} setImage={() => { }} generateDefaultDimensions={() => { }} toggleModal={() => { }} />);
 
     userEvent.type(screen.getByRole('textbox', { name: /Search by keyword/i }), 'cat');
     userEvent.click(screen.getByRole('button', { name: /Search/i }));
@@ -227,16 +227,15 @@ test('renders error message correctly (proxy error)', async () => {
 test('renders error message correctly (upstream error)', async () => {
     server.use(
         rest.get(searchURL, (req, res, ctx) =>
-                res(ctx.status(200), ctx.json({
-                    status: 400,
-                    type: 'failure',
-                    errors: ['Pretend something bad happened'],
-                })
-            )
+            res(ctx.status(200), ctx.json({
+                status: 400,
+                type: 'failure',
+                errors: ['Pretend something bad happened'],
+            }))
         ),
     );
 
-    render(<ImageSearchModal isOpen={true} setImage={() => {}} generateDefaultDimensions={() => {}} toggleModal={() => {}}/>);
+    render(<ImageSearchModal isOpen={true} setImage={() => { }} generateDefaultDimensions={() => { }} toggleModal={() => { }} />);
 
     userEvent.type(screen.getByRole('textbox', { name: /Search by keyword/i }), 'cat');
     userEvent.click(screen.getByRole('button', { name: /Search/i }));
@@ -249,7 +248,7 @@ test('renders error message correctly (upstream error)', async () => {
 test('renders rate limit error message correctly (proxy)', async () => {
     server.use(rest.get(searchURL, (req, res, ctx) => res(ctx.status(429))));
 
-    render(<ImageSearchModal isOpen={true} setImage={() => {}} generateDefaultDimensions={() => {}} toggleModal={() => {}}/>);
+    render(<ImageSearchModal isOpen={true} setImage={() => { }} generateDefaultDimensions={() => { }} toggleModal={() => { }} />);
 
     userEvent.type(screen.getByRole('textbox', { name: /Search by keyword/i }), 'cat');
     userEvent.click(screen.getByRole('button', { name: /Search/i }));
@@ -263,16 +262,15 @@ test('renders rate limit error message correctly (proxy)', async () => {
 test('renders rate limit error message correctly (upstream)', async () => {
     server.use(
         rest.get(searchURL, (req, res, ctx) =>
-                res(ctx.status(200), ctx.json({
-                    status: 429,
-                    type: 'failure',
-                    errors: ['Rate limit exceeded'],
-                })
-            )
+            res(ctx.status(200), ctx.json({
+                status: 429,
+                type: 'failure',
+                errors: ['Rate limit exceeded'],
+            }))
         ),
     );
 
-    render(<ImageSearchModal isOpen={true} setImage={() => {}} generateDefaultDimensions={() => {}} toggleModal={() => {}}/>);
+    render(<ImageSearchModal isOpen={true} setImage={() => { }} generateDefaultDimensions={() => { }} toggleModal={() => { }} />);
 
     userEvent.type(screen.getByRole('textbox', { name: /Search by keyword/i }), 'cat');
     userEvent.click(screen.getByRole('button', { name: /Search/i }));

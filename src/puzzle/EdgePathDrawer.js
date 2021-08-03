@@ -5,7 +5,7 @@ import { LEFT, TOP, RIGHT, BOTTOM } from './Sides';
 export default class EdgePathDrawer {
     constructor(pieceWidth, pieceHeight, borderSize) {
         this.START = 'START';
-        this.templates = this.makeTemplates(pieceWidth, pieceHeight, borderSize)
+        this.templates = this.makeTemplates(pieceWidth, pieceHeight, borderSize);
     }
 
     makeTemplates(pW, pH, b) {
@@ -13,7 +13,7 @@ export default class EdgePathDrawer {
 
         templates[this.START] = `M ${b} ${pH - b} `;
 
-        templates[BUMP + LEFT] = (w, o, c1, c2) => `V ${(pH + w) / 2}`    
+        templates[BUMP + LEFT] = (w, o, c1, c2) => `V ${(pH + w) / 2}`
             + `C ${b - o} ${pH / 2 + c1} ${0} ${pH / 2 + c2} ${0} ${pH / 2} `
             + `C ${0} ${pH / 2 - c2} ${b - o} ${pH / 2 - c1} ${b} ${(pH - w) / 2} `;
         templates[RECESS + LEFT] = (w, o, c1, c2) => `V ${(pH + w) / 2}`

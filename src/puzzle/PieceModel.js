@@ -13,7 +13,7 @@ export default class PieceModel {
     constructor(key, col, row, pos, bgPos, zIndex, edges, neighbors) {
         // By default, a new piece is inserted into the group with the same id as its key.
         this.group = key;
-        
+
         this.key = key;
         this.col = col;
         this.row = row;
@@ -21,22 +21,22 @@ export default class PieceModel {
         this.zIndex = zIndex;
         this.edges = edges;
         this.neighbors = neighbors;
-        
+
         this.setPos(pos.left, pos.top);
     }
-    
+
     get pos() {
         return this.actualPos;
     }
-    
+
     set pos(val) {
         throw Error('PieceModel: Don\'t set "pos" directly - use setPos() instead.');
     }
-    
+
     // 'pos' is the piece's original position before clamping; it doesn't change when the board is resized
     // so that if the board is expanded again, the piece can return to its original position.
     setPos(left, top) {
-        this.actualPos = {left: left, top: top};
+        this.actualPos = { left: left, top: top };
         this.displayPos = this.actualPos;
     }
 
@@ -44,7 +44,7 @@ export default class PieceModel {
     // its display position is set to keep it in bounds.
     // When the piece is interacted with (picked up or merged with another piece/group), displayPos becomes the piece's actual position.
     setDisplayPos(left, top) {
-        this.displayPos = {left: left, top: top};
+        this.displayPos = { left: left, top: top };
     }
 
     clone() {
