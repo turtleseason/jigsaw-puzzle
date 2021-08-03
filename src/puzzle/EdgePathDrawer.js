@@ -2,16 +2,17 @@ import { BUMP, RECESS, FLAT } from './Edges';
 import { LEFT, TOP, RIGHT, BOTTOM } from './Sides';
 
 
+const START = 'START';
+
 export default class EdgePathDrawer {
     constructor(pieceWidth, pieceHeight, borderSize) {
-        this.START = 'START';
         this.templates = this.makeTemplates(pieceWidth, pieceHeight, borderSize);
     }
 
     makeTemplates(pW, pH, b) {
         const templates = {};
 
-        templates[this.START] = `M ${b} ${pH - b} `;
+        templates[START] = `M ${b} ${pH - b} `;
 
         templates[BUMP + LEFT] = (w, o, c1, c2) => `V ${(pH + w) / 2}`
             + `C ${b - o} ${pH / 2 + c1} ${0} ${pH / 2 + c2} ${0} ${pH / 2} `
@@ -49,7 +50,7 @@ export default class EdgePathDrawer {
     }
 
     getPathString(side, edgeStyleInfo) {
-        const start = (side === LEFT) ? this.templates[this.START] : '';
+        const start = (side === LEFT) ? this.templates[START] : '';
         const end = this.templates[side];
 
         let mid = '';

@@ -1,6 +1,5 @@
 import { getOppositeEdge } from './Edges';
 
-
 // Contains the properties needed to draw a specific puzzle piece edge:
 // its overall type (bump, recess, flat) and any constants needed to define its shape.
 export default class EdgeStyleInfo {
@@ -16,8 +15,6 @@ export default class EdgeStyleInfo {
     // if this is a bump edge, opposite() returns a matching recess edge, and vice-versa.
     // Will fail if called on a flat edge.
     opposite() {
-        const other = { ...this };
-        other.type = getOppositeEdge(this.type);
-        return other;
+        return Object.assign(new EdgeStyleInfo(), this, { type: getOppositeEdge(this.type) });
     }
 }

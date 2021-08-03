@@ -17,7 +17,9 @@ export function getOppositeEdge(edge) {
             return RECESS;
         case RECESS:
             return BUMP;
+        case FLAT:
+            throw Error(`getOppositeEdge: Flat edge has no opposite type`);
         default:
-            throw Error(`getOppositeEdge: ${edge} does not have an opposite edge type`);
+            throw Error(`getOppositeEdge: Unknown edge type ${edge}`);
     }
 }
