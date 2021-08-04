@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
-
 export default class ImageSearchModalResults extends Component {
     handleImageClick(index) {
         this.props.chooseImage(this.props.images[this.props.page][index]);
@@ -49,7 +48,7 @@ export default class ImageSearchModalResults extends Component {
                 {!this.props.isLoading && images && images.length === 0 ? noResultsText : null}
                 {this.props.isLoading ? spinner : null}
                 <div className='search-results'>
-                    {images ? images.map((img, index) => this.renderImage(img, index)) : null}
+                    {images?.map((img, index) => this.renderImage(img, index))}
                 </div>
             </div>
         );

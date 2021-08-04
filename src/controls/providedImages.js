@@ -7,7 +7,6 @@ import img4 from './images/van-gogh-roses-nga.jpg';
 import img5 from './images/scott-webb-lYzgtps0UtQ-unsplash.jpg';
 import img6 from './images/travel-sourced-FsmcD6uKcHk-unsplash.jpg';
 
-
 const providedImages = [
     new ImageInfo('Red Parrot on the Branch of a Tree', img1, 6, 8, 'Itō Jakuchū',
         new ImageSource('Metropolitan Museum of Art', true, false, 'https://www.metmuseum.org/art/collection/search/57123'), 'Red Parrot'),

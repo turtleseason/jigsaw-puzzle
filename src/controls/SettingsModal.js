@@ -2,36 +2,27 @@ import { Component } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { Input } from 'reactstrap';
 
-
 export default class SettingsModal extends Component {
-    constructor(props) {
-        super(props);
-
-        this.handleDimensionsChange = this.handleDimensionsChange.bind(this);
-        this.handleDimensionsBlur = this.handleDimensionsBlur.bind(this);
-        this.handleColorChange = this.handleColorChange.bind(this);
-
-        this.state = {};
-    }
+    state = { color: null };
 
     componentDidMount() {
         const color = document.documentElement.style.getPropertyValue('--puzzle-bg');
-        this.setState({ color: color ? color : '#adb5bd' });
+        this.setState({ color: color !== '' ? color : '#adb5bd' });
     }
 
-    handleDimensionsChange(e) {
+    handleDimensionsChange = (e) => {
         this.props.setDimension(e.target.name, e.target.valueAsNumber);
-    }
+    };
 
-    handleDimensionsBlur(e) {
+    handleDimensionsBlur = (e) => {
         this.props.setDimension(e.target.name, this.validateDimension(e.target.value));
-    }
+    };
 
-    handleColorChange(e) {
+    handleColorChange = (e) => {
         const color = e.target.value;
         this.setState({ color: color });
         document.documentElement.style.setProperty('--puzzle-bg', color);
-    }
+    };
 
     validateDimension(val) {
         let result = parseInt(val, 10);

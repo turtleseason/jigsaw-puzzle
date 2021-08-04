@@ -8,66 +8,46 @@ import presetImages from './providedImages';
 
 import './ImagePicker.css';
 
-
 export default class ImagePicker extends Component {
-    constructor(props) {
-        super(props);
+    fileInput = React.createRef();
 
-        this.fileInput = React.createRef();
+    selectedPreset = presetImages[0];
+    userImage = null;
 
-        this.selectedPreset = presetImages[0];
-        this.userImage = null;
+    state = {
+        selectedOption: 'preset0',
+        usingUserImage: false,
+        invalidUserImage: false,
+        unsplashImage: null,
+        modalOpen: false,
+    };
 
-        this.useUserImage = this.useUserImage.bind(this);
-        this.usePresetImage = this.usePresetImage.bind(this);
-        this.setPresetImage = this.setPresetImage.bind(this);
-        this.setUnsplashImage = this.setUnsplashImage.bind(this);
-        this.handleSelectChange = this.handleSelectChange.bind(this);
-        this.handleFileChange = this.handleFileChange.bind(this);
-        this.handleRadioKeyDown = this.handleRadioKeyDown.bind(this);
-        this.generateDefaultDimensions = this.generateDefaultDimensions.bind(this);
-
-        this.toggleModal = this.toggleModal.bind(this);
-
-        this.state = {
-            selectedOption: 'preset0',
-            usingUserImage: false,
-            invalidUserImage: false,
-            unsplashImage: null,
-            modalOpen: false,
-        };
-    }
-
-    usePresetImage() {
+    usePresetImage = () => {
         this.setState({ usingUserImage: false });
         this.props.setSelectedImage(this.selectedPreset);
-    }
+    };
 
-    useUserImage() {
+    useUserImage = () => {
         this.setState({ usingUserImage: true });
         this.props.setSelectedImage(this.userImage);
-    }
+    };
 
-    setPresetImage(image) {
+    setPresetImage = (image) => {
         this.selectedPreset = image;
         this.props.setSelectedImage(image);
-    }
+    };
 
-    setUnsplashImage(image) {
-        this.setState({
-            unsplashImage: image, selectedOption: 'unsplash'
-        });
+    setUnsplashImage = (image) => {
+        this.setState({ unsplashImage: image, selectedOption: 'unsplash' });
         this.setPresetImage(image);
-    }
+    };
 
     // Maintain arrow key navigation between the radio buttons even though they aren't
     // actually part of the same radio group (so that they can be separate tab stops).
-    handleRadioKeyDown(e) {
+    handleRadioKeyDown = (e) => {
         switch (e.key) {
             case 'ArrowLeft':
             case 'ArrowUp':
-            case 'Left':
-            case 'Up':
                 if (e.target.id === 'radioBtn2') {
                     document.getElementById('radioBtn1').focus();
                     e.preventDefault();
@@ -75,8 +55,6 @@ export default class ImagePicker extends Component {
                 return;
             case 'ArrowRight':
             case 'ArrowDown':
-            case 'Down':
-            case 'Right':
                 if (e.target.id === 'radioBtn1') {
                     document.getElementById('radioBtn2').focus();
                     e.preventDefault();
@@ -85,9 +63,9 @@ export default class ImagePicker extends Component {
             default:
                 return;
         }
-    }
+    };
 
-    handleSelectChange(e) {
+    handleSelectChange = (e) => {
         this.usePresetImage();
 
         const select = e.target;
@@ -100,9 +78,9 @@ export default class ImagePicker extends Component {
             this.setPresetImage(presetImages[select.selectedIndex]);
             this.setState({ selectedOption: 'preset' + select.selectedIndex });
         }
-    }
+    };
 
-    handleFileChange() {
+    handleFileChange = () => {
         this.useUserImage();
 
         const file = this.fileInput.current.files[0];
@@ -128,11 +106,11 @@ export default class ImagePicker extends Component {
             this.props.setSelectedImage(this.userImage);
         };
         testLoader.src = fileUrl;
-    }
+    };
 
     // Tries to choose a good default based on the image aspect ratio;
     // could go further and tailor the target rows+columns to the viewport size
-    generateDefaultDimensions(width, height) {
+    generateDefaultDimensions = (width, height) => {
         const target = 12;
         const minBound = this.props.minPuzzleDimension;
         const aspect = width / height;
@@ -142,12 +120,12 @@ export default class ImagePicker extends Component {
         const rows = clamp(Math.round(target / (aspect + 1)), minBound, target - minBound);
         const cols = target - rows;
 
-        return { rows: rows, cols: cols };
-    }
+        return { rows, cols };
+    };
 
-    toggleModal() {
+    toggleModal = () => {
         this.setState({ modalOpen: !this.state.modalOpen });
-    }
+    };
 
     renderSelectOptions() {
         const options = [];
@@ -201,9 +179,11 @@ export default class ImagePicker extends Component {
                         </div>
                     </div>
                 </div>
+
                 <UncontrolledTooltip placement='top' target='show-tooltip'>
                     Images are only used locally in your browser and are never uploaded or sent over the Internet.
                 </UncontrolledTooltip>
+
                 <ImageSearchModal toggleModal={this.toggleModal} isOpen={this.state.modalOpen} setImage={this.setUnsplashImage} generateDefaultDimensions={this.generateDefaultDimensions} />
             </>
         );

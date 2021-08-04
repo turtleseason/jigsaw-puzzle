@@ -10,51 +10,38 @@ import Pagination from './Pagination.js';
 
 import './ImageSearchModal.css';
 
-
 const MAX_SEARCH_PAGES = 10;
 
 export default class ImageSearchModal extends Component {
+    proxyUrl = process.env.REACT_APP_PROXY_URL;
 
-    constructor(props) {
-        super(props);
+    searchBoxRef = React.createRef();
 
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleInputKeyDown = this.handleInputKeyDown.bind(this);
-        this.handlePageChange = this.handlePageChange.bind(this);
-        this.handleSearchButtonClick = this.handleSearchButtonClick.bind(this);
-        this.handleChooseButtonClick = this.handleChooseButtonClick.bind(this);
-        this.selectImage = this.selectImage.bind(this);
+    // Note: The page count starts from 1, but the images array is zero-indexed,
+    // so make sure to subtract 1 when using this.state.page to access the images array.
+    state = {
+        images: [],
+        page: 1,
+        maxPage: 1,
+        searchString: '',
+        isSearchStringValid: true,
+        isSearchLoading: false,
+        error: null,
+        selectedImage: null,
+    };
 
-        this.proxyUrl = process.env.REACT_APP_PROXY_URL;
-
-        this.searchBoxRef = React.createRef();
-
-        // Note: The page count starts from 1, but the images array is zero-indexed,
-        // so make sure to subtract 1 when using this.state.page to accesss the images array.
-        this.state = {
-            images: [],
-            page: 1,
-            maxPage: 1,
-            searchString: '',
-            isSearchStringValid: true,
-            isSearchLoading: false,
-            error: null,
-            selectedImage: null
-        };
-    }
-
-    handleInputChange(e) {
+    handleInputChange = (e) => {
         this.setState({ searchString: e.target.value });
-    }
+    };
 
-    handleInputKeyDown(e) {
+    handleInputKeyDown = (e) => {
         if (e.key === 'Enter') {
             this.handleSearchButtonClick();
             e.preventDefault();
         }
-    }
+    };
 
-    handlePageChange(newPage) {
+    handlePageChange = (newPage) => {
         if (this.state.isSearchLoading) {
             return;
         }
@@ -75,20 +62,20 @@ export default class ImageSearchModal extends Component {
         } else {
             this.setState({ page: newPage });
         }
-    }
+    };
 
-    handleSearchButtonClick() {
+    handleSearchButtonClick = () => {
         this.setState({ images: [] }, () => this.searchImages(1));
-    }
+    };
 
-    handleChooseButtonClick() {
+    handleChooseButtonClick = () => {
         this.chooseImage();
         this.props.toggleModal();
-    }
+    };
 
-    selectImage(image) {
+    selectImage = (image) => {
         this.setState({ selectedImage: image });
-    }
+    };
 
     getSearchUrl(query, page) {
         return `${this.proxyUrl}/search/${encodeURIComponent(query)}/page/${page}`;
@@ -104,7 +91,7 @@ export default class ImageSearchModal extends Component {
 
         const maxPage = Math.min(totalPages, MAX_SEARCH_PAGES);
 
-        this.setState({ images: images, page: page, maxPage: maxPage });
+        this.setState({ images, page, maxPage });
     }
 
     chooseImage() {

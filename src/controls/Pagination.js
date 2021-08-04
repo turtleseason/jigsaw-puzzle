@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
-
 export default class Pagination extends Component {
     handleNavigate(e, newPage) {
         e.preventDefault();
@@ -48,8 +47,8 @@ export default class Pagination extends Component {
         const outerClassName = 'custom-pagination container ' + (className || '');
         const outerAriaLabel = ariaLabel || 'Search results pages';
 
-        const isFirst = !(this.props.currentPage > this.props.minPage);
-        const isLast = !(this.props.currentPage < this.props.maxPage);
+        const isFirst = currentPage <= minPage;
+        const isLast = currentPage >= maxPage;
 
         const pageLinks = this.renderPageLinks();
 
@@ -58,7 +57,7 @@ export default class Pagination extends Component {
                 <div className='row justify-content-between align-items-center'>
                     <div className='col-auto p-0'>
                         <button className={'btn btn-link' + (isFirst ? ' invisible' : '')} type='button'
-                            onClick={isFirst ? null : (e) => this.handleNavigate(e, this.props.currentPage - 1)}>
+                            onClick={isFirst ? null : (e) => this.handleNavigate(e, currentPage - 1)}>
                             {'< Back'}
                         </button>
                     </div>
@@ -69,7 +68,7 @@ export default class Pagination extends Component {
 
                     <div className='col-auto p-0'>
                         <button className={'btn btn-link' + (isLast ? ' invisible' : '')} type='button'
-                            onClick={isLast ? null : (e) => this.handleNavigate(e, this.props.currentPage + 1)}>
+                            onClick={isLast ? null : (e) => this.handleNavigate(e, currentPage + 1)}>
                             {'More >'}
                         </button>
                     </div>
