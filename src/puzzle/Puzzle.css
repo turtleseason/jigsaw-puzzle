@@ -24,6 +24,9 @@
 }
 
 .puzzle-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 0;
     left: 0;
@@ -36,10 +39,6 @@
     touch-action: none;
 }
 
-.puzzle-area.puzzle-complete {
-    background: var(--puzzle-img) center no-repeat, transparent;
-}
-
 .puzzle-piece {
     position: absolute;
     touch-action: none;
@@ -50,7 +49,7 @@
 }
 
 .puzzle-complete-img {
-    position: absolute;
+    position: relative;
     transition: top 2s ease, left 2s ease;
 }
 

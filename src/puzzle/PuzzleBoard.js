@@ -16,27 +16,19 @@ export default class PuzzleBoard extends Component {
 
     edgeDrawer = new EdgePathDrawer(this.props.pieceWidth, this.props.pieceHeight, this.props.borderSize);
 
-    state = {
-        endAnimationComplete: false,
-    };
+    // Gets the offset of the puzzle's current position (measured by the top left piece)
+    // from the position where it would be centered within the game board.
+    getPuzzleOffsetFromCenter() {
+        const boardSize = this.props.getBoardDimensions();
+        const topLeftPiece = this.props.pieces[this.props.topLeftKey].pos;
 
-    handleTransitionEnd = () => {
-        this.setState({ endAnimationComplete: true });
-    };
+        const centerLeft = (boardSize.width / this.props.scaleFactor - this.props.imgWidth) / 2;
+        const centerTop = (boardSize.height / this.props.scaleFactor - this.props.imgHeight) / 2;
 
-    // Gets the current position of the piece representing the top left corner of the puzzle image
-    // (for lining up the completed puzzle image when the puzzle is completed).
-    getTopLeftPos() {
-        const pos = this.props.pieces[this.props.topLeftKey].pos;
-        return { left: pos.left + this.props.borderSize, top: pos.top + this.props.borderSize };
-    }
+        const imageLeft = topLeftPiece.left + this.props.borderSize;
+        const imageTop = topLeftPiece.top + this.props.borderSize;
 
-    // Gets the top-left position of the full puzzle image when it's centered within the game board area. 
-    getCenteredImagePos() {
-        const dimensions = this.props.getBoardDimensions();
-        const left = (dimensions.width / this.props.scaleFactor - this.props.imgWidth) / 2;
-        const top = (dimensions.height / this.props.scaleFactor - this.props.imgHeight) / 2;
-        return { left, top };
+        return { left: imageLeft - centerLeft, top: imageTop - centerTop, };
     }
 
     renderPiece(model) {
@@ -61,40 +53,31 @@ export default class PuzzleBoard extends Component {
             height: (100 / scaleFactor) + '%'
         };
 
-        let board;
-        if (gameComplete && this.state.endAnimationComplete) {
-            board = (<div className='puzzle-area puzzle-complete' style={boardStyle}></div>);
-        } else if (gameComplete) {
-            board = (
-                <div className='puzzle-area' style={boardStyle}>
-                    <PuzzleCompleteImage
-                        imgUrl={this.imgUrl}
-                        startPos={this.getTopLeftPos()}
-                        destPos={this.getCenteredImagePos()}
-                        width={this.imgWidth}
-                        height={this.imgHeight}
-                        onTransitionEnd={this.handleTransitionEnd} />
-                </div>);
-        } else {
-            const children = pieces?.map(model => this.renderPiece(model));
-            board = (
-                <div
-                    className={'puzzle-area' + (draggedPiece !== null ? ' no-scroll' : '')}
-                    onPointerMove={onPointerMove}
-                    onPointerUp={onPointerUp}
-                    style={boardStyle}>
-                    <ClipPathContainer edgeDrawer={this.edgeDrawer} pieces={pieces} />
-                    {children}
-                </div>);
-        }
+        const board = gameComplete ? (
+            <div className='puzzle-area' style={boardStyle}>
+                <PuzzleCompleteImage
+                    imgUrl={this.imgUrl}
+                    startPos={this.getPuzzleOffsetFromCenter()}
+                    width={this.imgWidth}
+                    height={this.imgHeight}
+                />
+            </div>
+        ) : (
+            <div
+                className={'puzzle-area' + (draggedPiece !== null ? ' no-scroll' : '')}
+                style={boardStyle}
+                onPointerMove={onPointerMove}
+                onPointerUp={onPointerUp}
+            >
+                <ClipPathContainer edgeDrawer={this.edgeDrawer} pieces={pieces} />
+                {pieces?.map(model => this.renderPiece(model))}
+            </div>
+        );
 
         return (
-            <div className='puzzle-container mt-2'>
+            <div className='puzzle-container pt-2 pb-3'>
                 <div className='puzzle-background'></div>
                 {board}
-                {/* Use a separate div for padding because adding padding directly to the puzzle container
-                    can cause the game-completed image to jump at the end of its motion */}
-                <div className='pb-3'></div>
             </div>
         );
     }

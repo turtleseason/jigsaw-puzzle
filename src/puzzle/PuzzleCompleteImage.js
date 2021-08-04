@@ -11,8 +11,12 @@ export default class PuzzleCompleteImage extends Component {
 
     componentDidMount() {
         // Change on the second frame to ensure the image is drawn at the original position at least once.
-        requestAnimationFrame(() => requestAnimationFrame(() => this.setState({ ...this.props.destPos })));
+        requestAnimationFrame(() => requestAnimationFrame(() => this.setState({ top: 0, left: 0 })));
     }
+
+    handleTransitionEnd = () => {
+        this.setState({ animationComplete: true });
+    };
 
     render() {
         return (
@@ -22,8 +26,8 @@ export default class PuzzleCompleteImage extends Component {
                 alt='Completed puzzle'
                 width={this.props.width}
                 height={this.props.height}
-                style={{ left: this.state.left, top: this.state.top }}
-                onTransitionEnd={this.props.onTransitionEnd} />
+                style={this.state}
+                onTransitionEnd={this.handleTransitionEnd} />
         );
     }
 }
