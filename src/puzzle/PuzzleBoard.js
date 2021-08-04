@@ -39,7 +39,6 @@ export default class PuzzleBoard extends Component {
                 width={this.pieceWidth}
                 height={this.pieceHeight}
                 imgUrl={this.imgUrl}
-                blockPointerEvents={this.props.draggedPiece !== null}
                 onPointerDown={this.props.pointerDownHandlers[model.key]} />
         );
     }

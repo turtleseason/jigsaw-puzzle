@@ -44,10 +44,6 @@
     touch-action: none;
 }
 
-.puzzle-piece.block-pointer-events {
-    pointer-events: none;
-}
-
 .puzzle-complete-img {
     position: relative;
     transition: top 2s ease, left 2s ease;

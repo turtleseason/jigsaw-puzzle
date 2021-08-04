@@ -240,8 +240,8 @@ export default class Puzzle extends Component {
         }
 
         // Ignore events from touches that started within puzzle area but moved out of bounds
-        const hitElement = document.elementFromPoint(e.clientX, e.clientY);
-        if (!hitElement || !hitElement.classList.contains('puzzle-area')) {
+        const hitElements = document.elementsFromPoint(e.clientX, e.clientY);
+        if (!hitElements.some(element => element.classList.contains('puzzle-area'))) {
             return;
         }
 
