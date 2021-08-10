@@ -101,7 +101,7 @@ export default class ImageSearchModal extends Component {
         // which is fine as long as generateDefaultDimensions only uses the aspect ratio, but that could change in the future.
         const dim = this.props.generateDefaultDimensions(img.width, img.height);
 
-        this.props.setImage(new ImageInfo(`Unsplash Photo (${img.id})`, img.urls.regular, dim.rows, dim.cols, img.user.name,
+        this.props.setImage(new ImageInfo('unsplash', `Unsplash Photo (${img.id})`, img.urls.regular, dim.rows, dim.cols, img.user.name,
             new ImageSource('Unsplash', false, true, img.links.html)));
 
         this.trackDownload(img.id);

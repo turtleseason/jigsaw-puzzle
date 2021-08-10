@@ -20,7 +20,8 @@ export default class PuzzleBoard extends Component {
     // from the position where it would be centered within the game board.
     getPuzzleOffsetFromCenter() {
         const boardSize = this.props.getBoardDimensions();
-        const topLeftPiece = this.props.pieces[this.props.topLeftKey].pos;
+        const topLeftKey = this.props.pieces.find(piece => piece.row === 0 && piece.col === 0).key;
+        const topLeftPiece = this.props.pieces[topLeftKey].pos;
 
         const centerLeft = (boardSize.width / this.props.scaleFactor - this.props.imgWidth) / 2;
         const centerTop = (boardSize.height / this.props.scaleFactor - this.props.imgHeight) / 2;

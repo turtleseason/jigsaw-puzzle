@@ -9,6 +9,7 @@ export default class Piece extends PureComponent {
             <div style={{ left: model.displayPos.left, top: model.displayPos.top, position: 'absolute' }}>
                 <svg
                     className='puzzle-piece'
+                    aria-label='Puzzle piece'
                     data-id={model.key}
                     width={this.props.width}
                     height={this.props.height}

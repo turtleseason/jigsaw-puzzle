@@ -10,7 +10,7 @@ export default class ClipPathContainer extends PureComponent {
     render() {
         const children = this.props.pieces?.map(model => this.renderClipPath(model));
         return (
-            <svg width='0' height='0'>
+            <svg width='0' height='0' aria-hidden='true' data-testid='clip-path-container'>
                 {children}
             </svg>
         );

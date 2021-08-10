@@ -2,7 +2,7 @@ import { Component } from 'react';
 
 import ImagePicker from './ImagePicker';
 import SettingsModal from './SettingsModal';
-import presetImages from './providedImages';
+import presetImages from './presetImages';
 
 const minPuzzleDimension = 2;
 const maxPuzzleDimension = 25;
@@ -79,6 +79,8 @@ export default class PuzzleControls extends Component {
 
                     <SettingsModal
                         toggleModal={this.toggleModal}
+                        saveGame={this.props.savePuzzle}
+                        loadGame={this.props.loadPuzzle}
                         isOpen={this.state.modalOpen}
                         rows={this.state.rows}
                         cols={this.state.cols}

@@ -1,5 +1,7 @@
 export class ImageInfo {
-    constructor(name, url, defaultRows, defaultCols, author, source, shortName) {
+    // type: 'preset' | 'unsplash' | 'user'
+    constructor(type, name, url, defaultRows, defaultCols, author, source, shortName) {
+        this.type = type;
         this.name = name;
         this.url = url;
         this.defaultRows = defaultRows;

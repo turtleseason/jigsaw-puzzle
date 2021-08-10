@@ -4,7 +4,7 @@ import { CustomInput, UncontrolledTooltip } from 'reactstrap';
 import ImageSearchModal from './ImageSearchModal.js';
 import { ImageInfo } from './ImageInfo';
 import { clamp } from '../util';
-import presetImages from './providedImages';
+import presetImages from './presetImages';
 
 import './ImagePicker.css';
 
@@ -101,7 +101,7 @@ export default class ImagePicker extends Component {
                 URL.revokeObjectURL(this.userImage.url);
             }
             const dim = this.generateDefaultDimensions(testLoader.naturalWidth, testLoader.naturalHeight);
-            this.userImage = new ImageInfo(file.name, fileUrl, dim.rows, dim.cols);
+            this.userImage = new ImageInfo('user', file.name, fileUrl, dim.rows, dim.cols);
             this.setState({ invalidUserImage: false });
             this.props.setSelectedImage(this.userImage);
         };

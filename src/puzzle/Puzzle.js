@@ -26,8 +26,6 @@ export default class Puzzle extends Component {
     groups;
     nextzIndex = 1;
 
-    topLeftKey;
-
     state = {
         scaleFactor: undefined,
         offsetX: undefined,
@@ -47,9 +45,15 @@ export default class Puzzle extends Component {
         const scaleFactor = this.setScaleFactor();
         window.addEventListener('resize', this.handleResize);
 
-        const pieces = this.createPieces(scaleFactor);
-        this.groups = this.createGroups(pieces);
-        this.setState({ pieces });
+        if (this.props.pieces) {
+            const pieces = this.props.pieces;
+            this.groups = this.createGroups(pieces);
+            this.setState({ pieces }, () => this.clampPiecesToBoardBounds(this.state.scaleFactor));
+        } else {
+            const pieces = this.createPieces(scaleFactor);
+            this.groups = this.createGroups(pieces);
+            this.setState({ pieces });
+        }
     }
 
     componentWillUnmount() {
@@ -82,10 +86,10 @@ export default class Puzzle extends Component {
             const yBound = maxBoundY - (this.innerHeight * (group.bounds[BOTTOM] - piece.row));
 
             pieces[i] = piece.clone();
-            pieces[i].setDisplayPos({
-                left: piece.pos.left > xBound ? xBound : piece.pos.left,
-                top: piece.pos.top > yBound ? yBound : piece.pos.top
-            });
+            pieces[i].displayPos = {
+                left: Math.min(piece.pos.left, xBound),
+                top: Math.min(piece.pos.top, yBound),
+            };
         }
         this.setState({ pieces });
     }
@@ -159,21 +163,27 @@ export default class Puzzle extends Component {
                 pieces[key] = new PieceModel(key, col, row, pos, imageOffset, 0, edges, neighbors);
             }
         }
-        this.topLeftKey = keysByGridPos[0][0];
         return pieces;
     }
 
     createGroups(pieces) {
         const groups = new Map();
-        pieces.forEach(piece => groups.set(piece.key, new GroupModel(piece)));
+        pieces.forEach(piece => {
+            const group = groups.get(piece.group);
+            if (!group) {
+                groups.set(piece.group, new GroupModel(piece, piece.group));
+            } else {
+                group.addPiece(piece);
+            }
+        });
         return groups;
     }
 
     alignPiece(piece, alignWith) {
-        piece.setPos({
+        piece.pos = {
             left: alignWith.displayPos.left + this.innerWidth * (piece.col - alignWith.col),
             top: alignWith.displayPos.top + this.innerHeight * (piece.row - alignWith.row)
-        });
+        };
     }
 
     isTouching(piece, side, other) {
@@ -220,7 +230,7 @@ export default class Puzzle extends Component {
         for (const k of this.groups.get(groupKey).pieces) {
             pieces[k] = pieces[k].clone();
             pieces[k].zIndex = this.nextzIndex;
-            pieces[k].setPos(pieces[k].displayPos);
+            pieces[k].pos = pieces[k].displayPos;
         }
 
         this.nextzIndex++;
@@ -252,7 +262,7 @@ export default class Puzzle extends Component {
 
         const left = (e.clientX - this.state.offsetX) / this.state.scaleFactor;
         const top = (e.clientY - this.state.offsetY) / this.state.scaleFactor;
-        draggedPiece.setPos({ left, top });
+        draggedPiece.pos = { left, top };
 
         const group = this.groups.get(draggedPiece.group);
         for (const key of group.pieces) {
@@ -291,6 +301,11 @@ export default class Puzzle extends Component {
         this.clampPiecesToBoardBounds(scaleFactor);
     };
 
+    // Exports state needed to save the game.
+    getGameState = () => {
+        return this.state.pieces;
+    };
+
     render() {
         return (
             <PuzzleBoard
@@ -300,7 +315,6 @@ export default class Puzzle extends Component {
                 pieceWidth={this.pieceWidth}
                 pieceHeight={this.pieceHeight}
                 borderSize={this.borderSize}
-                topLeftKey={this.topLeftKey}
                 scaleFactor={this.state.scaleFactor}
                 gameComplete={this.state.gameComplete}
                 pieces={this.state.pieces}
