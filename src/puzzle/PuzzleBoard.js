@@ -75,7 +75,7 @@ export default class PuzzleBoard extends Component {
         );
 
         return (
-            <div className='puzzle-container pt-2 pb-3'>
+            <div className='puzzle-container mt-2 pb-3'>
                 <div className='puzzle-background'></div>
                 {board}
             </div>
